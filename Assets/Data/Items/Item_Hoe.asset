@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac15622094ae6e544be02eb7b084d8f1, type: 3}
+  m_Name: Item_Hoe
+  m_EditorClassIdentifier: Assembly-CSharp::ToolData
+  itemId: hoe
+  displayName: "Cu\u1ED1c"
+  description: "D\xF9ng \u0111\u1EC3 x\u1EDBi \u0111\u1EA5t l\xE0m n\xF4ng nghi\u1EC7p."
+  icon: {fileID: 21300000, guid: 2154abe58e617384095bfe0cf971129e, type: 3}
+  maxStackSize: 1
+  kind: 0
+  hasUseAnimation: 1
+  useAnimation: 3
+  heldSprite: {fileID: 21300000, guid: 4d04713579f87d647bc5cf7676b18723, type: 3}
+  heldSpriteDown: {fileID: 21300000, guid: 4d04713579f87d647bc5cf7676b18723, type: 3}
+  heldSpriteRight: {fileID: 21300000, guid: 4d04713579f87d647bc5cf7676b18723, type: 3}
+  heldSpriteUp: {fileID: 21300000, guid: 4d04713579f87d647bc5cf7676b18723, type: 3}
+  heldAnimationSprites:
+  - {fileID: 21300000, guid: 486d617ef62e82049a006eeb67b7927f, type: 3}
+  - {fileID: 21300000, guid: 31d054eb12403054f9cb1173aa8d89cc, type: 3}
+  - {fileID: 21300000, guid: dbe53589519d94f4e8ffe4cdc8e89f12, type: 3}
+  - {fileID: 21300000, guid: 22aaa2952e151ee4bb5ff4e93d03108e, type: 3}
+  - {fileID: 21300000, guid: 238167708080fbf4c8cb7d33e81e5fbc, type: 3}

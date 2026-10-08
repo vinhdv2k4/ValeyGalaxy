@@ -25,8 +25,18 @@ public sealed class InputController : MonoBehaviour
         }
 
         move = ReadMove(keyboard);
-        attackPressed |= Pressed(Mouse.current?.leftButton) || Pressed(keyboard.spaceKey);
-        interactPressed |= Pressed(Mouse.current?.rightButton) || Pressed(keyboard.eKey);
+
+        bool isPointerOverUI = UnityEngine.EventSystems.EventSystem.current != null
+            && UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject();
+
+        if (!isPointerOverUI)
+        {
+            attackPressed |= Pressed(Mouse.current?.leftButton);
+            interactPressed |= Pressed(Mouse.current?.rightButton);
+        }
+
+        attackPressed |= Pressed(keyboard.spaceKey);
+        interactPressed |= Pressed(keyboard.eKey);
         inventoryPressed |= Pressed(keyboard.tabKey) || Pressed(keyboard.iKey);
         plantPressed |= Pressed(keyboard.fKey);
 
