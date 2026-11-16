@@ -122,6 +122,10 @@ Backend/GameBackend/data/
 __pycache__/
 *.py[cod]
 
+# One-off Python generators for reports, UML and data (local only)
+/docs/**/*.py
+/tools/**/*.py
+
 # Loose test crops at the project root
 /crop_clock.png
 /crop_hand.png
