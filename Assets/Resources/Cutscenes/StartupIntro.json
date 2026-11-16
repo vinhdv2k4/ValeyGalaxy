@@ -1,0 +1,68 @@
+{
+  "fade": 0.45,
+  "blackHold": 0.6,
+  "timePassHold": 2.0,
+  "jojaOverheadHold": 2.1,
+  "jojaPanTime": 7.0,
+  "letterOpenTime": 0.6,
+  "busCloudsTime": 1.4,
+  "busRoadPanTime": 1.3,
+  "busDriveTime": 6.5,
+  "busSignTime": 3.0,
+  "roadSpeed": 145,
+  "grandpaFade": 2.0,
+  "grandpaSpeechEnd": 60.0,
+  "grandpaEnvelopeAt": 17.0,
+  "grandpaEnvelopeFlight": 2.0,
+  "yearsLater": "Nhiều năm sau...",
+  "grandpaSpeech": [
+    {"at":3,"text":"Còn với đứa cháu trai yêu quý của ông...","femaleText":"Còn với đứa cháu gái yêu quý của ông..."},
+    {"at":10,"text":"Ông muốn trao cho cháu phong thư đã niêm kín này."},
+    {"at":20,"text":"Khoan, đừng mở vội... Hãy kiên nhẫn."},
+    {"at":25,"text":"Bây giờ, nghe ông nói này..."},
+    {"at":30,"text":"Sẽ đến ngày cháu thấy mình kiệt sức vì gánh nặng của cuộc sống hiện đại..."},
+    {"at":40,"text":"...và niềm vui trong cháu sẽ dần nhường chỗ cho cảm giác trống rỗng."},
+    {"at":50,"text":"Khi ngày đó đến, cháu trai à, cháu sẽ sẵn sàng đón nhận món quà này.","femaleText":"Khi ngày đó đến, cháu gái à, cháu sẽ sẵn sàng đón nhận món quà này."},
+    {"at":60,"text":"Giờ thì để ông nghỉ một lát nhé..."}
+  ],
+  "deskHint": "Nhấp vào ngăn kéo để lấy thư",
+  "letter": "Gửi {0},\n\nNếu cháu đang đọc thư này, hẳn đã đến lúc thay đổi. Ông cũng từng lạc lối như thế, cho đến khi rời thành phố để về sống ở Thung lũng Stardew.\n\nÔng để lại cho cháu trang trại {1}. Hãy biến nơi ấy thành nhà của mình.\n\nThương cháu,\nÔng nội\n\nTái bút: Nếu gặp Lewis, gửi ông ấy lời chào của ông nhé.",
+  "arrival": {
+    "id": "60367",
+    "title": "Đến Thung lũng Stardew",
+    "actors": [{"id":"Player","x":22,"y":11},{"id":"Robin","x":24,"y":11}],
+    "commands": [
+      {"type":"fade","value":"in","seconds":0.45},
+      {"type":"face","actor":"Robin","value":"Left"},
+      {"type":"face","actor":"Player","value":"Right"},
+      {"type":"speak","actor":"Robin","text":"Chào cháu! Cô là Robin, thợ mộc ở đây. Lewis nhờ cô ra đón cháu. Trang trại nằm ngay phía tây, đi theo cô nhé!"},
+      {"type":"guide","actor":"Robin","value":"Player","speed":2.75,"children":[
+        {"x":24,"y":23},{"x":9,"y":23}
+      ]},
+      {"type":"fade","value":"out","seconds":0.4}
+    ]
+  },
+  "farm": {
+    "id": "farm_welcome",
+    "title": "Chào mừng đến nông trại",
+    "actors": [{"id":"Player","x":78,"y":17},{"id":"Robin","x":76,"y":17},{"id":"Lewis","x":67,"y":18}],
+    "commands": [
+      {"type":"fade","value":"in","seconds":0.45},
+      {"type":"guide","actor":"Robin","value":"Player","speed":2.75,"children":[{"x":62,"y":17}]},
+      {"type":"face","actor":"Player","value":"Right"},
+      {"type":"face","actor":"Robin","value":"Right"},
+      {"type":"face","actor":"Lewis","value":"Left"},
+      {"type":"speak","actor":"Lewis","text":"Chào mừng cháu đến trang trại! Bác là Lewis, thị trưởng. Đây là chìa khóa căn nhà của cháu."},
+      {"type":"speak","actor":"Robin","text":"Căn nhà hơi cũ, nhưng cô có thể sửa sang và nâng cấp khi cháu có đủ gỗ và đá."},
+      {"type":"face","actor":"Lewis","value":"Right"},
+      {"type":"speak","actor":"Lewis","text":"Thấy thùng gỗ cạnh nhà không? Hãy bỏ những thứ muốn bán vào đó. Bác sẽ đến lấy hàng mỗi tối."},
+      {"type":"speak","actor":"Robin","text":"Cháu nghỉ ngơi đi nhé. Chúc ngủ ngon!"},
+      {"type":"speak","actor":"Lewis","text":"Ngủ ngon! Sáng mai cháu có thể bắt đầu làm quen với trang trại."},
+      {"type":"move","actor":"Lewis","x":77,"y":18,"speed":5},
+      {"type":"move","actor":"Robin","x":62,"y":18,"speed":4},
+      {"type":"parallel","children":[{"type":"move","actor":"Robin","x":75,"y":18,"speed":4},{"type":"move","actor":"Player","x":64,"y":15,"speed":2}]},
+      {"type":"sound","value":"doorClose"},
+      {"type":"fade","value":"out","seconds":0.45}
+    ]
+  }
+}

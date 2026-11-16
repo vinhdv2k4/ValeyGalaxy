@@ -7,8 +7,8 @@ using UnityEditor.Animations;
 using UnityEngine;
 
 /// <summary>
-/// Recreates the FarmerSprite animations from the 16x32 frame
-/// indices used by the decompiled Stardew code. The body frames occupy the
+/// Recreates farmer animations from the 16x32 frame
+/// indices used by the character sheet table. The body frames occupy the
 /// first 96 pixels of each row; the normal arm frames occupy the next 96.
 /// Pants are cut from the first 96 pixels of the pants sheet.
 /// </summary>
@@ -57,7 +57,7 @@ public sealed class FarmerAnimationGenerator : EditorWindow
         }
     }
 
-    // These are FarmerSprite.getAnimationFromIndex() frame indices, durations,
+    // Frame indices, durations,
     // and vertical offsets. Run has its own poses and timing.
     private static readonly List<AnimationSpec> Specs = BuildSpecs();
     private static readonly int[] FeatureXOffsets = ReadFeatureOffsets("featureXOffsetPerFrame");
@@ -65,9 +65,8 @@ public sealed class FarmerAnimationGenerator : EditorWindow
 
     private static int[] ReadFeatureOffsets(string field)
     {
-        // FarmerRenderer is #if false in this project, so read its decompiled
-        // offset table as source data instead of depending on that assembly.
-        string path = Path.Combine(Directory.GetCurrentDirectory(), "Assets/Scripts/StardewValley/FarmerRenderer.cs");
+        // Read offset table as source data.
+        string path = Path.Combine(Directory.GetCurrentDirectory(), "Assets/Scripts/GalaxyPlay/FarmerRenderer.cs");
         string source = File.ReadAllText(path);
         var match = Regex.Match(source, field + @"\s*=\s*new int\[126\]\s*\{([^}]*)\}");
         if (!match.Success) throw new InvalidOperationException("Missing FarmerRenderer." + field);
@@ -106,7 +105,7 @@ public sealed class FarmerAnimationGenerator : EditorWindow
         AddTimedAction(specs, "ToolChoose_Up", false, false, 500, 15);
         AddTimedAction(specs, "ToolChoose_Left", true, false, 500, 9);
 
-        // Stardew FacingDirection 2 is Down, 0 is Up.
+        // FacingDirection 2 is Down, 0 is Up.
         specs.Add(Action("Tool_Down", false, false, F(66, 150), F(67, 40), F(68, 40), F(69, 170), F(70, 75)));
         specs.Add(Action("Tool_Right", false, false, F(48, 100), F(49, 40), F(50, 40), F(51, 220), F(52, 75)));
         specs.Add(Action("Tool_Up", false, false, F(36, 100), F(37, 40), F(38, 40), F(63, 220), F(62, 75)));
@@ -118,7 +117,7 @@ public sealed class FarmerAnimationGenerator : EditorWindow
         specs.Add(Action("Watering_Up", false, false, F(62, 0), F(62, 75), F(63, 100), F(46, 500)));
         specs.Add(Action("Watering_Left", true, false, F(58, 0), F(58, 75), F(59, 100), F(45, 500)));
 
-        // seedThrow codes have no dedicated case in this decompiled version.
+        // seedThrow codes have no dedicated case in this animation set.
         // Use the hand-to-ground frames used for crop interaction.
         AddAction(specs, "SeedThrow_Down", false, false, 54, 55, 56, 57);
         AddAction(specs, "SeedThrow_Right", false, false, 58, 59, 60, 61);
@@ -155,6 +154,11 @@ public sealed class FarmerAnimationGenerator : EditorWindow
         specs.Add(Action("Fishing_Right", false, false, F(48, 100), F(49, 40), F(50, 40), F(51, 80), F(52, 200)));
         specs.Add(Action("Fishing_Up", false, false, F(76, 100), F(38, 40), F(63, 40), F(62, 80), F(63, 200)));
         specs.Add(Action("Fishing_Left", true, false, F(48, 100), F(49, 40), F(50, 40), F(51, 80), F(52, 200)));
+        // Pose held while fighting a fish.
+        AddTimedAction(specs, "FishingReel_Down", false, false, 5000, 70);
+        AddTimedAction(specs, "FishingReel_Right", false, false, 5000, 89);
+        AddTimedAction(specs, "FishingReel_Up", false, false, 5000, 44);
+        AddTimedAction(specs, "FishingReel_Left", true, false, 5000, 89);
         AddTimedAction(specs, "FishingDone_Down", false, false, 5000, 74);
         AddTimedAction(specs, "FishingDone_Right", false, false, 5000, 72);
         AddTimedAction(specs, "FishingDone_Up", false, false, 5000, 76);
@@ -351,8 +355,11 @@ public sealed class FarmerAnimationGenerator : EditorWindow
         var pantsKeys = new ObjectReferenceKeyframe[spec.steps.Length + 1];
         var offsetKeys = new Keyframe[spec.steps.Length + 1];
         var featureXKeys = new Keyframe[spec.steps.Length + 1];
+        var shirtXKeys = new Keyframe[spec.steps.Length + 1];
         var hairYKeys = new Keyframe[spec.steps.Length + 1];
         var shirtYKeys = new Keyframe[spec.steps.Length + 1];
+        float shirtSideOffset = spec.name.EndsWith("_Right", StringComparison.Ordinal) ? 1f / FrameWidth
+            : spec.name.EndsWith("_Left", StringComparison.Ordinal) ? -1f / FrameWidth : 0f;
         float time = 0f;
         for (int i = 0; i < spec.steps.Length; i++)
         {
@@ -366,13 +373,14 @@ public sealed class FarmerAnimationGenerator : EditorWindow
             bodyKeys[i] = new ObjectReferenceKeyframe { time = time, value = bodySprite };
             armKeys[i] = new ObjectReferenceKeyframe { time = time, value = armSprite };
             pantsKeys[i] = new ObjectReferenceKeyframe { time = time, value = pantsSprite };
-            // XNA screen Y grows downward; Unity world Y grows upward.
+            // Screen Y grows downward; Unity world Y grows upward.
             offsetKeys[i] = new Keyframe(time, -spec.steps[i].positionOffset / (float)FrameWidth);
             float featureX = FeatureXOffsets[index] / (float)FrameWidth;
             float featureY = FeatureYOffsets[index] / (float)FrameWidth;
             featureXKeys[i] = new Keyframe(time, spec.flipX ? -featureX : featureX);
-            // FarmerRenderer draws hair one source pixel below the body top,
-            // and the 8x8 shirt at source x=4, y=14 within a 16x32 frame.
+            shirtXKeys[i] = new Keyframe(time, featureXKeys[i].value + shirtSideOffset);
+            // Hair is placed one pixel below the body top,
+            // and the 8x8 shirt at (4, 14) within a 16x32 frame.
             hairYKeys[i] = new Keyframe(time, offsetKeys[i].value - (1f / FrameWidth) - featureY);
             shirtYKeys[i] = new Keyframe(time, offsetKeys[i].value - (2f / FrameWidth) - featureY);
             time += spec.steps[i].milliseconds / 1000f;
@@ -383,6 +391,7 @@ public sealed class FarmerAnimationGenerator : EditorWindow
         pantsKeys[spec.steps.Length] = new ObjectReferenceKeyframe { time = time, value = pantsKeys[endIndex].value };
         offsetKeys[spec.steps.Length] = new Keyframe(time, offsetKeys[endIndex].value);
         featureXKeys[spec.steps.Length] = new Keyframe(time, featureXKeys[endIndex].value);
+        shirtXKeys[spec.steps.Length] = new Keyframe(time, shirtXKeys[endIndex].value);
         hairYKeys[spec.steps.Length] = new Keyframe(time, hairYKeys[endIndex].value);
         shirtYKeys[spec.steps.Length] = new Keyframe(time, shirtYKeys[endIndex].value);
         AnimationUtility.SetObjectReferenceCurve(clip, EditorCurveBinding.PPtrCurve("Body", typeof(SpriteRenderer), "m_Sprite"), bodyKeys);
@@ -397,7 +406,8 @@ public sealed class FarmerAnimationGenerator : EditorWindow
         }
         foreach (string layer in new[] { "Shirt", "Hair" })
         {
-            AnimationUtility.SetEditorCurve(clip, EditorCurveBinding.FloatCurve(layer, typeof(Transform), "m_LocalPosition.x"), SteppedCurve(featureXKeys));
+            AnimationUtility.SetEditorCurve(clip, EditorCurveBinding.FloatCurve(layer, typeof(Transform), "m_LocalPosition.x"),
+                SteppedCurve(layer == "Shirt" ? shirtXKeys : featureXKeys));
             AnimationUtility.SetEditorCurve(clip, EditorCurveBinding.FloatCurve(layer, typeof(Transform), "m_LocalPosition.y"),
                 SteppedCurve(layer == "Hair" ? hairYKeys : shirtYKeys));
             AnimationUtility.SetEditorCurve(clip, EditorCurveBinding.FloatCurve(layer, typeof(SpriteRenderer), "m_FlipX"),

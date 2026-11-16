@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary>
-/// Weapon types matching decompiled Stardew Valley MeleeWeapon:
+/// Melee weapon types:
 /// 0 = Sword, 1 = Dagger, 2 = Club/Hammer, 3 = Defensive Sword / Scythe.
 /// </summary>
 public enum MeleeWeaponType
@@ -13,14 +13,14 @@ public enum MeleeWeaponType
 }
 
 /// <summary>
-/// OOP & SOLID: Represents melee weapons in Stardew Valley (Swords, Scythes, Daggers, Clubs).
-/// Inherits from ToolData, strictly following decompiled Stardew Valley 'public class MeleeWeapon : Tool'.
+/// OOP & SOLID: Represents melee weapons (Swords, Scythes, Daggers, Clubs).
+/// Inherits from ToolData ('public class MeleeWeapon : Tool').
 /// Encapsulates weapon types, damage ranges, attack speeds, knockback, and critical strike attributes.
 /// </summary>
 [CreateAssetMenu(fileName = "NewMeleeWeapon", menuName = "Stardew/Inventory/Melee Weapon Data")]
 public class MeleeWeaponData : ToolData
 {
-    [Header("Melee Weapon Properties (Stardew Valley MeleeWeapon : Tool)")]
+    [Header("Melee Weapon Properties (MeleeWeapon : Tool)")]
     public MeleeWeaponType weaponType = MeleeWeaponType.Sword;
     public int minDamage = 2;
     public int maxDamage = 5;
@@ -30,12 +30,27 @@ public class MeleeWeaponData : ToolData
     public float critMultiplier = 3f;
     public int addedDefense = 0;
 
+    internal static MeleeWeaponData Create(string id, string name, Sprite icon, MeleeWeaponType type)
+    {
+        var weapon = CreateInstance<MeleeWeaponData>();
+        weapon.itemId = id;
+        weapon.displayName = name;
+        weapon.icon = weapon.heldSprite = icon;
+        weapon.maxStackSize = 1;
+        weapon.kind = PlayerItemKind.Sword;
+        weapon.weaponType = type;
+        weapon.hasUseAnimation = true;
+        weapon.useAnimation = FarmerAnimationAction.SwordSwipe;
+        weapon.staminaCost = 0;
+        return weapon;
+    }
+
     protected override void Reset()
     {
         base.Reset();
         kind = PlayerItemKind.Sword;
         useAnimation = FarmerAnimationAction.SwordSwipe;
-        staminaCost = 0f; // Swords in Stardew Valley do not consume stamina
+        staminaCost = 0f; // Swords do not consume stamina
     }
 
     public bool IsScythe()

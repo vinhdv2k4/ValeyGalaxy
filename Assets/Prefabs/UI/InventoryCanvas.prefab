@@ -2124,7 +2124,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4d284d866fe8a584ca1458baeb7f3f31, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fa5f3331e5134ce4be29444249437d11, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -2284,6 +2284,7 @@ RectTransform:
   m_Children:
   - {fileID: 2205734650220624241}
   - {fileID: 1653915576733243894}
+  - {fileID: 7000000000000090001}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2372,6 +2373,13 @@ MonoBehaviour:
   tabStrip: {fileID: 4568135988889841392}
   backpackGrid: {fileID: 8801755786009971570}
   characterSheet: {fileID: 2923782467109939384}
+  worldMap: {fileID: 2800000, guid: be4c8863aa4e26e459005e823e5ef4f7, type: 3}
+  secondaryCursors: {fileID: 2800000, guid: f83b32eaf6095e94ea871cdc982d6aa0, type: 3}
+  fishDefinitions: {fileID: 4900000, guid: 61a117c10c8851849886f7a9aba35ff2, type: 3}
+  cookingRecipes: {fileID: 4900000, guid: 9c3a1065e5b6605419879aa1b9fdf9c3, type: 3}
+  craftablesAtlas: {fileID: 2800000, guid: 929255bdab4482a4896a9984845e7373, type: 3}
+  objectsAtlas: {fileID: 2800000, guid: 0ecd72a68176ffe4b81dbd0225adefe7, type: 3}
+  craftingRecipes: {fileID: 4900000, guid: b62168c1e363ab3449ca983a549d0e0b, type: 3}
   normalSlotSprite: {fileID: 21300000, guid: c3803d317dcf5b2498a00f9156b6433c, type: 3}
   selectedSlotSprite: {fileID: 21300000, guid: 80ce119ba1d1b3d47a4ed9179d3eca6c, type: 3}
   lockedSlotSprite: {fileID: 21300000, guid: b9584a79cd7dca641831b023b1113a6b, type: 3}
@@ -2438,6 +2446,8 @@ MonoBehaviour:
   bootsSlotImage: {fileID: 8924766934749236135}
   portraitBackgroundImage: {fileID: 4758120817407250238}
   characterPreviewImage: {fileID: 4758120817407250238}
+  portraitDay: {fileID: 2800000, guid: 40217dc2ab9d4d44f9bcd937a4339545, type: 3}
+  portraitNight: {fileID: 2800000, guid: 0d1d083c39a3eed41993fab8ec216c6b, type: 3}
   playerNameText: {fileID: 7738980299402545717}
   farmNameText: {fileID: 385737712846394209}
   currentFundsText: {fileID: 4295413625671378915}
@@ -7194,4 +7204,22 @@ PrefabInstance:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8279803072754128996, guid: a3e9c9b5ee1790d4d97306c1fa701c23, type: 3}
   m_PrefabInstance: {fileID: 9172240135976309760}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7000000000000090000
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6833338365440694018}
+    m_Modifications: []
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b501da2d13e64e298d3f382364c1db9f, type: 3}
+--- !u!224 &7000000000000090001 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7000000000000010001, guid: b501da2d13e64e298d3f382364c1db9f, type: 3}
+  m_PrefabInstance: {fileID: 7000000000000090000}
   m_PrefabAsset: {fileID: 0}

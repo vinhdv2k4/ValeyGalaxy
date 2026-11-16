@@ -1,0 +1,499 @@
+{
+  "animals": [
+    {
+      "id": "chicken",
+      "name": "Gà",
+      "kind": "Coop",
+      "level": 1,
+      "price": 800,
+      "produce": "object_176",
+      "deluxe": "object_174",
+      "altProduce": "object_180",
+      "altDeluxe": "object_182",
+      "daysToLay": 1,
+      "mature": 3,
+      "harvest": "floor",
+      "art": "White Chicken",
+      "altArt": "Brown Chicken",
+      "baby": "BabyWhite Chicken",
+      "altBaby": "BabyBrown Chicken",
+      "variants": 2,
+      "description": "Đẻ trứng mỗi ngày. Sống trong chuồng gà."
+    },
+    {
+      "id": "cow",
+      "name": "Bò sữa",
+      "kind": "Barn",
+      "level": 1,
+      "price": 1500,
+      "produce": "object_184",
+      "deluxe": "object_186",
+      "daysToLay": 1,
+      "mature": 5,
+      "harvest": "pail",
+      "art": "White Cow",
+      "altArt": "Brown Cow",
+      "baby": "BabyWhite Cow",
+      "altBaby": "BabyBrown Cow",
+      "variants": 2,
+      "description": "Cho sữa mỗi ngày, vắt bằng xô vắt sữa. Sống trong chuồng lớn."
+    },
+    {
+      "id": "goat",
+      "name": "Dê",
+      "kind": "Barn",
+      "level": 2,
+      "price": 4000,
+      "produce": "object_436",
+      "deluxe": "object_438",
+      "daysToLay": 2,
+      "mature": 5,
+      "harvest": "pail",
+      "art": "Goat",
+      "baby": "BabyGoat",
+      "variants": 1,
+      "description": "Cho sữa dê hai ngày một lần, vắt bằng xô vắt sữa. Sống trong chuồng lớn."
+    },
+    {
+      "id": "duck",
+      "name": "Vịt",
+      "kind": "Coop",
+      "level": 2,
+      "price": 1200,
+      "produce": "object_442",
+      "deluxe": "object_444",
+      "daysToLay": 2,
+      "mature": 5,
+      "harvest": "floor",
+      "art": "Duck",
+      "baby": "BabyWhite Chicken",
+      "variants": 1,
+      "description": "Đẻ trứng vịt hai ngày một lần, đôi khi rơi lông vịt. Sống trong chuồng gà."
+    },
+    {
+      "id": "sheep",
+      "name": "Cừu",
+      "kind": "Barn",
+      "level": 3,
+      "price": 8000,
+      "produce": "object_440",
+      "deluxe": "object_440",
+      "daysToLay": 3,
+      "mature": 4,
+      "harvest": "shears",
+      "art": "Sheep",
+      "baby": "BabySheep",
+      "sheared": "ShearedSheep",
+      "variants": 1,
+      "description": "Mọc len ba ngày một lần, cắt bằng kéo xén lông. Sống trong chuồng lớn."
+    },
+    {
+      "id": "rabbit",
+      "name": "Thỏ",
+      "kind": "Coop",
+      "level": 3,
+      "price": 8000,
+      "produce": "object_440",
+      "deluxe": "object_446",
+      "daysToLay": 4,
+      "mature": 6,
+      "harvest": "floor",
+      "art": "Rabbit",
+      "baby": "BabyRabbit",
+      "variants": 1,
+      "description": "Cho len bốn ngày một lần, đôi khi để lại chân thỏ may mắn. Sống trong chuồng gà."
+    },
+    {
+      "id": "pig",
+      "name": "Heo",
+      "kind": "Barn",
+      "level": 3,
+      "price": 16000,
+      "produce": "object_430",
+      "deluxe": "object_430",
+      "daysToLay": 1,
+      "mature": 10,
+      "harvest": "dig",
+      "art": "Pig",
+      "baby": "BabyPig",
+      "variants": 1,
+      "description": "Đào nấm cục khi được thả ra ngoài (trừ mùa đông). Sống trong chuồng lớn."
+    }
+  ],
+  "plans": [
+    {
+      "kind": "Coop",
+      "level": 1,
+      "name": "Coop",
+      "price": 4000,
+      "wood": 300,
+      "stone": 100,
+      "days": 3,
+      "produceArea": [
+        2,
+        4,
+        8,
+        4
+      ],
+      "materials": []
+    },
+    {
+      "kind": "Coop",
+      "level": 2,
+      "name": "Big Coop",
+      "price": 10000,
+      "wood": 400,
+      "stone": 150,
+      "days": 2,
+      "produceArea": [
+        2,
+        4,
+        11,
+        4
+      ],
+      "materials": []
+    },
+    {
+      "kind": "Coop",
+      "level": 3,
+      "name": "Deluxe Coop",
+      "price": 20000,
+      "wood": 500,
+      "stone": 200,
+      "days": 2,
+      "produceArea": [
+        2,
+        4,
+        18,
+        4
+      ],
+      "materials": []
+    },
+    {
+      "kind": "Barn",
+      "level": 1,
+      "name": "Barn",
+      "price": 6000,
+      "wood": 350,
+      "stone": 150,
+      "days": 3,
+      "produceArea": [
+        6,
+        4,
+        8,
+        7
+      ],
+      "materials": []
+    },
+    {
+      "kind": "Barn",
+      "level": 2,
+      "name": "Big Barn",
+      "price": 12000,
+      "wood": 450,
+      "stone": 200,
+      "days": 2,
+      "produceArea": [
+        6,
+        4,
+        12,
+        7
+      ],
+      "materials": []
+    },
+    {
+      "kind": "Barn",
+      "level": 3,
+      "name": "Deluxe Barn",
+      "price": 25000,
+      "wood": 550,
+      "stone": 300,
+      "days": 2,
+      "produceArea": [
+        6,
+        4,
+        15,
+        7
+      ],
+      "materials": []
+    },
+    {
+      "kind": "Silo",
+      "level": 1,
+      "name": "Silo",
+      "price": 100,
+      "wood": 0,
+      "stone": 100,
+      "days": 3,
+      "produceArea": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "materials": [
+        {
+          "id": "object_330",
+          "amount": 10
+        },
+        {
+          "id": "object_334",
+          "amount": 5
+        }
+      ]
+    }
+  ],
+  "footprints": [
+    {
+      "kind": "Coop",
+      "width": 6,
+      "height": 3,
+      "doorX": 1,
+      "animalDoorX": 2,
+      "animalDoorY": 2,
+      "troughX": 6,
+      "troughY": 3,
+      "hopperX": 3,
+      "hopperY": 3
+    },
+    {
+      "kind": "Barn",
+      "width": 7,
+      "height": 4,
+      "doorX": 1,
+      "animalDoorX": 3,
+      "animalDoorY": 3,
+      "troughX": 8,
+      "troughY": 3,
+      "hopperX": 6,
+      "hopperY": 3
+    },
+    {
+      "kind": "Silo",
+      "width": 3,
+      "height": 3,
+      "doorX": -1,
+      "animalDoorX": -1,
+      "animalDoorY": -1,
+      "troughX": -1,
+      "troughY": -1,
+      "hopperX": -1,
+      "hopperY": -1
+    }
+  ],
+  "paint": [
+    {
+      "building": "Deluxe Coop",
+      "regions": [
+        {
+          "name": "Building",
+          "min": -25,
+          "max": 0
+        },
+        {
+          "name": "Roof",
+          "min": -15,
+          "max": 5
+        },
+        {
+          "name": "Trim",
+          "min": -25,
+          "max": 0
+        }
+      ]
+    },
+    {
+      "building": "Deluxe Barn",
+      "regions": [
+        {
+          "name": "Building",
+          "min": -15,
+          "max": 0
+        },
+        {
+          "name": "Roof",
+          "min": -10,
+          "max": 5
+        },
+        {
+          "name": "Trim",
+          "min": -10,
+          "max": 5
+        }
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "object_176",
+      "name": "Trứng",
+      "category": "Egg",
+      "sellPrice": 50,
+      "buyPrice": 0,
+      "edibility": 10,
+      "qualities": true
+    },
+    {
+      "id": "object_174",
+      "name": "Trứng lớn",
+      "category": "Egg",
+      "sellPrice": 95,
+      "buyPrice": 0,
+      "edibility": 15,
+      "qualities": true
+    },
+    {
+      "id": "object_180",
+      "name": "Trứng nâu",
+      "category": "Egg",
+      "sellPrice": 50,
+      "buyPrice": 0,
+      "edibility": 10,
+      "qualities": true
+    },
+    {
+      "id": "object_182",
+      "name": "Trứng nâu lớn",
+      "category": "Egg",
+      "sellPrice": 95,
+      "buyPrice": 0,
+      "edibility": 15,
+      "qualities": true
+    },
+    {
+      "id": "object_442",
+      "name": "Trứng vịt",
+      "category": "Egg",
+      "sellPrice": 95,
+      "buyPrice": 0,
+      "edibility": 15,
+      "qualities": true
+    },
+    {
+      "id": "object_444",
+      "name": "Lông vịt",
+      "category": "AnimalProduct",
+      "sellPrice": 250,
+      "buyPrice": 0,
+      "edibility": 0,
+      "qualities": true
+    },
+    {
+      "id": "object_440",
+      "name": "Len",
+      "category": "AnimalProduct",
+      "sellPrice": 340,
+      "buyPrice": 0,
+      "edibility": 0,
+      "qualities": true
+    },
+    {
+      "id": "object_446",
+      "name": "Chân thỏ",
+      "category": "AnimalProduct",
+      "sellPrice": 565,
+      "buyPrice": 0,
+      "edibility": 0,
+      "qualities": true
+    },
+    {
+      "id": "object_184",
+      "name": "Sữa",
+      "category": "Milk",
+      "sellPrice": 125,
+      "buyPrice": 0,
+      "edibility": 15,
+      "qualities": true
+    },
+    {
+      "id": "object_186",
+      "name": "Sữa lớn",
+      "category": "Milk",
+      "sellPrice": 190,
+      "buyPrice": 0,
+      "edibility": 20,
+      "qualities": true
+    },
+    {
+      "id": "object_436",
+      "name": "Sữa dê",
+      "category": "Milk",
+      "sellPrice": 225,
+      "buyPrice": 0,
+      "edibility": 25,
+      "qualities": true
+    },
+    {
+      "id": "object_438",
+      "name": "Sữa dê lớn",
+      "category": "Milk",
+      "sellPrice": 345,
+      "buyPrice": 0,
+      "edibility": 35,
+      "qualities": true
+    },
+    {
+      "id": "object_430",
+      "name": "Nấm cục",
+      "category": "AnimalProduct",
+      "sellPrice": 625,
+      "buyPrice": 0,
+      "edibility": 5,
+      "qualities": true
+    },
+    {
+      "id": "object_178",
+      "name": "Cỏ khô",
+      "category": "AnimalFeed",
+      "sellPrice": 0,
+      "buyPrice": 50,
+      "edibility": 0,
+      "qualities": false
+    },
+    {
+      "id": "object_330",
+      "name": "Đất sét",
+      "category": "Resource",
+      "sellPrice": 20,
+      "buyPrice": 0,
+      "edibility": 0,
+      "qualities": false
+    },
+    {
+      "id": "object_334",
+      "name": "Thỏi đồng",
+      "category": "Resource",
+      "sellPrice": 60,
+      "buyPrice": 0,
+      "edibility": 0,
+      "qualities": false
+    },
+    {
+      "id": "tool_MilkPail",
+      "name": "Xô vắt sữa",
+      "category": "Tool",
+      "sellPrice": 0,
+      "buyPrice": 1000,
+      "edibility": 0,
+      "qualities": false
+    },
+    {
+      "id": "tool_Shears",
+      "name": "Kéo xén lông",
+      "category": "Tool",
+      "sellPrice": 0,
+      "buyPrice": 1000,
+      "edibility": 0,
+      "qualities": false
+    },
+    {
+      "id": "object_92",
+      "name": "Nhựa cây",
+      "category": "Resource",
+      "sellPrice": 2,
+      "buyPrice": 0,
+      "edibility": 0,
+      "qualities": false
+    }
+  ]
+}

@@ -477,6 +477,9 @@ GameObject:
   - component: {fileID: -8395128916760746476}
   - component: {fileID: 710034030120266513}
   - component: {fileID: 8974644736651687085}
+  - component: {fileID: -3396851269178870071}
+  - component: {fileID: 5870672790194797336}
+  - component: {fileID: 8048188755621869854}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -636,7 +639,11 @@ MonoBehaviour:
   farmingInteractor: {fileID: 432642572655145590}
   inventory: {fileID: 3895469510898395604}
   playerAnimation: {fileID: 7000000000000000001}
+  fishingController: {fileID: -3396851269178870071}
+  fishingCursorAtlas: {fileID: 2800000, guid: 4f228b23415de98469764b2c50aee32f, type: 3}
+  fishingAnimationsAtlas: {fileID: 2800000, guid: 7febdc91a22f5054197e4852ac852340, type: 3}
   toolActionDuration: 0.28
+  toolSwitchCooldownDuration: 0.25
 --- !u!114 &7000000000000000001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -663,8 +670,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4afa5f2b0a2307419b76a877aa1b882, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NetworkCharacterStats
-  maxStamina: 100
-  stamina: 100
+  maxStamina: 270
+  stamina: 270
 --- !u!114 &432642572655145590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -683,6 +690,13 @@ MonoBehaviour:
   plotLayer:
     serializedVersion: 2
     m_Bits: 0
+  farmGround: {fileID: 0}
+  farmBuildings: {fileID: 0}
+  hoeDirtAtlas: {fileID: 2800000, guid: 000228e8b8e5463458f18ed009d18d41, type: 3}
+  wateringAtlas: {fileID: 2800000, guid: 7febdc91a22f5054197e4852ac852340, type: 3}
+  waterEffectPrefab: {fileID: 3317797324469197522, guid: 895822703846405399addc3318da2fca, type: 3}
+  waterCapacity: 40
+  waterLeft: 40
 --- !u!114 &8675325365346964929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -726,7 +740,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: de3ad66433ae8c1468a39ee56f81bc56, type: 3}
     - {fileID: 21300000, guid: 0e09fe3f8fc0e1945a022716093c520f, type: 3}
     - {fileID: 21300000, guid: d0d4b96cf867b1445b17afb5ecf64fff, type: 3}
-    inventoryIcon: {fileID: 21300000, guid: c7a39d742d431524faa0378e9eb044b0, type: 3}
+    inventoryIcon: {fileID: 3202775321866498333, guid: 930bfb71aff8a184e9d538c2d87883b1, type: 3}
     hasUseAnimation: 1
     useAnimation: 3
     amount: 1
@@ -805,91 +819,66 @@ MonoBehaviour:
     hasUseAnimation: 1
     useAnimation: 17
     amount: 1
-  - displayName: 
-    kind: 0
-    itemData: {fileID: 0}
-    heldSprite: {fileID: 21300000, guid: 4d04713579f87d647bc5cf7676b18723, type: 3}
-    heldSpriteDown: {fileID: 21300000, guid: 4d04713579f87d647bc5cf7676b18723, type: 3}
-    heldSpriteRight: {fileID: 21300000, guid: 4d04713579f87d647bc5cf7676b18723, type: 3}
-    heldSpriteUp: {fileID: 21300000, guid: 4d04713579f87d647bc5cf7676b18723, type: 3}
-    heldAnimationSprites:
-    - {fileID: 21300000, guid: 486d617ef62e82049a006eeb67b7927f, type: 3}
-    - {fileID: 21300000, guid: 31d054eb12403054f9cb1173aa8d89cc, type: 3}
-    - {fileID: 21300000, guid: dbe53589519d94f4e8ffe4cdc8e89f12, type: 3}
-    - {fileID: 21300000, guid: 22aaa2952e151ee4bb5ff4e93d03108e, type: 3}
-    - {fileID: 21300000, guid: 238167708080fbf4c8cb7d33e81e5fbc, type: 3}
-    inventoryIcon: {fileID: 21300000, guid: 85bac6278575f0d49a8fbc2744c7f9a4, type: 3}
-    hasUseAnimation: 0
-    useAnimation: 0
-    amount: 0
-  - displayName: 
-    kind: 0
-    itemData: {fileID: 0}
-    heldSprite: {fileID: 21300000, guid: 4d04713579f87d647bc5cf7676b18723, type: 3}
-    heldSpriteDown: {fileID: 21300000, guid: 4d04713579f87d647bc5cf7676b18723, type: 3}
-    heldSpriteRight: {fileID: 21300000, guid: 4d04713579f87d647bc5cf7676b18723, type: 3}
-    heldSpriteUp: {fileID: 21300000, guid: 4d04713579f87d647bc5cf7676b18723, type: 3}
-    heldAnimationSprites:
-    - {fileID: 21300000, guid: 486d617ef62e82049a006eeb67b7927f, type: 3}
-    - {fileID: 21300000, guid: 31d054eb12403054f9cb1173aa8d89cc, type: 3}
-    - {fileID: 21300000, guid: dbe53589519d94f4e8ffe4cdc8e89f12, type: 3}
-    - {fileID: 21300000, guid: 22aaa2952e151ee4bb5ff4e93d03108e, type: 3}
-    - {fileID: 21300000, guid: 238167708080fbf4c8cb7d33e81e5fbc, type: 3}
-    inventoryIcon: {fileID: 21300000, guid: 85bac6278575f0d49a8fbc2744c7f9a4, type: 3}
-    hasUseAnimation: 0
-    useAnimation: 0
-    amount: 0
-  - displayName: 
-    kind: 0
-    itemData: {fileID: 0}
-    heldSprite: {fileID: 21300000, guid: 4d04713579f87d647bc5cf7676b18723, type: 3}
-    heldSpriteDown: {fileID: 21300000, guid: 4d04713579f87d647bc5cf7676b18723, type: 3}
-    heldSpriteRight: {fileID: 21300000, guid: 4d04713579f87d647bc5cf7676b18723, type: 3}
-    heldSpriteUp: {fileID: 21300000, guid: 4d04713579f87d647bc5cf7676b18723, type: 3}
-    heldAnimationSprites:
-    - {fileID: 21300000, guid: 486d617ef62e82049a006eeb67b7927f, type: 3}
-    - {fileID: 21300000, guid: 31d054eb12403054f9cb1173aa8d89cc, type: 3}
-    - {fileID: 21300000, guid: dbe53589519d94f4e8ffe4cdc8e89f12, type: 3}
-    - {fileID: 21300000, guid: 22aaa2952e151ee4bb5ff4e93d03108e, type: 3}
-    - {fileID: 21300000, guid: 238167708080fbf4c8cb7d33e81e5fbc, type: 3}
-    inventoryIcon: {fileID: 21300000, guid: 85bac6278575f0d49a8fbc2744c7f9a4, type: 3}
-    hasUseAnimation: 0
-    useAnimation: 0
-    amount: 0
-  - displayName: 
-    kind: 0
-    itemData: {fileID: 0}
-    heldSprite: {fileID: 21300000, guid: 4d04713579f87d647bc5cf7676b18723, type: 3}
-    heldSpriteDown: {fileID: 21300000, guid: 4d04713579f87d647bc5cf7676b18723, type: 3}
-    heldSpriteRight: {fileID: 21300000, guid: 4d04713579f87d647bc5cf7676b18723, type: 3}
-    heldSpriteUp: {fileID: 21300000, guid: 4d04713579f87d647bc5cf7676b18723, type: 3}
-    heldAnimationSprites:
-    - {fileID: 21300000, guid: 486d617ef62e82049a006eeb67b7927f, type: 3}
-    - {fileID: 21300000, guid: 31d054eb12403054f9cb1173aa8d89cc, type: 3}
-    - {fileID: 21300000, guid: dbe53589519d94f4e8ffe4cdc8e89f12, type: 3}
-    - {fileID: 21300000, guid: 22aaa2952e151ee4bb5ff4e93d03108e, type: 3}
-    - {fileID: 21300000, guid: 238167708080fbf4c8cb7d33e81e5fbc, type: 3}
-    inventoryIcon: {fileID: 21300000, guid: 85bac6278575f0d49a8fbc2744c7f9a4, type: 3}
-    hasUseAnimation: 0
-    useAnimation: 0
-    amount: 0
-  - displayName: 
-    kind: 0
-    itemData: {fileID: 0}
-    heldSprite: {fileID: 21300000, guid: 4d04713579f87d647bc5cf7676b18723, type: 3}
-    heldSpriteDown: {fileID: 21300000, guid: 4d04713579f87d647bc5cf7676b18723, type: 3}
-    heldSpriteRight: {fileID: 21300000, guid: 4d04713579f87d647bc5cf7676b18723, type: 3}
-    heldSpriteUp: {fileID: 21300000, guid: 4d04713579f87d647bc5cf7676b18723, type: 3}
-    heldAnimationSprites:
-    - {fileID: 21300000, guid: 486d617ef62e82049a006eeb67b7927f, type: 3}
-    - {fileID: 21300000, guid: 31d054eb12403054f9cb1173aa8d89cc, type: 3}
-    - {fileID: 21300000, guid: dbe53589519d94f4e8ffe4cdc8e89f12, type: 3}
-    - {fileID: 21300000, guid: 22aaa2952e151ee4bb5ff4e93d03108e, type: 3}
-    - {fileID: 21300000, guid: 238167708080fbf4c8cb7d33e81e5fbc, type: 3}
-    inventoryIcon: {fileID: 21300000, guid: 85bac6278575f0d49a8fbc2744c7f9a4, type: 3}
-    hasUseAnimation: 0
-    useAnimation: 0
-    amount: 0
+  - displayName: "H\u1EA1t c\u1EA3i \u0111\u1ECF"
+    kind: 1
+    itemData: {fileID: 11400000, guid: 3ef9290c939648342a08ba8eac5c9694, type: 2}
+    heldSprite: {fileID: 21300000, guid: 2f2af0421512fac41803e1d8191a78d1, type: 3}
+    heldSpriteDown: {fileID: 0}
+    heldSpriteRight: {fileID: 0}
+    heldSpriteUp: {fileID: 0}
+    heldAnimationSprites: []
+    inventoryIcon: {fileID: 21300000, guid: 2f2af0421512fac41803e1d8191a78d1, type: 3}
+    hasUseAnimation: 1
+    useAnimation: 5
+    amount: 20
+  - displayName: "H\u1EA1t khoai t\xE2y"
+    kind: 1
+    itemData: {fileID: 11400000, guid: 68e901ab2f6443879cf13091b5e3d201, type: 2}
+    heldSprite: {fileID: 21300000, guid: 2f2af0421512fac41803e1d8191a78d1, type: 3}
+    heldSpriteDown: {fileID: 0}
+    heldSpriteRight: {fileID: 0}
+    heldSpriteUp: {fileID: 0}
+    heldAnimationSprites: []
+    inventoryIcon: {fileID: 0}
+    hasUseAnimation: 1
+    useAnimation: 5
+    amount: 20
+  - displayName: "H\u1EA1t \u0111\u1EADu que"
+    kind: 1
+    itemData: {fileID: 11400000, guid: 24e4e8184762496591e28f74b9d1870f, type: 2}
+    heldSprite: {fileID: 21300000, guid: 2f2af0421512fac41803e1d8191a78d1, type: 3}
+    heldSpriteDown: {fileID: 0}
+    heldSpriteRight: {fileID: 0}
+    heldSpriteUp: {fileID: 0}
+    heldAnimationSprites: []
+    inventoryIcon: {fileID: 0}
+    hasUseAnimation: 1
+    useAnimation: 5
+    amount: 20
+  - displayName: "H\u1EA1t h\u1ED7n h\u1EE3p"
+    kind: 1
+    itemData: {fileID: 11400000, guid: 2783072e8b054ece8bd519c49efce1b7, type: 2}
+    heldSprite: {fileID: 21300000, guid: 2f2af0421512fac41803e1d8191a78d1, type: 3}
+    heldSpriteDown: {fileID: 0}
+    heldSpriteRight: {fileID: 0}
+    heldSpriteUp: {fileID: 0}
+    heldAnimationSprites: []
+    inventoryIcon: {fileID: 0}
+    hasUseAnimation: 1
+    useAnimation: 5
+    amount: 12
+  - displayName: "H\u1EA1t s\xFAp l\u01A1"
+    kind: 1
+    itemData: {fileID: 11400000, guid: 1f1d8a9fb750497a95ad63a47e34c91c, type: 2}
+    heldSprite: {fileID: 21300000, guid: 2f2af0421512fac41803e1d8191a78d1, type: 3}
+    heldSpriteDown: {fileID: 0}
+    heldSpriteRight: {fileID: 0}
+    heldSpriteUp: {fileID: 0}
+    heldAnimationSprites: []
+    inventoryIcon: {fileID: 0}
+    hasUseAnimation: 1
+    useAnimation: 5
+    amount: 20
   - displayName: 
     kind: 0
     itemData: {fileID: 0}
@@ -1390,6 +1379,7 @@ MonoBehaviour:
   shirtStyleIndex: 0
   pantsStyleIndex: 0
   femalePants: 0
+  sortingGroup: {fileID: 0}
 --- !u!70 &8974644736651687085
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -1427,6 +1417,58 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.75}
   m_Size: {x: 0.7, y: 0.45}
   m_Direction: 1
+--- !u!114 &-3396851269178870071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6059844591511450023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dee2721ee6ba2944962270237540399, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FishingController
+  motor: {fileID: 0}
+  inventory: {fileID: 0}
+  playerAnimation: {fileID: 0}
+  cursorsTexture: {fileID: 2800000, guid: 4f228b23415de98469764b2c50aee32f, type: 3}
+  waterDetector: {fileID: 5870672790194797336}
+  characterStats: {fileID: 0}
+  bobberPrefab: {fileID: 7664964744010385204, guid: 8c2ae5b1d8517b0438492bc16908c73c, type: 3}
+  splashPrefab: {fileID: 8815780833755218903, guid: 89ce20b473d72334ab4e9c59f8389ef8, type: 3}
+  linePrefab: {fileID: 558461524895411419, guid: 7912a8e3d9457674a9886c970e28a158, type: 3}
+  minCastDistance: 2
+  maxCastDistance: 3.5
+  biteWaitMin: 0.5
+  biteWaitMax: 12
+  biteReactionWindow: 1
+--- !u!114 &5870672790194797336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6059844591511450023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a2165925d73abc42ac912d704972a60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaterDetector
+  ground: {fileID: 0}
+--- !u!114 &8048188755621869854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6059844591511450023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cce88760ee0a6c44843482edbb4ce2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerWarpDetector
+  motor: {fileID: 0}
 --- !u!1 &6323067904115003719
 GameObject:
   m_ObjectHideFlags: 0

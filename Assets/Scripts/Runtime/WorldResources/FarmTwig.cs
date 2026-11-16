@@ -31,7 +31,7 @@ public sealed class FarmTwig : WorldResource
             spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
 
         spriteRenderer.sprite = twigSprite;
-        spriteRenderer.sortingOrder = 22;
+        spriteRenderer.sortingOrder = WorldSortOrder.GetOrder(transform.position.y, -0.5f);
         dropItem = woodItem;
     }
 }

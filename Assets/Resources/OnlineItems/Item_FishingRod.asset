@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e343f60f394d49bcba34265a90ec6bbb, type: 3}
+  m_Name: Item_FishingRod
+  m_EditorClassIdentifier: Assembly-CSharp::FishingRodData
+  itemId: fishing_rod
+  displayName: "C\u1EA7n c\xE2u"
+  description: "D\xF9ng \u0111\u1EC3 c\xE2u c\xE1."
+  icon: {fileID: 21300000, guid: b72dbb8139eb47fd8764493d827496e8, type: 3}
+  maxStackSize: 1
+  kind: 4
+  hasUseAnimation: 1
+  useAnimation: 17
+  heldSprite: {fileID: 21300000, guid: b72dbb8139eb47fd8764493d827496e8, type: 3}
+  heldSpriteDown: {fileID: 21300000, guid: b72dbb8139eb47fd8764493d827496e8, type: 3}
+  heldSpriteRight: {fileID: 21300000, guid: b72dbb8139eb47fd8764493d827496e8, type: 3}
+  heldSpriteUp: {fileID: 21300000, guid: b72dbb8139eb47fd8764493d827496e8, type: 3}
+  heldAnimationSprites: []
+  castSideFrames:
+  - {fileID: 21300000, guid: 935d76e6c8fca38ec55429efd87a06f2, type: 3}
+  - {fileID: 21300000, guid: cd3175b5d2357dd32a24a64e7a6bd19a, type: 3}
+  - {fileID: 21300000, guid: 418132c57605b8146eb9ce8466a8c512, type: 3}
+  - {fileID: 21300000, guid: 5f3debc2dd3de74d16501a22689a524d, type: 3}
+  - {fileID: 21300000, guid: 8cec2d81164f5dcbf22d94c00fe56533, type: 3}
+  - {fileID: 21300000, guid: bb211f59d86a41cc8cc620e6adf4a00a, type: 3}
+  castVerticalFrames:
+  - {fileID: 21300000, guid: 3e966eb4208d26787f329f96331fb012, type: 3}
+  - {fileID: 21300000, guid: 939e22adeb3e05eb3b87e321122c0137, type: 3}
+  - {fileID: 21300000, guid: aec61e86c575b1f643aa21d6c79f77a6, type: 3}
+  - {fileID: 21300000, guid: b537d52b2929dbe441fe0773eae7e908, type: 3}
+  - {fileID: 21300000, guid: 98e880ffc274d537a298d34bbd9a487a, type: 3}
+  - {fileID: 21300000, guid: 634fabb0461846168df697cf70d75ab0, type: 3}
+  upgradeLevel: 0
+  initialParentTileIndex: 189
+  currentParentTileIndex: 189
+  staminaCost: 0
+  animationSpeedModifier: 1

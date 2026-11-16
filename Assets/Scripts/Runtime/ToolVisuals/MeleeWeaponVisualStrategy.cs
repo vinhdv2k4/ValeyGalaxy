@@ -1,8 +1,8 @@
 using UnityEngine;
 
 /// <summary>
-/// Six-frame sword/scythe pose from MeleeWeapon.drawDuringUse (ordinary swipe).
-/// Coordinates are the decompiled XNA offsets from playerPosition at 4x scale.
+/// Six-frame sword/scythe pose (ordinary swipe).
+/// Coordinates are offsets from playerPosition at 4x scale.
 /// The weapon sprite's pivot (1, 1 from the bottom) is the same point as the
 /// source origin (1, 15 from the top), so no pivot correction is needed.
 /// </summary>
@@ -44,14 +44,19 @@ public class MeleeWeaponVisualStrategy : IToolVisualStrategy
         direction = Mathf.Clamp(direction, 0, 3);
         int frame = ToolAnimationTimeline.SwordFrame(progress);
 
-        if (direction == 3) // Facing Left: perfect horizontal mirror of Facing Right (direction 1)
+        if (direction == 3)
         {
-            FramePose rightSource = Frames[1][frame];
+            // drawDuringUse facing left draws with FlipHorizontally but keeps the origin (1, 15):
+            // the flipped image hangs 14 source px (56 screen px) right of the draw point along
+            // the blade's rotation, where Unity's flipX keeps the hilt on the pivot instead.
+            FramePose leftSource = Frames[3][frame];
+            float radians = leftSource.Angle * Mathf.Deg2Rad;
+            float hiltX = leftSource.X + 56f * Mathf.Cos(radians);
+            float hiltY = leftSource.Y + 56f * Mathf.Sin(radians);
             return new ToolPose
             {
-                LocalPosition = new Vector3(-(rightSource.X - 32f) / 64f,
-                    -(rightSource.Y + 32f) / 64f, 0f),
-                LocalRotation = Quaternion.Euler(0f, 0f, rightSource.Angle),
+                LocalPosition = new Vector3((hiltX - 32f) / 64f, -(hiltY + 32f) / 64f, 0f),
+                LocalRotation = Quaternion.Euler(0f, 0f, -leftSource.Angle),
                 SortingOrder = frame < 3 ? 20 : 27,
                 FlipX = true,
                 OverrideSprite = slot?.GetHeldSprite(direction)
@@ -60,7 +65,7 @@ public class MeleeWeaponVisualStrategy : IToolVisualStrategy
 
         FramePose source = Frames[direction][frame];
 
-        // FarmerRenderer's 16x32 body is centred at playerPosition + (32,-32)
+        // Body is centred at playerPosition + (32,-32)
         // in source screen pixels. Unity sprites use 64 screen pixels per unit.
         return new ToolPose
         {

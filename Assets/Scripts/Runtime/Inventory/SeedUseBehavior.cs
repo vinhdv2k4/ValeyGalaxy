@@ -5,7 +5,7 @@ public sealed class SeedUseBehavior : IItemUseBehavior
 
     public bool Apply(ItemUseContext context)
     {
-        if (context.Farming == null || !context.Farming.TryPlant(context.Facing)) return false;
-        return context.Inventory != null && context.Inventory.ConsumeSelected(PlayerItemKind.Seeds);
+        // Planting needs the backend state transaction used by NetworkPlayerController.
+        return false;
     }
 }

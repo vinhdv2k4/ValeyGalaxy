@@ -163,6 +163,34 @@ public class InventoryModel : IReadOnlyInventory, IInventoryController
         return removed;
     }
 
+    public bool ConsumeItem(string itemId, int amount = 1)
+    {
+        if (string.IsNullOrEmpty(itemId) || amount <= 0) return false;
+        EnsureCapacity();
+        string id = itemId.ToLowerInvariant();
+        int remaining = amount;
+        for (int i = 0; i < UnlockedSlots; i++)
+        {
+            var s = slots[i];
+            if (!s.IsEmpty && s.Data != null && s.Data.itemId.Equals(id, StringComparison.OrdinalIgnoreCase))
+            {
+                int toTake = Mathf.Min(remaining, s.Amount);
+                s.RemoveAmount(toTake);
+                remaining -= toTake;
+                SlotChanged?.Invoke(i, s);
+                if (remaining <= 0) break;
+            }
+        }
+        return remaining <= 0;
+    }
+
+    public void ClearSlot(int index)
+    {
+        if (index < 0 || index >= UnlockedSlots) return;
+        slots[index].Clear();
+        SlotChanged?.Invoke(index, slots[index]);
+    }
+
     public void UnlockBackpack(int newCount)
     {
         unlockedSlots = Mathf.Clamp(newCount, ToolbarSlotCount, MaxCapacity);

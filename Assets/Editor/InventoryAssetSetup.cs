@@ -39,15 +39,15 @@ public static class InventoryAssetSetup
             }
         }
 
-        // 3. Extract Tools from tools.png
+        // 3. Extract Tools
         string toolsPath = "Assets/Content/TileSheets/tools.png";
         if (File.Exists(toolsPath))
         {
             Texture2D toolsTex = LoadTextureReadable(toolsPath);
             if (toolsTex != null)
             {
-                // Axe: topX = 80, topY = 144
-                ExtractAndSaveSprite(toolsTex, 80, 144, 16, 16, $"{uiDir}/Icon_Axe.png", Vector4.zero);
+                // Axe: the visible head and handle are on row 10.
+                ExtractAndSaveSprite(toolsTex, 80, 160, 16, 16, $"{uiDir}/Icon_Axe.png", Vector4.zero);
 
                 // Hoe: topX = 80, topY = 32
                 ExtractAndSaveSprite(toolsTex, 80, 32, 16, 16, $"{uiDir}/Icon_Hoe.png", Vector4.zero);
@@ -62,7 +62,7 @@ public static class InventoryAssetSetup
             }
         }
 
-        // 4. Extract Scythe from weapons.png
+        // 4. Extract Scythe
         string wepPath = "Assets/Content/TileSheets/weapons.png";
         if (File.Exists(wepPath))
         {
@@ -76,7 +76,7 @@ public static class InventoryAssetSetup
             }
         }
 
-        // 5. Extract items from springobjects.png
+        // 5. Extract items
         string springObjectsPath = "Assets/Content/Maps/springobjects.png";
         if (File.Exists(springObjectsPath))
         {

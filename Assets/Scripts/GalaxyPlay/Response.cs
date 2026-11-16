@@ -1,0 +1,25 @@
+#if false
+using Microsoft.Xna.Framework.Input;
+
+namespace GameSource
+{
+  public class Response
+  {
+    public string responseKey;
+    public string responseText;
+    public Keys hotkey;
+
+    public Response(string responseKey, string responseText)
+    {
+      this.responseKey = responseKey;
+      this.responseText = responseText;
+    }
+
+    public Response SetHotKey(Keys key)
+    {
+      this.hotkey = key;
+      return this;
+    }
+  }
+}
+#endif

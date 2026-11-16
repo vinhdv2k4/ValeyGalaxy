@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3caa0aa9f4376784db6b0bd379df71d3, type: 3}
+  m_Name: Item_Cauliflower
+  m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  itemId: cauliflower
+  displayName: Súp lơ
+  description: Nông sản thu hoạch.
+  icon: {fileID: 0}
+  iconAtlas: {fileID: 2800000, guid: 0ecd72a68176ffe4b81dbd0225adefe7, type: 3}
+  iconAtlasIndex: 190
+  maxStackSize: 999
+  kind: 2
+  hasUseAnimation: 0
+  useAnimation: 0
+  edibility: 30
+  isDrink: 0
+  buffDurationMinutes: 0
+  foodBuff:
+    farming: 0
+    fishing: 0
+    mining: 0
+    luck: 0
+    foraging: 0
+    crafting: 0
+    maxStamina: 0
+    magneticRadius: 0
+    speed: 0
+    defense: 0
+    attack: 0
+  cropDefinition: {fileID: 0}
+  mixedSeedCrops: []
+  heldSprite: {fileID: 0}
+  heldSpriteDown: {fileID: 0}
+  heldSpriteRight: {fileID: 0}
+  heldSpriteUp: {fileID: 0}
+  heldAnimationSprites: []

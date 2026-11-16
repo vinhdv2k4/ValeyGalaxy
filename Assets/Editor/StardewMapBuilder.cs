@@ -28,6 +28,12 @@ namespace StardewValley.EditorTools
             window.Show();
         }
 
+        [MenuItem("Stardew Valley/Build All Maps To Prefabs")]
+        public static void MenuBuildAllMaps()
+        {
+            BuildAllMapsToPrefabs();
+        }
+
         private void OnEnable()
         {
             RefreshMapList();
@@ -124,7 +130,7 @@ namespace StardewValley.EditorTools
             GUI.backgroundColor = Color.white;
         }
 
-        public static GameObject BuildMapToScene(string tbinPath, string season, int ppu, bool addColliders, bool hidePaths = false, bool separatePathsObjects = true, bool silent = false)
+        public static GameObject BuildMapToScene(string tbinPath, string season, int ppu, bool addColliders, bool hidePaths = false, bool separatePathsObjects = true, bool silent = false, string tileAssetPath = null)
         {
             if (!File.Exists(tbinPath))
             {
@@ -133,6 +139,7 @@ namespace StardewValley.EditorTools
             }
 
             if (!silent) EditorUtility.DisplayProgressBar("Đang xây dựng Map", "Đang đọc dữ liệu .tbin...", 0.1f);
+            GameObject gridGo = null;
             try
             {
                 TbinData mapData;
@@ -144,13 +151,106 @@ namespace StardewValley.EditorTools
                 string mapName = Path.GetFileNameWithoutExtension(tbinPath);
 
                 // Root Grid GameObject
-                GameObject gridGo = new GameObject($"Map_{mapName}");
+                gridGo = new GameObject($"Map_{mapName}");
                 Grid grid = gridGo.AddComponent<Grid>();
                 grid.cellSize = new Vector3(1f, 1f, 0f);
 
                 // Load all tilesheet textures and sprites
                 if (!silent) EditorUtility.DisplayProgressBar("Đang xây dựng Map", "Đang xử lý Tilesheets...", 0.3f);
                 var sheetSprites = LoadTileSheetSprites(mapData.TileSheets, season, ppu);
+
+                // Tiles created only in memory disappear when a prefab is reloaded.
+                // Keep one persistent tile library beside each exported prefab.
+                var savedTiles = new Dictionary<string, Tile>();
+                bool hasTileLibrary = !string.IsNullOrEmpty(tileAssetPath) && AssetDatabase.LoadMainAssetAtPath(tileAssetPath) != null;
+                if (hasTileLibrary)
+                {
+                    foreach (var asset in AssetDatabase.LoadAllAssetsAtPath(tileAssetPath))
+                    {
+                        if (asset is Tile savedTile) savedTiles[savedTile.name] = savedTile;
+                    }
+                }
+
+                // Cache Tile ScriptableObjects per sheet and tile index to prevent massive duplication
+                var sheetTiles = new Dictionary<string, Tile[]>();
+                foreach (var kvp in sheetSprites)
+                {
+                    sheetTiles[kvp.Key] = new Tile[kvp.Value.Length];
+                }
+                var tileSheetsById = new Dictionary<string, TileSheetData>(StringComparer.OrdinalIgnoreCase);
+                foreach (var sheet in mapData.TileSheets) tileSheetsById[sheet.Id] = sheet;
+
+                bool HasTileProperty(TileData tileInfo, string property)
+                {
+                    if (tileInfo.Properties.ContainsKey(property)) return true;
+                    return tileSheetsById.TryGetValue(tileInfo.TileSheetId, out var sheet) &&
+                           sheet.Properties.ContainsKey($"@TileIndex@{tileInfo.TileIndex}@{property}");
+                }
+
+                Tile GetOrCreateTile(string sheetId, int tileIdx)
+                {
+                    if (!sheetSprites.TryGetValue(sheetId, out var spArr)) return null;
+                    if (tileIdx < 0 || tileIdx >= spArr.Length || spArr[tileIdx] == null) return null;
+
+                    if (!sheetTiles.TryGetValue(sheetId, out var tArr)) return null;
+                    if (tArr[tileIdx] == null)
+                    {
+                        if (!string.IsNullOrEmpty(tileAssetPath) && !AssetDatabase.Contains(spArr[tileIdx]))
+                            throw new InvalidOperationException($"Sprite {sheetId}[{tileIdx}] chưa được lưu trong AssetDatabase.");
+
+                        string tileName = $"{sheetId.Length}_{sheetId}_{tileIdx}";
+                        Tile t;
+                        if (!string.IsNullOrEmpty(tileAssetPath) && savedTiles.TryGetValue(tileName, out var existingTile))
+                        {
+                            t = existingTile;
+                            if (t.sprite != spArr[tileIdx])
+                            {
+                                t.sprite = spArr[tileIdx];
+                                EditorUtility.SetDirty(t);
+                            }
+                        }
+                        else
+                        {
+                            t = ScriptableObject.CreateInstance<Tile>();
+                            t.name = tileName;
+                            t.sprite = spArr[tileIdx];
+                            if (!string.IsNullOrEmpty(tileAssetPath))
+                            {
+                                if (!hasTileLibrary)
+                                {
+                                    AssetDatabase.CreateAsset(t, tileAssetPath);
+                                    hasTileLibrary = true;
+                                }
+                                else AssetDatabase.AddObjectToAsset(t, tileAssetPath);
+                                savedTiles[tileName] = t;
+                            }
+                        }
+                        tArr[tileIdx] = t;
+                    }
+                    return tArr[tileIdx];
+                }
+
+                // Keep collision independent of visual layers: a Buildings tile may carry
+                // Passable/Shadow and must remain walkable.
+                Tilemap collisionMap = null;
+                Tile collisionTile = null;
+                if (addColliders)
+                {
+                    collisionTile = GetCollisionTile();
+                    var collisionGo = new GameObject("MapCollision");
+                    collisionGo.transform.SetParent(gridGo.transform, false);
+                    collisionMap = collisionGo.AddComponent<Tilemap>();
+                    var collisionBody = collisionGo.AddComponent<Rigidbody2D>();
+                    collisionBody.bodyType = RigidbodyType2D.Static;
+                    var collisionShape = collisionGo.AddComponent<TilemapCollider2D>();
+                    var collisionComposite = collisionGo.AddComponent<CompositeCollider2D>();
+                    collisionComposite.geometryType = CompositeCollider2D.GeometryType.Polygons;
+#if UNITY_2023_1_OR_NEWER
+                    collisionShape.compositeOperation = Collider2D.CompositeOperation.Merge;
+#else
+                    collisionShape.usedByComposite = true;
+#endif
+                }
 
                 // Build each Layer
                 int layerIndex = 0;
@@ -177,13 +277,18 @@ namespace StardewValley.EditorTools
                         obstaclesGo.transform.SetParent(gridGo.transform, false);
                         Tilemap obsTilemap = obstaclesGo.AddComponent<Tilemap>();
                         TilemapRenderer obsRenderer = obstaclesGo.AddComponent<TilemapRenderer>();
-                        obsRenderer.sortingOrder = -4;
+                        if (tileAssetPath != null) ConfigureMapMaterial(obsRenderer);
+                        obsRenderer.sortingOrder = WorldSortOrder.LayerPaths;
+                        // Marker layers are data only; the game never draws them.
+                        obsRenderer.enabled = false;
 
                         GameObject weedsGo = new GameObject("Paths_Weeds");
                         weedsGo.transform.SetParent(gridGo.transform, false);
                         Tilemap weedsTilemap = weedsGo.AddComponent<Tilemap>();
                         TilemapRenderer weedsRenderer = weedsGo.AddComponent<TilemapRenderer>();
-                        weedsRenderer.sortingOrder = -5;
+                        if (tileAssetPath != null) ConfigureMapMaterial(weedsRenderer);
+                        weedsRenderer.sortingOrder = WorldSortOrder.LayerPaths;
+                        weedsRenderer.enabled = false;
 
                         for (int y = 0; y < layer.Height; y++)
                         {
@@ -192,15 +297,12 @@ namespace StardewValley.EditorTools
                                 var tileInfo = layer.Tiles[x, y];
                                 if (tileInfo == null) continue;
 
-                                if (sheetSprites.TryGetValue(tileInfo.TileSheetId, out var sprites) &&
-                                    tileInfo.TileIndex >= 0 && tileInfo.TileIndex < sprites.Length &&
-                                    sprites[tileInfo.TileIndex] != null)
+                                Tile tile = GetOrCreateTile(tileInfo.TileSheetId, tileInfo.TileIndex);
+                                if (tile != null)
                                 {
-                                    Tile tile = ScriptableObject.CreateInstance<Tile>();
-                                    tile.sprite = sprites[tileInfo.TileIndex];
                                     Vector3Int tilePos = new Vector3Int(x, -y, 0);
 
-                                    // Stardew Valley tile index logic:
+                                    // Tile index logic:
                                     // 16, 17: Stones (Đá) -> Block
                                     // 18: Twigs (Cành củi) -> Block
                                     // 9, 10, 11, 12, 31, 32: Trees (Cây) -> Block
@@ -232,24 +334,10 @@ namespace StardewValley.EditorTools
 
                     Tilemap tilemap = layerGo.AddComponent<Tilemap>();
                     TilemapRenderer renderer = layerGo.AddComponent<TilemapRenderer>();
+                    if (tileAssetPath != null) ConfigureMapMaterial(renderer);
 
                     // Configure Sorting Order
                     ConfigureLayerRenderer(layer.Id, renderer);
-
-                    // Add Collider if Buildings layer
-                    if (addColliders && layer.Id.StartsWith("Buildings", StringComparison.OrdinalIgnoreCase))
-                    {
-                        var collider = layerGo.AddComponent<TilemapCollider2D>();
-                        var rb = layerGo.AddComponent<Rigidbody2D>();
-                        rb.bodyType = RigidbodyType2D.Static;
-                        var composite = layerGo.AddComponent<CompositeCollider2D>();
-                        composite.geometryType = CompositeCollider2D.GeometryType.Polygons;
-#if UNITY_2023_1_OR_NEWER
-                        collider.compositeOperation = Collider2D.CompositeOperation.Merge;
-#else
-                        collider.usedByComposite = true;
-#endif
-                    }
 
                     // Populate Tiles
                     for (int y = 0; y < layer.Height; y++)
@@ -259,22 +347,71 @@ namespace StardewValley.EditorTools
                             var tileInfo = layer.Tiles[x, y];
                             if (tileInfo == null) continue;
 
-                            if (sheetSprites.TryGetValue(tileInfo.TileSheetId, out var sprites) &&
-                                tileInfo.TileIndex >= 0 && tileInfo.TileIndex < sprites.Length &&
-                                sprites[tileInfo.TileIndex] != null)
+                            Tile tile = GetOrCreateTile(tileInfo.TileSheetId, tileInfo.TileIndex);
+                            if (tile != null)
                             {
-                                Tile tile = ScriptableObject.CreateInstance<Tile>();
-                                tile.sprite = sprites[tileInfo.TileIndex];
-
-                                // Stardew Valley: (0,0) is top-left, Unity Tilemap: y increases upwards
+                                // Map source: (0,0) is top-left, Unity Tilemap: y increases upwards
                                 Vector3Int tilePos = new Vector3Int(x, -y, 0);
                                 tilemap.SetTile(tilePos, tile);
+                                if (collisionMap != null)
+                                {
+                                    bool building = layer.Id.Equals("Buildings", StringComparison.OrdinalIgnoreCase);
+                                    bool back = layer.Id.Equals("Back", StringComparison.OrdinalIgnoreCase);
+                                    if ((building && !HasTileProperty(tileInfo, "Passable") &&
+                                         !HasTileProperty(tileInfo, "Shadow")) ||
+                                        (back && HasTileProperty(tileInfo, "Passable")))
+                                        collisionMap.SetTile(tilePos, collisionTile);
+                                }
                             }
                         }
                     }
 
                     layerIndex++;
                 }
+
+                if (collisionMap != null)
+                {
+                    ClearWarpArrivalCorridors(mapName, collisionMap);
+                    collisionMap.GetComponent<TilemapCollider2D>().ProcessTilemapChanges();
+                }
+
+                // Setup GameLocation & parse Warps
+                GameLocation loc = gridGo.AddComponent<GameLocation>();
+                loc.LocationName = mapName;
+                loc.IsOutdoors = mapData.Properties.TryGetValue("Outdoors", out string outVal) &&
+                                 (outVal.Equals("T", StringComparison.OrdinalIgnoreCase) ||
+                                  outVal.Equals("True", StringComparison.OrdinalIgnoreCase));
+
+                if (mapData.Properties.TryGetValue("Warp", out string warpProp) && !string.IsNullOrWhiteSpace(warpProp))
+                {
+                    loc.LoadWarpsFromPropertyString(warpProp);
+                }
+
+                if (mapName.Equals("FarmHouse", StringComparison.OrdinalIgnoreCase) ||
+                    mapName.Equals("FarmCave", StringComparison.OrdinalIgnoreCase))
+                {
+                    foreach (LocationWarp warp in loc.Warps) warp.isDoor = true;
+                }
+
+                // Special case for Farm maps: add FarmHouseEntry door warp
+                if (mapName.StartsWith("Farm", StringComparison.OrdinalIgnoreCase) && !mapName.Contains("House") && !mapName.Contains("Cave"))
+                {
+                    int entryX = 64;
+                    int entryY = 15;
+                    if (mapData.Properties.TryGetValue("FarmHouseEntry", out string fhEntry))
+                    {
+                        var parts = fhEntry.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                        if (parts.Length >= 2 && int.TryParse(parts[0], out int ex) && int.TryParse(parts[1], out int ey))
+                        {
+                            entryX = ex;
+                            entryY = ey;
+                        }
+                    }
+                    loc.AddWarp(new LocationWarp(entryX, entryY, "FarmHouse", 3, 11) { isDoor = true });
+                }
+
+                // Build physical / visual WarpTrigger colliders
+                loc.EnsureWarpTriggers();
 
                 if (!silent)
                 {
@@ -286,6 +423,7 @@ namespace StardewValley.EditorTools
             }
             catch (Exception ex)
             {
+                if (gridGo != null) DestroyImmediate(gridGo);
                 Debug.LogError($"[MapBuilder] Lỗi khi dựng map: {ex}");
                 if (!silent) EditorUtility.DisplayDialog("Lỗi", $"Lỗi khi dựng map: {ex.Message}", "OK");
                 return null;
@@ -298,34 +436,20 @@ namespace StardewValley.EditorTools
 
         public static string BuildMapToPrefab(string tbinPath, string season, int ppu, bool addColliders, bool hidePaths = false, bool separatePathsObjects = true, bool silent = false)
         {
-            var go = BuildMapToScene(tbinPath, season, ppu, addColliders, hidePaths, separatePathsObjects, silent);
+            string mapName = Path.GetFileNameWithoutExtension(tbinPath);
+            string category = GetMapCategory(mapName);
+            string outDir = $"Assets/Prefabs/Maps/{category}".Replace('\\', '/');
+            EnsureAssetFolder(outDir);
+            string tileAssetPath = $"{outDir}/{mapName}_Tiles.asset";
+            var go = BuildMapToScene(tbinPath, season, ppu, addColliders, hidePaths, separatePathsObjects, silent, tileAssetPath);
             if (go != null)
             {
                 try
                 {
-                    string mapName = Path.GetFileNameWithoutExtension(tbinPath);
-                    // Giữ nguyên subfolder nếu có (ví dụ: Mines/1.tbin -> Assets/Prefabs/Maps/Mines/1.prefab)
-                    string mapsRoot = Path.Combine(Application.dataPath, "Content/Maps").Replace('\\', '/');
-                    string normalizedTbin = tbinPath.Replace('\\', '/');
-                    string subDir = "";
-                    if (normalizedTbin.StartsWith(mapsRoot, StringComparison.OrdinalIgnoreCase))
-                    {
-                        string rel = normalizedTbin.Substring(mapsRoot.Length).TrimStart('/');
-                        subDir = Path.GetDirectoryName(rel);
-                    }
-                    else if (normalizedTbin.Contains("Content/Maps/"))
-                    {
-                        int idx = normalizedTbin.IndexOf("Content/Maps/", StringComparison.OrdinalIgnoreCase);
-                        string rel = normalizedTbin.Substring(idx + "Content/Maps/".Length);
-                        subDir = Path.GetDirectoryName(rel);
-                    }
-
-                    string outDir = "Assets/Prefabs/Maps";
-                    if (!string.IsNullOrEmpty(subDir)) outDir = $"{outDir}/{subDir}".Replace('\\', '/');
-                    if (!Directory.Exists(outDir)) Directory.CreateDirectory(outDir);
-
                     string prefabPath = $"{outDir}/{mapName}.prefab";
-                    PrefabUtility.SaveAsPrefabAsset(go, prefabPath);
+                    AssetDatabase.SaveAssets();
+                    PrefabUtility.SaveAsPrefabAsset(go, prefabPath, out bool saved);
+                    if (!saved) throw new InvalidOperationException($"Không thể lưu prefab: {prefabPath}");
                     if (!silent) Debug.Log($"Đã lưu Prefab tại: {prefabPath}");
                     return prefabPath;
                 }
@@ -335,6 +459,121 @@ namespace StardewValley.EditorTools
                 }
             }
             return null;
+        }
+
+        // Repairs maps embedded directly in older scenes without replacing their
+        // GameLocation, warp, resource, or exterior components.
+        public static int RebuildCollisionOnExistingMap(GameObject mapRoot, string tbinPath)
+        {
+            TbinData map;
+            using (var stream = File.OpenRead(tbinPath)) map = TbinParser.Read(stream);
+            var sheets = new Dictionary<string, TileSheetData>(StringComparer.OrdinalIgnoreCase);
+            foreach (var sheet in map.TileSheets) sheets[sheet.Id] = sheet;
+
+            bool HasProperty(TileData tile, string key)
+            {
+                return tile.Properties.ContainsKey(key) ||
+                       sheets.TryGetValue(tile.TileSheetId, out var sheet) &&
+                       sheet.Properties.ContainsKey($"@TileIndex@{tile.TileIndex}@{key}");
+            }
+
+            var oldCollision = mapRoot.transform.Find("MapCollision");
+            if (oldCollision != null) DestroyImmediate(oldCollision.gameObject);
+            foreach (var old in mapRoot.GetComponentsInChildren<TilemapCollider2D>(true))
+            {
+                var go = old.gameObject;
+                DestroyImmediate(old);
+                var composite = go.GetComponent<CompositeCollider2D>();
+                if (composite != null) DestroyImmediate(composite);
+                var body = go.GetComponent<Rigidbody2D>();
+                if (body != null) DestroyImmediate(body);
+            }
+
+            var collisionGo = new GameObject("MapCollision");
+            collisionGo.transform.SetParent(mapRoot.transform, false);
+            var collisionMap = collisionGo.AddComponent<Tilemap>();
+            var collisionTile = GetCollisionTile();
+            var rb = collisionGo.AddComponent<Rigidbody2D>();
+            rb.bodyType = RigidbodyType2D.Static;
+            var collider = collisionGo.AddComponent<TilemapCollider2D>();
+            var compositeCollider = collisionGo.AddComponent<CompositeCollider2D>();
+            compositeCollider.geometryType = CompositeCollider2D.GeometryType.Polygons;
+#if UNITY_2023_1_OR_NEWER
+            collider.compositeOperation = Collider2D.CompositeOperation.Merge;
+#else
+            collider.usedByComposite = true;
+#endif
+
+            int solidCount = 0;
+            foreach (var layer in map.Layers)
+            {
+                bool buildings = layer.Id.Equals("Buildings", StringComparison.OrdinalIgnoreCase);
+                bool back = layer.Id.Equals("Back", StringComparison.OrdinalIgnoreCase);
+                if (!buildings && !back) continue;
+                var visual = mapRoot.transform.Find(layer.Id);
+                if (visual == null || !visual.TryGetComponent(out Tilemap source)) continue;
+                for (int y = 0; y < layer.Height; y++)
+                for (int x = 0; x < layer.Width; x++)
+                {
+                    var tile = layer.Tiles[x, y];
+                    if (tile == null) continue;
+                    if (!((buildings && !HasProperty(tile, "Passable") && !HasProperty(tile, "Shadow")) ||
+                          (back && HasProperty(tile, "Passable")))) continue;
+                    var cell = new Vector3Int(x, -y, 0);
+                    if (!source.HasTile(cell)) continue;
+                    collisionMap.SetTile(cell, collisionTile);
+                    solidCount++;
+                }
+            }
+            ClearWarpArrivalCorridors(Path.GetFileNameWithoutExtension(tbinPath), collisionMap);
+            collider.ProcessTilemapChanges();
+            return solidCount;
+        }
+
+        private static Tile GetCollisionTile()
+        {
+            const string path = "Assets/Prefabs/Maps/MapCollisionTile.asset";
+            EnsureAssetFolder("Assets/Prefabs/Maps");
+            var tile = AssetDatabase.LoadAssetAtPath<Tile>(path);
+            if (tile == null)
+            {
+                tile = ScriptableObject.CreateInstance<Tile>();
+                tile.name = "MapCollisionTile";
+                tile.colliderType = Tile.ColliderType.Grid;
+                AssetDatabase.CreateAsset(tile, path);
+            }
+            else if (tile.colliderType != Tile.ColliderType.Grid)
+            {
+                tile.colliderType = Tile.ColliderType.Grid;
+                EditorUtility.SetDirty(tile);
+            }
+            return tile;
+        }
+
+        // A few vanilla warp destinations land inside the static Buildings art at
+        // the edge of a map. Keep their original coordinates while opening the
+        // narrow route from that arrival tile to the walkable map interior.
+        private static void ClearWarpArrivalCorridors(string mapName, Tilemap collisionMap)
+        {
+            void ClearVertical(int x, int firstY, int lastY)
+            {
+                for (int y = firstY; y <= lastY; y++)
+                    collisionMap.SetTile(new Vector3Int(x, -y, 0), null);
+            }
+            if (mapName.Equals("Mountain", StringComparison.OrdinalIgnoreCase))
+            {
+                ClearVertical(57, 38, 40);
+                ClearVertical(85, 40, 40);
+            }
+            else if (mapName.Equals("Beach", StringComparison.OrdinalIgnoreCase))
+                ClearVertical(67, 0, 5);
+            else if (mapName.Equals("Town", StringComparison.OrdinalIgnoreCase))
+            {
+                ClearVertical(90, 0, 2);
+                ClearVertical(98, 0, 4);
+            }
+            else if (mapName.Equals("Mine", StringComparison.OrdinalIgnoreCase))
+                ClearVertical(8, 9, 9);
         }
 
         public static void BuildAllMapsToPrefabs(string season = "spring", int ppu = 16, bool addColliders = true, bool separatePathsObjects = true)
@@ -373,6 +612,90 @@ namespace StardewValley.EditorTools
             Debug.Log($"[MapBuilder] HOÀN TẤT! Đã xuất thành công: {success}/{files.Length} prefabs. Thất bại: {failed}.");
         }
 
+        public static string GetMapCategory(string mapName)
+        {
+            if (int.TryParse(mapName, out _) || mapName.StartsWith("Volcano", StringComparison.OrdinalIgnoreCase) ||
+                mapName.Equals("Mine", StringComparison.OrdinalIgnoreCase) ||
+                mapName.Equals("SkullCave", StringComparison.OrdinalIgnoreCase) ||
+                mapName.Equals("SkullCaveAltar", StringComparison.OrdinalIgnoreCase) ||
+                mapName.Equals("BugLand", StringComparison.OrdinalIgnoreCase) ||
+                mapName.Equals("Tunnel", StringComparison.OrdinalIgnoreCase) ||
+                mapName.Equals("Darkroom", StringComparison.OrdinalIgnoreCase))
+            {
+                return "Mines";
+            }
+
+            if (mapName.StartsWith("Island", StringComparison.OrdinalIgnoreCase) ||
+                mapName.Equals("Caldera", StringComparison.OrdinalIgnoreCase) ||
+                mapName.Equals("QiNutRoom", StringComparison.OrdinalIgnoreCase) ||
+                mapName.Equals("LeoTreeHouse", StringComparison.OrdinalIgnoreCase) ||
+                mapName.Equals("BoatTunnel", StringComparison.OrdinalIgnoreCase) ||
+                mapName.Equals("CaptainRoom", StringComparison.OrdinalIgnoreCase) ||
+                mapName.Equals("MermaidHouse", StringComparison.OrdinalIgnoreCase) ||
+                mapName.Equals("Submarine", StringComparison.OrdinalIgnoreCase))
+            {
+                return "Island";
+            }
+
+            string lower = mapName.ToLowerInvariant();
+            if (lower.Contains("festival") || lower.Contains("fair") || lower.Contains("luau") ||
+                lower.Contains("jellies") || lower.Contains("nightmarket") || lower.Contains("halloween") ||
+                lower.Contains("christmas") || lower.Contains("eggfestival") || lower.Contains("squidfest") ||
+                lower.Contains("fishingderby"))
+            {
+                return "Festivals";
+            }
+
+            if (lower.Contains("dreamscape") || lower.Contains("balloon") || lower.Contains("samshow") ||
+                lower.Contains("sebastian") || lower.Contains("nightscene") || lower.Contains("elliottsea") ||
+                lower.Contains("bus(people)") || lower.Contains("stadium") || lower.Contains("fishinggame") ||
+                lower.Contains("targetgame"))
+            {
+                return "Events";
+            }
+
+            if (lower.Contains("farmhouse") || lower.Contains("farmcave") || lower.Contains("greenhouse") ||
+                lower.Contains("cellar") || lower.Contains("cabin") || lower.Contains("barn") ||
+                lower.Contains("coop") || lower.Contains("shed") || lower.Contains("slimehutch") ||
+                lower.Contains("spouse"))
+            {
+                return "Farm/Interiors";
+            }
+
+            if (mapName.StartsWith("Farm", StringComparison.OrdinalIgnoreCase))
+            {
+                return "Farm";
+            }
+
+            string[] wilderness = new[]
+            {
+                "AdventureGuild", "AnimalShop", "Club", "ElliottHouse", "FishShop", "LeahHouse",
+                "MaruBasement", "MasteryCave", "SandyHouse", "ScienceHouse", "SebastianRoom",
+                "Tent", "WitchHut", "WitchSwamp", "WitchWarpCave", "WizardHouse", "WizardHouseBasement",
+                "Forest_RaccoonHouse", "Forest_RaccoonStump"
+            };
+            foreach (var w in wilderness)
+            {
+                if (mapName.Equals(w, StringComparison.OrdinalIgnoreCase)) return "Interiors/Wilderness";
+            }
+
+            string[] townInteriors = new[]
+            {
+                "AbandonedJojaMart", "ArchaeologyHouse", "Blacksmith", "CommunityCenter",
+                "CommunityCenter_Ruins", "CommunityCenter_Joja", "CommunityCenter_Refurbished",
+                "HaleyHouse", "HarveyRoom", "Hospital", "JojaMart", "JoshHouse", "LewisBasement",
+                "ManorHouse", "MovieTheater", "MovieTheaterScreen", "Saloon", "RefurbishedSaloonRoom",
+                "SamHouse", "SeedShop", "Sunroom", "Trailer", "Trailer_Big", "Trailer_big"
+            };
+            foreach (var t in townInteriors)
+            {
+                if (mapName.Equals(t, StringComparison.OrdinalIgnoreCase) || mapName.StartsWith("BathHouse", StringComparison.OrdinalIgnoreCase))
+                    return "Interiors/Town";
+            }
+
+            return "Overworld";
+        }
+
         private static void ConfigureLayerRenderer(string layerId, TilemapRenderer renderer)
         {
             switch (layerId.ToLower())
@@ -380,27 +703,52 @@ namespace StardewValley.EditorTools
                 case "back":
                 case "back2":
                 case "back3":
-                    renderer.sortingOrder = -10;
+                    renderer.sortingOrder = WorldSortOrder.LayerBack;
                     break;
                 case "paths":
-                    renderer.sortingOrder = -5;
+                    renderer.sortingOrder = WorldSortOrder.LayerPaths;
+                    renderer.enabled = false;
                     break;
                 case "buildings":
                 case "buildings2":
-                    renderer.sortingOrder = 0;
+                case "buildings3":
+                    renderer.sortingOrder = WorldSortOrder.LayerBuildings;
                     break;
                 case "front":
                 case "front2":
-                    renderer.sortingOrder = 10;
+                    renderer.sortingOrder = WorldSortOrder.LayerFront;
                     break;
                 case "alwaysfront":
                 case "alwaysfront2":
                 case "alwaysfront3":
-                    renderer.sortingOrder = 20;
+                    renderer.sortingOrder = WorldSortOrder.LayerAlwaysFront;
                     break;
                 default:
                     renderer.sortingOrder = 0;
                     break;
+            }
+        }
+
+        private static void ConfigureMapMaterial(TilemapRenderer renderer)
+        {
+            // Sprite-Lit-Default renders magenta in prefab previews without a 2D light pass.
+            // These pixel-art maps do not need lighting, so use URP's persistent unlit material.
+            const string materialPath = "Packages/com.unity.render-pipelines.universal/Runtime/Materials/Sprite-Unlit-Default.mat";
+            var material = AssetDatabase.LoadAssetAtPath<Material>(materialPath);
+            if (material != null) renderer.sharedMaterial = material;
+            else Debug.LogError($"[MapBuilder] Không tìm thấy material: {materialPath}");
+        }
+
+        private static void EnsureAssetFolder(string folderPath)
+        {
+            string[] parts = folderPath.Split('/');
+            string current = parts[0];
+            for (int i = 1; i < parts.Length; i++)
+            {
+                string next = $"{current}/{parts[i]}";
+                if (!AssetDatabase.IsValidFolder(next) && string.IsNullOrEmpty(AssetDatabase.CreateFolder(current, parts[i])))
+                    throw new IOException($"Không thể tạo thư mục asset: {next}");
+                current = next;
             }
         }
 
@@ -428,27 +776,44 @@ namespace StardewValley.EditorTools
                     continue;
                 }
 
-                EnsureTextureReadable(pngPath, ppu);
+                int tileW = sheet.TileWidth > 0 ? sheet.TileWidth : 16;
+                int tileH = sheet.TileHeight > 0 ? sheet.TileHeight : 16;
+
+                EnsureTextureSliced(pngPath, tileW, tileH, ppu);
 
                 Texture2D tex = AssetDatabase.LoadAssetAtPath<Texture2D>(pngPath);
                 if (tex == null) continue;
 
-                int tileW = sheet.TileWidth > 0 ? sheet.TileWidth : 16;
-                int tileH = sheet.TileHeight > 0 ? sheet.TileHeight : 16;
                 int cols = tex.width / tileW;
                 int rows = tex.height / tileH;
                 int totalTiles = cols * rows;
 
-                Sprite[] sprites = new Sprite[totalTiles];
-
-                for (int ty = 0; ty < rows; ty++)
+                // Load all sub-sprites from AssetDatabase with persistent GUID/fileID
+                var subAssets = AssetDatabase.LoadAllAssetsAtPath(pngPath);
+                var spriteMap = new Dictionary<string, Sprite>(StringComparer.OrdinalIgnoreCase);
+                foreach (var obj in subAssets)
                 {
-                    for (int tx = 0; tx < cols; tx++)
+                    if (obj is Sprite sp)
                     {
-                        int index = ty * cols + tx;
-                        float pixelY = tex.height - (ty + 1) * tileH;
-                        Rect rect = new Rect(tx * tileW, pixelY, tileW, tileH);
-                        sprites[index] = Sprite.Create(tex, rect, new Vector2(0.5f, 0.5f), ppu);
+                        spriteMap[sp.name] = sp;
+                    }
+                }
+
+                Sprite[] sprites = new Sprite[totalTiles];
+                string baseName = Path.GetFileNameWithoutExtension(pngPath);
+
+                for (int idx = 0; idx < totalTiles; idx++)
+                {
+                    string expectedName = $"{baseName}_{idx}";
+                    if (spriteMap.TryGetValue(expectedName, out Sprite sp))
+                    {
+                        sprites[idx] = sp;
+                    }
+                    else
+                    {
+                        float pixelY = tex.height - (idx / cols + 1) * tileH;
+                        Rect rect = new Rect((idx % cols) * tileW, pixelY, tileW, tileH);
+                        sprites[idx] = Sprite.Create(tex, rect, new Vector2(0.5f, 0.5f), ppu);
                     }
                 }
 
@@ -491,42 +856,53 @@ namespace StardewValley.EditorTools
             return null;
         }
 
-        private static void EnsureTextureReadable(string assetPath, int ppu)
+        private static void EnsureTextureSliced(string assetPath, int tileW, int tileH, int ppu)
         {
             TextureImporter importer = AssetImporter.GetAtPath(assetPath) as TextureImporter;
-            if (importer != null)
-            {
-                bool needReimport = false;
-                if (!importer.isReadable)
-                {
-                    importer.isReadable = true;
-                    needReimport = true;
-                }
-                if (importer.textureType != TextureImporterType.Sprite)
-                {
-                    importer.textureType = TextureImporterType.Sprite;
-                    needReimport = true;
-                }
-                if (importer.filterMode != FilterMode.Point)
-                {
-                    importer.filterMode = FilterMode.Point;
-                    needReimport = true;
-                }
-                if (importer.textureCompression != TextureImporterCompression.Uncompressed)
-                {
-                    importer.textureCompression = TextureImporterCompression.Uncompressed;
-                    needReimport = true;
-                }
-                if (importer.spritePixelsPerUnit != ppu)
-                {
-                    importer.spritePixelsPerUnit = ppu;
-                    needReimport = true;
-                }
+            if (importer == null) return;
 
-                if (needReimport)
+            bool needBasicReimport = false;
+            if (!importer.isReadable) { importer.isReadable = true; needBasicReimport = true; }
+            if (importer.textureType != TextureImporterType.Sprite) { importer.textureType = TextureImporterType.Sprite; needBasicReimport = true; }
+            if (importer.spriteImportMode != SpriteImportMode.Multiple) { importer.spriteImportMode = SpriteImportMode.Multiple; needBasicReimport = true; }
+            if (importer.filterMode != FilterMode.Point) { importer.filterMode = FilterMode.Point; needBasicReimport = true; }
+            if (importer.textureCompression != TextureImporterCompression.Uncompressed) { importer.textureCompression = TextureImporterCompression.Uncompressed; needBasicReimport = true; }
+            if (importer.spritePixelsPerUnit != ppu) { importer.spritePixelsPerUnit = ppu; needBasicReimport = true; }
+
+            if (needBasicReimport)
+            {
+                EditorUtility.SetDirty(importer);
+                importer.SaveAndReimport();
+            }
+
+            Texture2D tex = AssetDatabase.LoadAssetAtPath<Texture2D>(assetPath);
+            if (tex == null) return;
+
+            int cols = tex.width / tileW;
+            int rows = tex.height / tileH;
+            int totalTiles = cols * rows;
+
+            if (importer.spritesheet == null || importer.spritesheet.Length != totalTiles)
+            {
+                var metaList = new List<SpriteMetaData>();
+                string baseName = Path.GetFileNameWithoutExtension(assetPath);
+                for (int ty = 0; ty < rows; ty++)
                 {
-                    importer.SaveAndReimport();
+                    for (int tx = 0; tx < cols; tx++)
+                    {
+                        int index = ty * cols + tx;
+                        float pixelY = tex.height - (ty + 1) * tileH;
+                        var smd = new SpriteMetaData();
+                        smd.name = $"{baseName}_{index}";
+                        smd.rect = new Rect(tx * tileW, pixelY, tileW, tileH);
+                        smd.alignment = (int)SpriteAlignment.Center;
+                        smd.pivot = new Vector2(0.5f, 0.5f);
+                        metaList.Add(smd);
+                    }
                 }
+                importer.spritesheet = metaList.ToArray();
+                EditorUtility.SetDirty(importer);
+                importer.SaveAndReimport();
             }
         }
     }
@@ -569,6 +945,8 @@ namespace StardewValley.EditorTools
         public string TileSheetId = "";
         public int TileIndex;
         public byte BlendMode;
+        public int FrameInterval;
+        public List<TileData> Frames;
         public Dictionary<string, string> Properties = new Dictionary<string, string>();
     }
 
@@ -661,9 +1039,9 @@ namespace StardewValley.EditorTools
                         }
                         else if (op == 'A')
                         {
-                            long frameInterval = LoadInt32(stream);
+                            int frameInterval = LoadInt32(stream);
                             int frameCount = LoadInt32(stream);
-                            TileData firstFrame = null;
+                            var frames = new List<TileData>(frameCount);
                             string animSheetId = currentTileSheetId;
                             while (frameCount > 0)
                             {
@@ -681,16 +1059,20 @@ namespace StardewValley.EditorTools
                                         BlendMode = (byte)stream.ReadByte(),
                                         Properties = LoadProperties(stream)
                                     };
-                                    if (firstFrame == null) firstFrame = frameTile;
+                                    frames.Add(frameTile);
                                     frameCount--;
                                 }
+                                else throw new InvalidDataException($"Invalid animated tile frame: {ab}");
                             }
                             var animProps = LoadProperties(stream);
-                            if (firstFrame != null)
+                            if (frames.Count > 0)
                             {
+                                TileData firstFrame = frames[0];
+                                firstFrame.FrameInterval = frameInterval;
+                                firstFrame.Frames = frames;
                                 foreach (var kv in animProps) firstFrame.Properties[kv.Key] = kv.Value;
+                                layer.Tiles[curX, curY] = firstFrame;
                             }
-                            layer.Tiles[curX, curY] = firstFrame;
                             curX++;
                         }
                         else

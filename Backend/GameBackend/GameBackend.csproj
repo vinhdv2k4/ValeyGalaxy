@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="../../Assets/Scripts/Runtime/DailyEvents/DailyEventCalendar.cs" Link="DailyEvents/DailyEventCalendar.cs" />
+    <Compile Include="../../Assets/Scripts/Runtime/DailyEvents/FarmWeather.cs" Link="DailyEvents/FarmWeather.cs" />
+    <Compile Include="../../Assets/Scripts/Runtime/DailyEvents/ForageSpawns.cs" Link="DailyEvents/ForageSpawns.cs" />
+    <Compile Include="../../Assets/Scripts/Runtime/Inventory/SkillRecipeRequirement.cs" Link="Items/SkillRecipeRequirement.cs" />
+    <Content Include="../../Assets/Resources/DailyEvents/Calendar.json"
+             Link="ContentData/DailyEvents.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <Content Update="item-catalog.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <Content Update="fish-catalog.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <Content Update="object-shipping.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="../../Assets/Content/Data/Objects.json;../../Assets/Content/Data/BigCraftables.json;../../Assets/Content/Data/Weapons.json;../../Assets/Content/Data/Boots.json;../../Assets/Content/Data/hats.json;../../Assets/Content/Data/Furniture.json;../../Assets/Content/Data/Tools.json;../../Assets/Content/Data/Shirts.json;../../Assets/Content/Data/Pants.json;../../Assets/Content/Data/Trinkets.json;../../Assets/Content/Data/Fish.json;../../Assets/Content/Data/Crops.json;../../Assets/Content/Data/FruitTrees.json;../../Assets/Content/Data/Fences.json;../../Assets/Content/Data/FloorsAndPaths.json;../../Assets/Content/Data/CraftingRecipes.json;../../Assets/Content/Data/NPCGiftTastes.json"
+             Link="ContentData/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+    <PackageReference Include="EFCore.NamingConventions" Version="9.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.1">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.1" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="7.3.1" />
+    <Content Include="../../Assets/Content/Data/AdventureGuildStock.json"
+             Link="ContentData/AdventureGuildStock.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="../../Assets/Content/Data/MineTreasureRewards.json"
+             Link="ContentData/MineTreasureRewards.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="../../Assets/Resources/Data/ForageTiles.txt"
+             Link="ContentData/ForageTiles.txt" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="../../Assets/Resources/Data/ItemNames.json"
+             Link="ContentData/ItemNames.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="../../Assets/Resources/Data/Artisan.json"
+             Link="ContentData/Artisan.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="../../Assets/Content/Data/Bundles.json"
+             Link="ContentData/Bundles.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="../../Assets/Content/Data/RanchShop.json"
+             Link="ContentData/RanchShop.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

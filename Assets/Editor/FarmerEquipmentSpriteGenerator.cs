@@ -14,7 +14,7 @@ public static class FarmerEquipmentSpriteGenerator
     {
         try
         {
-            // FarmerRenderer uses 16x32 hair and 8x8 shirt direction tiles.
+            // Uses 16x32 hair and 8x8 shirt direction tiles.
             using (var hair = new Source("Assets/Content/Characters/Farmer/hairstyles.png"))
             {
                 Write("Hair_Down", hair, 0, 0, 16, 32);
@@ -25,7 +25,7 @@ public static class FarmerEquipmentSpriteGenerator
             {
                 Write("Shirt_Down", shirts, 0, 0, 8, 8);
                 Write("Shirt_Right", shirts, 0, 8, 8, 8);
-                Write("Shirt_Up", shirts, 0, 0, 8, 8);
+                Write("Shirt_Up", shirts, 0, 24, 8, 8);
                 Write("Shirt_Left", shirts, 0, 16, 8, 8);
             }
             using (var tools = new Source("Assets/Content/TileSheets/tools.png"))
@@ -51,7 +51,7 @@ public static class FarmerEquipmentSpriteGenerator
                 for (int index = 273; index <= 277; index++)
                     Write("WateringCan_Index_" + index, tools, index % 21 * 16, index / 21 * 16, 16, 32, true);
 
-                // Game1.drawTool uses the 48x48 fishing strip at y=288/336.
+                // Fishing strip at y=288/336 (48x48).
                 for (int frame = 0; frame < 5; frame++)
                 {
                     Write("FishingRod_Cast_Side_" + frame, tools, frame * 48, 288, 48, 48,
@@ -77,7 +77,7 @@ public static class FarmerEquipmentSpriteGenerator
             }
             using (var objects = new Source("Assets/Content/Maps/springobjects.png"))
             {
-                // Stardew object indexes: Parsnip Seeds=472, Wood=388.
+                // Object indexes: Parsnip Seeds=472, Wood=388.
                 WriteObject("Seeds_Inventory", objects, 472);
                 WriteObject("Wood_Inventory", objects, 388);
             }

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary>
-/// Motion strategy for generic swinging tools (Hoe, Axe, Pickaxe) based on Stardew Valley Game1.drawTool.
+/// Motion strategy for generic swinging tools (Hoe, Axe, Pickaxe).
 /// Follows SRP, OCP, and LSP. All swinging tools perform an overhead vertical chop/slam into ground.
 /// Supports frame-specific sprites (windup, strike, diagonal, up) from InventorySlot.GetHeldAnimationSprite.
 /// </summary>
@@ -10,10 +10,17 @@ public class GenericToolVisualStrategy : IToolVisualStrategy
     public const float ClipMilliseconds = 475f + 1000f / 60f;
 
     public virtual ToolPose CalculatePose(int direction, float progress, InventorySlot slot)
+        => CalculatePose(direction, progress, slot, 0);
+
+    /// <summary>
+    /// <paramref name="toolPower"/> is Farmer.toolPower: on frame 0 a charging tool sinks
+    /// min(8, power * 4) px toward the farmer and tips min(power, 2) * 0.049 rad further back.
+    /// </summary>
+    public ToolPose CalculatePose(int direction, float progress, InventorySlot slot, int toolPower)
     {
         int phase = ToolAnimationTimeline.ToolFrame(direction, progress);
 
-        // Tool animation frame index according to Stardew Valley Tool.Update:
+        // Tool animation frame index:
         // Frame 0: Upright idle / windup (used for Down/Up windup)
         // Frame 1: Downward strike frame (facing Down)
         // Frame 2: Diagonal frame (facing Sides: Right/Left)
@@ -31,7 +38,7 @@ public class GenericToolVisualStrategy : IToolVisualStrategy
 
         switch (direction)
         {
-            case 0: // Stardew facing 2: down
+            case 0: // Source facing 2: down
                 x = phase == 0 ? -20f : phase == 1 ? -12f : 0f;
                 y = phase == 0 ? -116f : phase == 1 ? -96f
                     : phase == 2 ? -64f : phase == 3 ? -20f : -16f;
@@ -52,7 +59,7 @@ public class GenericToolVisualStrategy : IToolVisualStrategy
                 sortingOrder = 26;
                 break;
 
-            case 2: // Stardew facing 0: up; source hides the tool after frame 2
+            case 2: // Source facing 0: up; source hides the tool after frame 2
                 x = phase == 1 ? 4f : 0f;
                 y = phase == 0 ? -136f : phase == 1 ? -88f : -64f;
                 radians = 0f;
@@ -74,8 +81,17 @@ public class GenericToolVisualStrategy : IToolVisualStrategy
                 break;
         }
 
-        // FarmerRenderer places the 16x32 body with its centre at
-        // playerPosition + (32,-32) in XNA's 4x, Y-down coordinates.
+        if (phase == 0 && toolPower > 0)
+        {
+            float sink = Mathf.Min(8f, toolPower * 4f);
+            float tilt = Mathf.Min(toolPower, 2) * 0.0490873865783215f;
+            y += sink;
+            if (direction == 1) { x -= sink; radians -= tilt; }
+            else if (direction == 3) { x += sink; radians += tilt; }
+        }
+
+        // Places the 16x32 body with its centre at
+        // playerPosition + (32,-32) in 4x, Y-down coordinates.
         // The generated held sprite has its pivot at (8,8) from the bottom.
         Vector2 pivot = sprite == null ? new Vector2(8f, 24f)
             : new Vector2(sprite.pivot.x, sprite.rect.height - sprite.pivot.y);

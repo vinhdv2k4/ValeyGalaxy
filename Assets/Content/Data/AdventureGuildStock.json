@@ -1,0 +1,32 @@
+{
+  "offers": [
+    {"itemId":"weapon_12","name":"Wooden Blade","price":250,"floor":0,"sellPrice":50,"minDamage":3,"maxDamage":7},
+    {"itemId":"weapon_17","name":"Iron Dirk","price":500,"floor":15,"weaponType":1,"sellPrice":50,"minDamage":2,"maxDamage":4,"critChance":0.03},
+    {"itemId":"weapon_1","name":"Silver Saber","price":750,"floor":20,"sellPrice":100,"minDamage":8,"maxDamage":15,"defense":1},
+    {"itemId":"weapon_43","name":"Pirate's Sword","price":850,"floor":25,"sellPrice":100,"minDamage":8,"maxDamage":14,"speed":2},
+    {"itemId":"weapon_44","name":"Cutlass","price":1500,"floor":25,"sellPrice":150,"minDamage":9,"maxDamage":17,"speed":2},
+    {"itemId":"weapon_27","name":"Wood Mallet","price":2000,"floor":40,"weaponType":2,"sellPrice":150,"minDamage":15,"maxDamage":24,"speed":2},
+    {"itemId":"weapon_10","name":"Claymore","price":2000,"floor":45,"sellPrice":250,"minDamage":20,"maxDamage":32,"speed":-4,"defense":2},
+    {"itemId":"weapon_7","name":"Templar's Blade","price":4000,"floor":55,"sellPrice":250,"minDamage":22,"maxDamage":29,"defense":1,"critChance":0},
+    {"itemId":"weapon_5","name":"Bone Sword","price":6000,"floor":75,"sellPrice":250,"minDamage":20,"maxDamage":30,"speed":4},
+    {"itemId":"weapon_50","name":"Steel Falchion","price":9000,"floor":90,"sellPrice":400,"minDamage":28,"maxDamage":46,"speed":4},
+    {"itemId":"weapon_9","name":"Lava Katana","price":25000,"floor":120,"sellPrice":500,"minDamage":55,"maxDamage":64,"defense":3,"critChance":0.015},
+    {"itemId":"boot_504","name":"Sneakers","price":500,"floor":0},
+    {"itemId":"boot_506","name":"Leather Boots","price":500,"floor":10},
+    {"itemId":"boot_509","name":"Tundra Boots","price":750,"floor":50},
+    {"itemId":"boot_508","name":"Combat Boots","price":1250,"floor":40},
+    {"itemId":"boot_512","name":"Firewalker Boots","price":2000,"floor":80},
+    {"itemId":"boot_511","name":"Dark Boots","price":2500,"floor":80},
+    {"itemId":"boot_514","name":"Space Boots","price":5000,"floor":110},
+    {"itemId":"object_529","name":"Amethyst Ring","price":1000,"floor":0},
+    {"itemId":"object_530","name":"Topaz Ring","price":1000,"floor":0},
+    {"itemId":"object_531","name":"Aquamarine Ring","price":2500,"floor":40},
+    {"itemId":"object_532","name":"Jade Ring","price":2500,"floor":40},
+    {"itemId":"object_533","name":"Emerald Ring","price":5000,"floor":80},
+    {"itemId":"object_534","name":"Ruby Ring","price":5000,"floor":80},
+    {"itemId":"weapon_32","name":"Slingshot","price":500,"floor":40,"slingshot":true},
+    {"itemId":"weapon_33","name":"Master Slingshot","price":1000,"floor":70,"slingshot":true},
+    {"itemId":"object_441","name":"Explosive Ammo","price":300,"floor":0,"combatLevel":8}
+  ],
+  "resale": {"weapon_0":50,"weapon_11":50,"weapon_21":200,"weapon_8":300}
+}

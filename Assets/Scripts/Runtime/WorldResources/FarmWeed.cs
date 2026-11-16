@@ -27,12 +27,13 @@ public sealed class FarmWeed : WorldResource
 
     protected override void EnsureCollider()
     {
-        if (GetComponent<Collider2D>() == null)
+        var box = GetComponent<BoxCollider2D>();
+        if (box == null)
         {
-            var box = gameObject.AddComponent<BoxCollider2D>();
+            box = gameObject.AddComponent<BoxCollider2D>();
             box.size = new Vector2(0.8f, 0.8f);
-            box.isTrigger = true;
         }
+        box.isTrigger = false; // Weeds block player movement until cut down
     }
 
     public override bool CanHarvest(ItemData tool, PlayerItemKind kind) => true;
@@ -44,16 +45,17 @@ public sealed class FarmWeed : WorldResource
             spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
 
         spriteRenderer.sprite = weedSprite;
-        spriteRenderer.sortingOrder = 22;
+        spriteRenderer.sortingOrder = WorldSortOrder.GetOrder(transform.position.y, -0.5f);
         dropItem = fiber;
         mixedSeedItem = mixedSeeds;
     }
 
     protected override void OnBreak(Vector2 hitDirection)
     {
+        GameAudio.Play("cut");
         // Object.cutWeed: 50% Fiber, otherwise 5% Mixed Seeds.
         ItemData item = Random.value < 0.5f ? dropItem : Random.value < 0.05f ? mixedSeedItem : null;
-        if (item != null) WorldItemDrop.Spawn(item, 1, transform.position, hitDirection);
+        if (item != null) SpawnResourceDrop(item, transform.position, hitDirection);
         Destroy(gameObject);
     }
 }

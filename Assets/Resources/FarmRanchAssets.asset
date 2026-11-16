@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55f177484b32467c8a7cf174e72084ce, type: 3}
+  m_Name: FarmRanchAssets
+  m_EditorClassIdentifier: Assembly-CSharp::FarmRanchAssets
+  catalog: {fileID: 4900000, guid: afab419b8f20482dac39ff1ab50074ac, type: 3}
+  buildings:
+  - {fileID: 2800000, guid: 0186d9f68d6813e4d881235ad70d2777, type: 3}
+  - {fileID: 2800000, guid: ceb13f61bb1d32a44943a010dc8eafc8, type: 3}
+  - {fileID: 2800000, guid: c3d7010b442536c48b79723b1dc92dd3, type: 3}
+  - {fileID: 2800000, guid: 48759e442c53c4644b9773862b6b4697, type: 3}
+  - {fileID: 2800000, guid: a9f5c6648a784c9478cf0ecf885425ed, type: 3}
+  - {fileID: 2800000, guid: 7f428276e8ff3a5498af7c1bc7389f9c, type: 3}
+  - {fileID: 2800000, guid: a024ab011c242ab43a51e1e5d1144cfd, type: 3}
+  animals:
+  - {fileID: 2800000, guid: e7a49601b58a29e4ba91b6187635c120, type: 3}
+  - {fileID: 2800000, guid: 0be4a047f2537cb4a83fdd4ef0be41f9, type: 3}
+  - {fileID: 2800000, guid: db253ce8ca8a0194bbf3c2a24ec78829, type: 3}
+  - {fileID: 2800000, guid: 1bb806add59a09549abe4c5931fde6a6, type: 3}
+  - {fileID: 2800000, guid: 472745ff9a669524bb38bacb3f6c1c3d, type: 3}
+  - {fileID: 2800000, guid: da4bdd85481b1674bbba480600e43170, type: 3}
+  - {fileID: 2800000, guid: ae730a47d4690b24887dec14664e8807, type: 3}
+  - {fileID: 2800000, guid: 2481d8d820f0a9846b769a439c258f69, type: 3}
+  - {fileID: 2800000, guid: dcd4f41a8201cb34f9002a340c761add, type: 3}
+  - {fileID: 2800000, guid: f90673baccd9f7840a0ba19b4c4e5bde, type: 3}
+  - {fileID: 2800000, guid: ffc602c83c0707a48a51bda526360bc9, type: 3}
+  - {fileID: 2800000, guid: 95bf17567abd76a4f921505a7f4f3c19, type: 3}
+  - {fileID: 2800000, guid: b324346cd938a0a4ba0ae5de24cfb121, type: 3}
+  - {fileID: 2800000, guid: 3ff7e24232733714b8b3f83949982f6f, type: 3}
+  - {fileID: 2800000, guid: bafffa41bafe96d45b3386aefca8bf04, type: 3}
+  - {fileID: 2800000, guid: 880e290274542f84ba48ac7f77f483d6, type: 3}
+  - {fileID: 2800000, guid: 11bd9a95cef2c064a8b13d613d718794, type: 3}
+  - {fileID: 2800000, guid: e4de730035535ca42b19c2f4d20961c7, type: 3}
+  interiors:
+  - {fileID: 8107784291845614502, guid: bd45bb85c25d2e94db0c7d0a34ff9960, type: 3}
+  - {fileID: 3867313460597397538, guid: 8e3702f511941744db3b6270edc9f118, type: 3}
+  - {fileID: 5346779071086516760, guid: d66b95126740fee4e99d2bdb184bd326, type: 3}
+  - {fileID: 2239794590840304429, guid: c6ca8439962608b4fb42e5b972af47b5, type: 3}
+  - {fileID: 5129572222423981593, guid: cb039cb9614d32c4e9df76dd8a31468d, type: 3}
+  - {fileID: 261437833381005221, guid: 0d5743182d824414c86aedca5a97d9f7, type: 3}
+  paintMasks:
+  - {fileID: 2800000, guid: 8a14e1f6334f5894d9750a134eac282f, type: 3}
+  - {fileID: 2800000, guid: 147668b402c5aad419c6ab8dd1099c59, type: 3}
+  cursors2: {fileID: 2800000, guid: f83b32eaf6095e94ea871cdc982d6aa0, type: 3}
+  fences:
+  - {fileID: 2800000, guid: c3d943462e8a6f24d9d33e27c35626ef, type: 3}
+  - {fileID: 2800000, guid: 322778526e237b842bbcb6d0d01ea385, type: 3}
+  - {fileID: 2800000, guid: 3f431e085efcf0f43b7c79bae45c220f, type: 3}
+  - {fileID: 2800000, guid: fef36d47ccfe075488661aebe68eb71a, type: 3}
+  flooring: {fileID: 2800000, guid: a7b11a3c0223cbb42aaf467f4ddfe80b, type: 3}

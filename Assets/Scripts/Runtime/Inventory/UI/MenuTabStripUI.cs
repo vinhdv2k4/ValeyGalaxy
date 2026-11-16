@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// SRP: Manages the top tab strip (8 tabs + extra buttons + close button).
-/// Raises the active tab by 8px matching Stardew Valley GameMenu.cs.
+/// SRP: Manages the eight GameMenu tabs and close button.
+/// Lowers the active tab by 8px as GameMenu.draw adds eight screen pixels.
 /// </summary>
 public class MenuTabStripUI : MonoBehaviour
 {
@@ -28,6 +28,8 @@ public class MenuTabStripUI : MonoBehaviour
 
     private int currentTab = 0;
     private readonly List<Vector2> originalPositions = new();
+    private RectTransform closeTransform;
+    private Vector2 closePosition;
 
     private void Awake()
     {
@@ -36,7 +38,11 @@ public class MenuTabStripUI : MonoBehaviour
             int index = i;
             if (tabs[i].tabTransform != null)
             {
-                originalPositions.Add(tabs[i].tabTransform.anchoredPosition);
+                // Older prefab versions already raised Inventory by 8 px.
+                Vector2 position = tabs[i].tabTransform.anchoredPosition;
+                if (i == 0 && position.y > 352f + 1f)
+                    position.y -= activeTabElevation;
+                originalPositions.Add(position);
             }
             else
             {
@@ -52,11 +58,17 @@ public class MenuTabStripUI : MonoBehaviour
         if (closeButton != null)
         {
             closeButton.onClick.AddListener(() => CloseRequested?.Invoke());
+            closeTransform = closeButton.GetComponent<RectTransform>();
+            closePosition = closeTransform.anchoredPosition;
         }
+        // GameMenu.cs defines exactly eight tabs; the ninth hammer is a stale
+        // decoration left by the prefab builder and has no page in the source.
+        if (extraHammerButton != null) extraHammerButton.gameObject.SetActive(false);
     }
 
     public void SelectTab(int index)
     {
+        if (tabs.Count == 0) return;
         currentTab = Mathf.Clamp(index, 0, tabs.Count - 1);
         UpdateTabVisuals();
         TabSelected?.Invoke(currentTab);
@@ -71,12 +83,22 @@ public class MenuTabStripUI : MonoBehaviour
             Vector2 pos = originalPositions[i];
             if (i == currentTab)
             {
-                // Active tab is elevated upwards by activeTabElevation (matching Stardew Valley)
-                pos.y += activeTabElevation;
+                // Screen Y grows downward; Unity anchored Y grows upward.
+                pos.y -= activeTabElevation;
             }
             tabs[i].tabTransform.anchoredPosition = pos;
         }
     }
 
     public int CurrentTab => currentTab;
+
+    internal void ShowPage(int page, float width)
+    {
+        gameObject.SetActive(page != 3);
+        if (closeTransform != null)
+        {
+            closeTransform.gameObject.SetActive(page != 3);
+            closeTransform.anchoredPosition = closePosition + new Vector2(width - 864f, 0f);
+        }
+    }
 }

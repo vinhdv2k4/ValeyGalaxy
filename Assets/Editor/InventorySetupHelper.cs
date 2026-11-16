@@ -18,7 +18,7 @@ public static class InventorySetupHelper
         if (!Directory.Exists(DataDir)) Directory.CreateDirectory(DataDir);
         if (!Directory.Exists(PrefabsDir)) Directory.CreateDirectory(PrefabsDir);
 
-        // 1. Cut tools and icons using exact Stardew Valley coordinates
+        // 1. Cut tools and icons using exact atlas coordinates
         CutToolIcons();
 
         // 2. Load UI Sprites
@@ -143,7 +143,7 @@ public static class InventorySetupHelper
         scaler.referenceResolution = new Vector2(1920, 1080);
         scaler.matchWidthOrHeight = 0.5f;
 
-        // Toolbar Root: 800 x 96 (Stardew Toolbar.cs:159)
+        // Toolbar Root: 800 x 96
         GameObject toolbarRoot = new GameObject("Toolbar", typeof(RectTransform), typeof(Image));
         toolbarRoot.transform.SetParent(canvasGO.transform, false);
         RectTransform tbRect = toolbarRoot.GetComponent<RectTransform>();

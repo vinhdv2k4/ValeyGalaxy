@@ -31,9 +31,15 @@ public sealed class FarmRock : WorldResource
             spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
 
         spriteRenderer.sprite = rockSprite;
-        spriteRenderer.sortingOrder = 22;
+        spriteRenderer.sortingOrder = WorldSortOrder.GetOrder(transform.position.y, -0.5f);
         dropItem = stoneItem;
         maxHealth = hp;
         health = hp;
+    }
+
+    protected override void OnBreak(Vector2 hitDirection)
+    {
+        GameAudio.Play("hammer");
+        base.OnBreak(hitDirection);
     }
 }

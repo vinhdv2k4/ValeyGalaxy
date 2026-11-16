@@ -64,7 +64,7 @@ public sealed class InventorySlot : IReadOnlyItemSlot
             heldSpriteRight = itemData.heldSpriteRight;
             heldSpriteUp = itemData.heldSpriteUp;
             heldAnimationSprites = itemData.heldAnimationSprites;
-            inventoryIcon = itemData.icon;
+            inventoryIcon = itemData.GetIcon();
             hasUseAnimation = itemData.hasUseAnimation;
             useAnimation = itemData.useAnimation;
         }
@@ -83,10 +83,20 @@ public sealed class PlayerInventory : MonoBehaviour, IReadOnlyInventory, IInvent
 
     public int TotalCapacity => MaxCapacity;
     public int UnlockedSlots => Mathf.Clamp(unlockedSlots, ToolbarCount, MaxCapacity);
+    public void SetUnlockedSlots(int count)
+    {
+        int next = Mathf.Clamp(count <= 0 ? ToolbarCount : count, ToolbarCount, MaxCapacity);
+        if (next == unlockedSlots) return;
+        unlockedSlots = next;
+        EnsureCapacity();
+        for (int i = 0; i < MaxCapacity; i++) SlotChanged?.Invoke(i, slots[i]);
+    }
     public int SelectedIndex => selectedIndex;
     public bool IsOpen => isOpen;
     public IReadOnlyItemSlot SelectedSlot => (selectedIndex >= 0 && selectedIndex < slots.Count) ? slots[selectedIndex] : null;
     public InventorySlot SelectedItem => slots.Count == 0 ? null : slots[Mathf.Clamp(selectedIndex, 0, slots.Count - 1)];
+    internal ItemData LeftLightRing { get; private set; }
+    internal ItemData RightLightRing { get; private set; }
 
     public event Action<int, IReadOnlyItemSlot> SlotChanged;
     public event Action<int> SelectionChanged;
@@ -95,8 +105,55 @@ public sealed class PlayerInventory : MonoBehaviour, IReadOnlyInventory, IInvent
 
     private void Awake()
     {
+        if (StartupSession.Api == null)
+            unlockedSlots = Mathf.Clamp(PlayerPrefs.GetInt("BackpackSlots.Local", unlockedSlots),
+                ToolbarCount, MaxCapacity);
         EnsureCapacity();
         SyncAllSlots();
+        SlotChanged += ValidateLightRings;
+    }
+
+    internal bool SetLightRing(bool right, int backpackSlot)
+    {
+        if (IsLocked || backpackSlot >= UnlockedSlots) return false;
+        ItemData item = null;
+        if (backpackSlot >= 0)
+        {
+            var slot = GetSlot(backpackSlot);
+            if (slot == null || slot.IsEmpty || slot.Data == null) return false;
+            item = slot.Data;
+            int id = WorldLightingController.LightRingId(item.itemId);
+            if (id == 0) return false;
+            ItemData other = right ? LeftLightRing : RightLightRing;
+            if (id == WorldLightingController.LightRingId(other?.itemId) && CountLightRings(id) < 2)
+                return false;
+        }
+
+        if (right) RightLightRing = item;
+        else LeftLightRing = item;
+        return true;
+    }
+
+    private void ValidateLightRings(int _, IReadOnlyItemSlot __)
+    {
+        int left = WorldLightingController.LightRingId(LeftLightRing?.itemId);
+        int right = WorldLightingController.LightRingId(RightLightRing?.itemId);
+        int leftCount = left == 0 ? 0 : CountLightRings(left);
+        if (leftCount == 0) LeftLightRing = null;
+        if (right != 0 && (right == left ? leftCount < 2 : CountLightRings(right) == 0))
+            RightLightRing = null;
+    }
+
+    private int CountLightRings(int id)
+    {
+        int count = 0;
+        for (int i = 0; i < UnlockedSlots && i < slots.Count; i++)
+        {
+            InventorySlot slot = slots[i];
+            if (slot != null && !slot.IsEmpty && WorldLightingController.LightRingId(slot.Data?.itemId) == id)
+                count += slot.Amount;
+        }
+        return count;
     }
 
     public void EnsureCapacity()
@@ -122,6 +179,38 @@ public sealed class PlayerInventory : MonoBehaviour, IReadOnlyInventory, IInvent
     }
 
     public bool IsLocked { get; set; }
+
+    public void ReplaceFromServer(OnlineStack[] serverSlots, Func<string, ItemData> resolveItem)
+    {
+        EnsureCapacity();
+        for (int i = 0; i < MaxCapacity; i++)
+        {
+            var slot = slots[i];
+            slot.itemData = null;
+            slot.displayName = string.Empty;
+            slot.inventoryIcon = null;
+            slot.amount = 0;
+        }
+        if (serverSlots != null)
+        {
+            foreach (var entry in serverSlots)
+            {
+                if (entry == null || entry.slot < 0 || entry.slot >= MaxCapacity || entry.amount <= 0) continue;
+                var item = resolveItem(entry.itemId);
+                if (item == null)
+                {
+                    Debug.LogWarning("Unknown server item: " + entry.itemId);
+                    continue;
+                }
+                var slot = slots[entry.slot];
+                slot.itemData = item;
+                slot.amount = entry.amount;
+                slot.SyncFromData();
+            }
+        }
+        for (int i = 0; i < MaxCapacity; i++) SlotChanged?.Invoke(i, slots[i]);
+        SelectionChanged?.Invoke(selectedIndex);
+    }
 
     public void SelectSlot(int index)
     {
@@ -178,21 +267,8 @@ public sealed class PlayerInventory : MonoBehaviour, IReadOnlyInventory, IInvent
 
     public bool AddItem(ItemData item, int amount = 1)
     {
-        if (item == null || amount <= 0 || item.maxStackSize <= 0) return false;
+        if (!CanAccept(item, amount)) return false;
         EnsureCapacity();
-
-        // World drops retry collection when the bag is full. Reserve enough
-        // capacity before mutating slots so a failed attempt cannot duplicate
-        // part of a stack on the next retry.
-        int available = 0;
-        for (int i = 0; i < UnlockedSlots; i++)
-        {
-            var slot = slots[i];
-            if (slot.IsEmpty) available += item.maxStackSize;
-            else if (slot.Data != null && slot.Data.CanStackWith(item))
-                available += Mathf.Max(0, item.maxStackSize - slot.amount);
-        }
-        if (available < amount) return false;
 
         // 1. Stack into existing slots
         if (item.maxStackSize > 1)
@@ -231,6 +307,23 @@ public sealed class PlayerInventory : MonoBehaviour, IReadOnlyInventory, IInvent
         return amount <= 0;
     }
 
+    // Debris checks inventory acceptance before it starts moving toward the farmer.
+    public bool CanAccept(ItemData item, int amount = 1)
+    {
+        if (item == null || amount <= 0 || item.maxStackSize <= 0) return false;
+        EnsureCapacity();
+        int available = 0;
+        for (int i = 0; i < UnlockedSlots; i++)
+        {
+            InventorySlot slot = slots[i];
+            if (slot.IsEmpty) available += item.maxStackSize;
+            else if (slot.Data != null && slot.Data.CanStackWith(item))
+                available += Mathf.Max(0, item.maxStackSize - slot.amount);
+            if (available >= amount) return true;
+        }
+        return false;
+    }
+
     public bool ConsumeSelected(int amount = 1)
     {
         var item = SelectedItem;
@@ -252,6 +345,48 @@ public sealed class PlayerInventory : MonoBehaviour, IReadOnlyInventory, IInvent
         var item = SelectedItem;
         if (item == null || item.kind != expectedKind || item.amount < amount) return false;
         return ConsumeSelected(amount);
+    }
+
+    public bool ConsumeItem(string itemId, int amount = 1)
+    {
+        if (string.IsNullOrEmpty(itemId) || amount <= 0) return false;
+        EnsureCapacity();
+        string id = itemId.ToLowerInvariant();
+        int remaining = amount;
+        for (int i = 0; i < UnlockedSlots; i++)
+        {
+            var s = slots[i];
+            if (!s.IsEmpty && s.Data != null && s.Data.itemId.Equals(id, StringComparison.OrdinalIgnoreCase))
+            {
+                int toTake = Mathf.Min(remaining, s.amount);
+                s.amount -= toTake;
+                remaining -= toTake;
+                if (s.amount <= 0)
+                {
+                    s.itemData = null;
+                    s.displayName = "";
+                    s.inventoryIcon = null;
+                    s.amount = 0;
+                }
+                SlotChanged?.Invoke(i, s);
+                if (remaining <= 0) break;
+            }
+        }
+        return remaining <= 0;
+    }
+
+    public void ClearSlot(int index)
+    {
+        if (index < 0 || index >= UnlockedSlots) return;
+        var s = slots[index];
+        if (s == null) return;
+        s.itemData = null;
+        s.displayName = "";
+        s.inventoryIcon = null;
+        s.amount = 0;
+        SlotChanged?.Invoke(index, s);
+        if (index == selectedIndex)
+            SelectionChanged?.Invoke(selectedIndex);
     }
 
     public void SetOpen(bool value)

@@ -1,0 +1,881 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca6b45d4512b4270a8c5cc52ab648c20, type: 3}
+  m_Name: GameAudioLibrary
+  m_EditorClassIdentifier: Assembly-CSharp::GameAudioLibrary
+  entries:
+  - cue: 50s
+    clip: {fileID: 8300000, guid: 16b5f3edef3575248b55896882048144, type: 3}
+  - cue: AbigailFlute
+    clip: {fileID: 8300000, guid: 8ee3c3695fbf6034fa6ddc6c02b162fe, type: 3}
+  - cue: AbigailFluteDuet
+    clip: {fileID: 8300000, guid: 16c4470782e59da419cb8091837e1117, type: 3}
+  - cue: Cavern
+    clip: {fileID: 8300000, guid: 3308769b0589b2c45b610b06184b80f8, type: 3}
+  - cue: Cloth
+    clip: {fileID: 8300000, guid: 4feb547dce3313f47935b563aa92b41a, type: 3}
+  - cue: CloudCountry
+    clip: {fileID: 8300000, guid: b45cdf7498c0d104785bdbe7604ed9b8, type: 3}
+  - cue: Cowboy_Footstep
+    clip: {fileID: 8300000, guid: 6ec2fdd558ddaf34694710361722726a, type: 3}
+  - cue: Cowboy_OVERWORLD
+    clip: {fileID: 8300000, guid: db91dcc5555f2334191abde2b9dc3caf, type: 3}
+  - cue: Cowboy_Secret
+    clip: {fileID: 8300000, guid: 44cdf795ca469b8468c7c63c6d18903a, type: 3}
+  - cue: Cowboy_gunshot
+    clip: {fileID: 8300000, guid: 94166a1b6ea84af418f748a7bda1ee0c, type: 3}
+  - cue: Cowboy_monsterDie
+    clip: {fileID: 8300000, guid: 1c68d3595cab7414781beb30d79ccb89, type: 3}
+  - cue: Cowboy_singing
+    clip: {fileID: 8300000, guid: b018cb2e152aea6458aa020a7da8424d, type: 3}
+  - cue: Cowboy_undead
+    clip: {fileID: 8300000, guid: d29dafcca5e5d194595bfa15ffc089c6, type: 3}
+  - cue: Crystal Bells
+    clip: {fileID: 8300000, guid: ab663f4004fe1334f9e3748d6ad53a1e, type: 3}
+  - cue: Cyclops
+    clip: {fileID: 8300000, guid: b28046e3cbb8dbc4fa57375da64d3823, type: 3}
+  - cue: Duck
+    clip: {fileID: 8300000, guid: 7e0efaaa5525fc94998724c8ea3d0658, type: 3}
+  - cue: Duggy
+    clip: {fileID: 8300000, guid: b00c1a51d1d9cd64fa968fe88ed30a85, type: 3}
+  - cue: DwarvishSentry
+    clip: {fileID: 8300000, guid: f7ca04118284d444d8c46da84f95fc4f, type: 3}
+  - cue: EarthMine
+    clip: {fileID: 8300000, guid: ec6b3c37f9edda94ca78455db2a460b2, type: 3}
+  - cue: EmilyDance
+    clip: {fileID: 8300000, guid: 554f624633a464e4ab8cb94585567645, type: 3}
+  - cue: EmilyDream
+    clip: {fileID: 8300000, guid: b9638a1a18dabc84e9b1f3a1b806e888, type: 3}
+  - cue: EmilyTheme
+    clip: {fileID: 8300000, guid: 9b62f2edafdd86140889588c7e33dd12, type: 3}
+  - cue: FishHit
+    clip: {fileID: 8300000, guid: cd633b9ecd77dd74da37b65fc7959433, type: 3}
+  - cue: FlowerDance
+    clip: {fileID: 8300000, guid: 5b7187aa1cfe28045a3869f940c3fd8f, type: 3}
+  - cue: FrogCave
+    clip: {fileID: 8300000, guid: 0a96895b60a601e4b96cb46cfed1847f, type: 3}
+  - cue: FrostMine
+    clip: {fileID: 8300000, guid: 51fb4d0eac6c6aa4ea94578fc272432b, type: 3}
+  - cue: Frost_Ambient
+    clip: {fileID: 8300000, guid: ceed387724f7f0b4b942c1301f184a48, type: 3}
+  - cue: Ghost Synth
+    clip: {fileID: 8300000, guid: 6f0f69b0e06383848b41433d1c69a23c, type: 3}
+  - cue: Hospital_Ambient
+    clip: {fileID: 8300000, guid: 007b8cd38494c6b478dda4d2304c7b93, type: 3}
+  - cue: Icicles
+    clip: {fileID: 8300000, guid: 94f7cf1a681a95841a504ae582dca9a7, type: 3}
+  - cue: IslandMusic
+    clip: {fileID: 8300000, guid: e4b08e38ee7ac514aa050cef3a56c35b, type: 3}
+  - cue: LavaMine
+    clip: {fileID: 8300000, guid: 5cf23698132e60246815eb013a55de3b, type: 3}
+  - cue: Lava_Ambient
+    clip: {fileID: 8300000, guid: fee5384e779b6704f94911587caac385, type: 3}
+  - cue: MainTheme
+    clip: {fileID: 8300000, guid: 18c7705fe5e01934fb70247da4c9929f, type: 3}
+  - cue: Majestic
+    clip: {fileID: 8300000, guid: ebc9d56765f716947891b5d877c63d69, type: 3}
+  - cue: MarlonsTheme
+    clip: {fileID: 8300000, guid: 601ad4645fcf3ec4cb60a3d2cd0b54b1, type: 3}
+  - cue: Meteorite
+    clip: {fileID: 8300000, guid: 0d7da197c7bcd5341b29e8ea99def999, type: 3}
+  - cue: Milking
+    clip: {fileID: 8300000, guid: 1743226c2cae66948ab7f8f9708f6614, type: 3}
+  - cue: Near The Planet Core
+    clip: {fileID: 8300000, guid: 1dd6ba916930e0f4db76b8e354ad69d8, type: 3}
+  - cue: New Snow
+    clip: {fileID: 8300000, guid: 352ffa1716ac43a4caf1d0f9d1d6e78b, type: 3}
+  - cue: Of Dwarves
+    clip: {fileID: 8300000, guid: f9757c0b410785547a31339ee2eee03e, type: 3}
+  - cue: Orange
+    clip: {fileID: 8300000, guid: 3b548d42a7700cd47afa21f465f7c629, type: 3}
+  - cue: Ostrich
+    clip: {fileID: 8300000, guid: 50b412b7cbd111c49ab7a22743079096, type: 3}
+  - cue: Overcast
+    clip: {fileID: 8300000, guid: 9eff1bec97bdffc4bb8f359a6bbee5c4, type: 3}
+  - cue: PIRATE_THEME(muffled)
+    clip: {fileID: 8300000, guid: 926d80b449039bc408065419e0be7147, type: 3}
+  - cue: PIRATE_THEME
+    clip: {fileID: 8300000, guid: bc3aaad96f2e64846b2ef8e91a2e550e, type: 3}
+  - cue: Pickup_Coin15
+    clip: {fileID: 8300000, guid: 0cc77bbe3e6fd6f40ba69c655695d0be, type: 3}
+  - cue: Pink Petals
+    clip: {fileID: 8300000, guid: 393eb79f101a73846a462b287b073ddf, type: 3}
+  - cue: Plums
+    clip: {fileID: 8300000, guid: bcc82ee17fa0c7743ad53f86643c45dd, type: 3}
+  - cue: Raccoon
+    clip: {fileID: 8300000, guid: f83096dcad19e6d46837407efe0ac2f4, type: 3}
+  - cue: Saloon1
+    clip: {fileID: 8300000, guid: 51d0d5228abaebe46800ddde6ef5747f, type: 3}
+  - cue: Secret Gnomes
+    clip: {fileID: 8300000, guid: f28af6da930d8ff419e72da46855327d, type: 3}
+  - cue: SettlingIn
+    clip: {fileID: 8300000, guid: e53dc24c3c08be14ab40744a2a66b672, type: 3}
+  - cue: Ship
+    clip: {fileID: 8300000, guid: ae725c1862cd10747977e887e6595462, type: 3}
+  - cue: SinWave
+    clip: {fileID: 8300000, guid: f1344a1438537d749803398e6fa0649e, type: 3}
+  - cue: SpringBirds
+    clip: {fileID: 8300000, guid: 9c716913f596d694aad7f32036f5af90, type: 3}
+  - cue: Stadium_ambient
+    clip: {fileID: 8300000, guid: 5ffb46a176b5a084f8139d141b045207, type: 3}
+  - cue: Stadium_cheer
+    clip: {fileID: 8300000, guid: b9b9db5e09e654f429864df7eda05229, type: 3}
+  - cue: SunRoom
+    clip: {fileID: 8300000, guid: fd4fcf06a261e68419b571cbe5fde34c, type: 3}
+  - cue: Tropical Jam
+    clip: {fileID: 8300000, guid: 59edb410cdd4cc049813863090deadcf, type: 3}
+  - cue: UFO
+    clip: {fileID: 8300000, guid: d2862e16749ed964999189f0994890ad, type: 3}
+  - cue: Upper_Ambient
+    clip: {fileID: 8300000, guid: b2a83f6b07b2446468482d01c480a86d, type: 3}
+  - cue: VolcanoMines
+    clip: {fileID: 8300000, guid: d71be59c68a469a4394b15d774461d9c, type: 3}
+  - cue: VolcanoMines1
+    clip: {fileID: 8300000, guid: e622cbb7e56cfcc4db37118c2a16f5a4, type: 3}
+  - cue: VolcanoMines2
+    clip: {fileID: 8300000, guid: 02cc89a59b3d5364fa6e2c865c06932a, type: 3}
+  - cue: Volcano_Ambient
+    clip: {fileID: 8300000, guid: 52ba6c3451b3bbf40b915b5b75584dff, type: 3}
+  - cue: WizardSong
+    clip: {fileID: 8300000, guid: 30c9791576d243540bb7f2f219bd5921, type: 3}
+  - cue: XOR
+    clip: {fileID: 8300000, guid: d1cee4efee588db459fda3783ba6a4a7, type: 3}
+  - cue: achievement
+    clip: {fileID: 8300000, guid: 8653ff9818256dc4a8171f5ac4385293, type: 3}
+  - cue: aerobics
+    clip: {fileID: 8300000, guid: e16e29f6c459eed4a90d2f8820644fa4, type: 3}
+  - cue: archaeo
+    clip: {fileID: 8300000, guid: de3afc8860987ec48a9af4615b2cfdb0, type: 3}
+  - cue: axchop
+    clip: {fileID: 8300000, guid: 81503977050127f419bbea75574310d2, type: 3}
+  - cue: axe
+    clip: {fileID: 8300000, guid: 1aea36c9ec5c10c4bbab4c1ac76a14f1, type: 3}
+  - cue: babblingBrook
+    clip: {fileID: 8300000, guid: 92bed12b97745ab4e82f6310754738ce, type: 3}
+  - cue: backpackIN
+    clip: {fileID: 8300000, guid: 99d63f122002f774f9be0a91bf27151a, type: 3}
+  - cue: barrelBreak
+    clip: {fileID: 8300000, guid: 212c7d1a8f9d8404d9079864b4cccdaa, type: 3}
+  - cue: batFlap
+    clip: {fileID: 8300000, guid: eb235d25e472fa643b67148cf6ca3ce5, type: 3}
+  - cue: batScreech
+    clip: {fileID: 8300000, guid: 51b5620fa51a7244782ab61b42240410, type: 3}
+  - cue: bigDeSelect
+    clip: {fileID: 8300000, guid: 268774607877b3340b60006eaad1bd82, type: 3}
+  - cue: bigDrums
+    clip: {fileID: 8300000, guid: 49014e1ad9d4422459ab7c2c8b066957, type: 3}
+  - cue: bigSelect
+    clip: {fileID: 8300000, guid: f8d81e0133e50f44c89c39053ee8b3aa, type: 3}
+  - cue: bob
+    clip: {fileID: 8300000, guid: 412c03badd98def408d2f4966e058f26, type: 3}
+  - cue: book_read
+    clip: {fileID: 8300000, guid: 9a97c243739a5d74f94449d408043cfe, type: 3}
+  - cue: boop
+    clip: {fileID: 8300000, guid: 534c64ab31104f74d9264dc196f99e83, type: 3}
+  - cue: boulderBreak
+    clip: {fileID: 8300000, guid: 5f2775bc5ea3b234ebb207a2c217a124, type: 3}
+  - cue: boulderCrack
+    clip: {fileID: 8300000, guid: 6babee6c19ec41d48864eecc14e315c9, type: 3}
+  - cue: breakingGlass
+    clip: {fileID: 8300000, guid: 979ccb2be65cec645a900aa0a8d01608, type: 3}
+  - cue: breathin
+    clip: {fileID: 8300000, guid: 093068df432671546952571af4bd4ef7, type: 3}
+  - cue: breathout
+    clip: {fileID: 8300000, guid: 4ad8f7174c612734eac753dd3b5e6d25, type: 3}
+  - cue: breezy
+    clip: {fileID: 8300000, guid: 192d78becd3bc06438859251f236f002, type: 3}
+  - cue: bubbles
+    clip: {fileID: 8300000, guid: 178ea5040c66dcd4caccc4b60fec01c8, type: 3}
+  - cue: bugLevelLoop
+    clip: {fileID: 8300000, guid: 4573521494b4f3044a38cad8c7be7619, type: 3}
+  - cue: busDoorOpen
+    clip: {fileID: 8300000, guid: 38782806af745494ab157ddf6ea489e9, type: 3}
+  - cue: busDriveOff
+    clip: {fileID: 8300000, guid: 61f2343c5967bfa439153c2600e9c280, type: 3}
+  - cue: button1
+    clip: {fileID: 8300000, guid: a73d7bde9408121449e16b7a5460a44e, type: 3}
+  - cue: button_press
+    clip: {fileID: 8300000, guid: 984c3e9ab74cfd14e85413f0c91c5ebc, type: 3}
+  - cue: button_tap
+    clip: {fileID: 8300000, guid: a600d8c51582cb6468de32013dc65857, type: 3}
+  - cue: cacklingWitch
+    clip: {fileID: 8300000, guid: f53d98650f0dc3d499aece8ce4bf1485, type: 3}
+  - cue: caldera
+    clip: {fileID: 8300000, guid: 1b9d9bddbc94126488c4146a6941b7de, type: 3}
+  - cue: camel
+    clip: {fileID: 8300000, guid: fdeac27bfa8ef084684c8312f217d787, type: 3}
+  - cue: cameraNoise
+    clip: {fileID: 8300000, guid: 35f3ea87173854749924a3c626285b0b, type: 3}
+  - cue: cancel
+    clip: {fileID: 8300000, guid: 865ebab9b6562ce46a2d4ea96742982b, type: 3}
+  - cue: cast
+    clip: {fileID: 8300000, guid: 2017c4111b3803c4ebe648af6e83b916, type: 3}
+  - cue: cat
+    clip: {fileID: 8300000, guid: 2b4dd59d41b1da542b9970a7919e17d2, type: 3}
+  - cue: cavedrip
+    clip: {fileID: 8300000, guid: 8c0904d066428f5499514f79ce6d33b8, type: 3}
+  - cue: christmasTheme
+    clip: {fileID: 8300000, guid: 3a5411765e5965649887242f4ec4279f, type: 3}
+  - cue: clam_tone
+    clip: {fileID: 8300000, guid: 6af3274b523e8c84093d73d0b8342136, type: 3}
+  - cue: clank
+    clip: {fileID: 8300000, guid: d51ed55b4e855714b8d5fbb7007d2a5f, type: 3}
+  - cue: clubSmash
+    clip: {fileID: 8300000, guid: 3c7aaae7421f05f40b3dd824db1b2388, type: 3}
+  - cue: clubhit
+    clip: {fileID: 8300000, guid: 804b8ea9179587a4eb5590cd03a6a754, type: 3}
+  - cue: clubloop
+    clip: {fileID: 8300000, guid: ba4386c40fc905d41a15fe4da8b0aa1b, type: 3}
+  - cue: clubswipe
+    clip: {fileID: 8300000, guid: 66305a9edd994094c8aee598559d4395, type: 3}
+  - cue: cluck
+    clip: {fileID: 8300000, guid: 07eeb37edaeb21f41841b3febee1f48d, type: 3}
+  - cue: coin
+    clip: {fileID: 8300000, guid: bb791eaffbf72554cbff33547e6f926f, type: 3}
+  - cue: coldSpell
+    clip: {fileID: 8300000, guid: 436c612eb95534e4a9e9d3ac485d2aeb, type: 3}
+  - cue: communityCenter
+    clip: {fileID: 8300000, guid: f770ffb97f83c8a4eb7b09851ed085a0, type: 3}
+  - cue: cow
+    clip: {fileID: 8300000, guid: 85474b9a01af642409a0c795c5dffd56, type: 3}
+  - cue: cowboy_boss
+    clip: {fileID: 8300000, guid: 04977c2ca7b2bcd44a4e17dc4fc6e527, type: 3}
+  - cue: cowboy_dead
+    clip: {fileID: 8300000, guid: e69e327c8d4a9644989afdd303205e94, type: 3}
+  - cue: cowboy_explosion
+    clip: {fileID: 8300000, guid: ff988cbdefee1d14896a54f9b3139322, type: 3}
+  - cue: cowboy_gopher
+    clip: {fileID: 8300000, guid: ca07b7b81851d3a43992329b56a651cf, type: 3}
+  - cue: cowboy_gunload
+    clip: {fileID: 8300000, guid: 6344ca4bd08a8584c9b634ac4c23db60, type: 3}
+  - cue: cowboy_monsterhit
+    clip: {fileID: 8300000, guid: d29cc17b34196ef44973d4ec735211e4, type: 3}
+  - cue: cowboy_outlawsong
+    clip: {fileID: 8300000, guid: beae31788efca824a9cb34bdf7534dca, type: 3}
+  - cue: cowboy_powerup
+    clip: {fileID: 8300000, guid: c8be1091019a42d49b75b725c83a3b67, type: 3}
+  - cue: cracklingFire
+    clip: {fileID: 8300000, guid: dbbe796b5538fa64f86f6a98b17aced8, type: 3}
+  - cue: crafting
+    clip: {fileID: 8300000, guid: 82be1b02c3a9ab9439a5603352813a6d, type: 3}
+  - cue: crane
+    clip: {fileID: 8300000, guid: 00652a1c5fa15914099ceeb8388f7170, type: 3}
+  - cue: crane_game
+    clip: {fileID: 8300000, guid: a48afcf09d3f0ad43bfb7ec3539d6709, type: 3}
+  - cue: crane_game_fast
+    clip: {fileID: 8300000, guid: 4a100284dfecd4348ad924095a9dd2db, type: 3}
+  - cue: crickets
+    clip: {fileID: 8300000, guid: 5db46a541fdd2de4187a69f25d009841, type: 3}
+  - cue: cricketsAmbient
+    clip: {fileID: 8300000, guid: b4623d7b7432e484d986c5e0839fd551, type: 3}
+  - cue: crit
+    clip: {fileID: 8300000, guid: cebc1f867dce7674b990ecc53d867303, type: 3}
+  - cue: croak
+    clip: {fileID: 8300000, guid: 28b8fa4921b96a549b097871af5b3859, type: 3}
+  - cue: crow
+    clip: {fileID: 8300000, guid: 89b380609ad549542ab5180efa13da5d, type: 3}
+  - cue: crystal
+    clip: {fileID: 8300000, guid: f12542e49178559428cc53e5efd8608c, type: 3}
+  - cue: cursed_mannequin
+    clip: {fileID: 8300000, guid: 449ad1ece9d6c7447b7c5fcaf5bdaf9e, type: 3}
+  - cue: cut
+    clip: {fileID: 8300000, guid: c19f3c054c9e960418a705cd750ae6b1, type: 3}
+  - cue: daggerswipe
+    clip: {fileID: 8300000, guid: 3f5761c857ec914459007a5e3d703c2d, type: 3}
+  - cue: darkCaveLoop
+    clip: {fileID: 8300000, guid: 8e6256cd71f121147a5690763f4bf4a2, type: 3}
+  - cue: death
+    clip: {fileID: 8300000, guid: d5ad8991224cdeb4ca993d603a0c6529, type: 3}
+  - cue: debuffHit
+    clip: {fileID: 8300000, guid: 5044f6d5f8fc3ea40a9163aa5e8d84d4, type: 3}
+  - cue: debuffSpell
+    clip: {fileID: 8300000, guid: 310c3d344643c06468ecc79262974cd0, type: 3}
+  - cue: desolate
+    clip: {fileID: 8300000, guid: 9e2af6771aa8b104090573e285833c80, type: 3}
+  - cue: detector
+    clip: {fileID: 8300000, guid: 31ea29a9f3cc4ad44a31cbd6c2ecc919, type: 3}
+  - cue: dialogueCharacter
+    clip: {fileID: 8300000, guid: f87f004689c2f8d42bda84bb27089a8d, type: 3}
+  - cue: dialogueCharacterClose
+    clip: {fileID: 8300000, guid: c7915cdc13845fd4aa8472299d19d976, type: 3}
+  - cue: dirtyHit
+    clip: {fileID: 8300000, guid: a5be840d97a2789478c884c4b96ec3c5, type: 3}
+  - cue: discoverMineral
+    clip: {fileID: 8300000, guid: bc02d5c319a7ef74fb31bcef07daa7c6, type: 3}
+  - cue: distantBanjo
+    clip: {fileID: 8300000, guid: 08539a90d933499448004896c980e66f, type: 3}
+  - cue: distantTrain
+    clip: {fileID: 8300000, guid: dc2a68f6d2e75bf47923846aabd44c19, type: 3}
+  - cue: dogWhining
+    clip: {fileID: 8300000, guid: c43113cb7272aec43ab20eb859f659c8, type: 3}
+  - cue: dog_bark
+    clip: {fileID: 8300000, guid: 143a74ae4d748a24ea2babaf3cbc61be, type: 3}
+  - cue: dog_pant
+    clip: {fileID: 8300000, guid: 57ea1c59d9efa6d4e9462a8b2f5b4770, type: 3}
+  - cue: dogs
+    clip: {fileID: 8300000, guid: 8b52aa61fd3cc1342b24e327ad03df0b, type: 3}
+  - cue: doorClose
+    clip: {fileID: 8300000, guid: 079b0b56b5da627488dd7b2880d8d9bc, type: 3}
+  - cue: doorCreak
+    clip: {fileID: 8300000, guid: 8734ccd968d58bb4d98c582de34107d2, type: 3}
+  - cue: doorCreakReverse
+    clip: {fileID: 8300000, guid: e8ce444a70f88944aaba1f01c6d99ff1, type: 3}
+  - cue: doorOpen
+    clip: {fileID: 8300000, guid: 680edb8c6d6fc7047826c112830e1fab, type: 3}
+  - cue: dropItemInWater
+    clip: {fileID: 8300000, guid: 96c89cfa46d53174ba78fa9b5ad59498, type: 3}
+  - cue: drumkit0
+    clip: {fileID: 8300000, guid: b05fc6ac4f1cf7b4ebe45d8b48c2efdb, type: 3}
+  - cue: drumkit1
+    clip: {fileID: 8300000, guid: a03cda634d67d30479c059fd7bc97f81, type: 3}
+  - cue: drumkit2
+    clip: {fileID: 8300000, guid: 389dc76e3e6bebd4fb492fdc6a63fb3a, type: 3}
+  - cue: drumkit3
+    clip: {fileID: 8300000, guid: df972408b26368947a90694243313bf6, type: 3}
+  - cue: drumkit4
+    clip: {fileID: 8300000, guid: aa86e9963a3af9549af3ab5968df97dc, type: 3}
+  - cue: drumkit5
+    clip: {fileID: 8300000, guid: db1c63ca7b0676b49b84a77ae49cca17, type: 3}
+  - cue: drumkit6
+    clip: {fileID: 8300000, guid: ea90a10cb9095a344b8993398e4541c4, type: 3}
+  - cue: dustMeep
+    clip: {fileID: 8300000, guid: 867ee01d029b72e45b1e3581ea30ef41, type: 3}
+  - cue: dwoop
+    clip: {fileID: 8300000, guid: 5dcfced098f6d7a439b8119a3c9557bb, type: 3}
+  - cue: dwop
+    clip: {fileID: 8300000, guid: 842b8b8e8d7c37b4189364da81e7cfd3, type: 3}
+  - cue: eat
+    clip: {fileID: 8300000, guid: eb33276850a7b4e4d89ae9311a3f2102, type: 3}
+  - cue: echos
+    clip: {fileID: 8300000, guid: 1f95596c64b754644a56e1c744d7a294, type: 3}
+  - cue: elliottPiano
+    clip: {fileID: 8300000, guid: 26cdb01a20ca48f4fa279e568b7d3d8c, type: 3}
+  - cue: end_credits
+    clip: {fileID: 8300000, guid: 55b3796fcae01be46ac74fd4bd164034, type: 3}
+  - cue: event1
+    clip: {fileID: 8300000, guid: 21c1d3ade4689fc4aae5ab1e6b107aae, type: 3}
+  - cue: event2
+    clip: {fileID: 8300000, guid: 204dd0243dd838c41ac532cd163c903d, type: 3}
+  - cue: explosion
+    clip: {fileID: 8300000, guid: 8373fbe498ef1e54ca26e4c8f5376a51, type: 3}
+  - cue: fairy_heal
+    clip: {fileID: 8300000, guid: a4cb6577bfbf6cb4c8791698defb3f77, type: 3}
+  - cue: fall1
+    clip: {fileID: 8300000, guid: c8f4c37741b2d664fafbb9988aee3a9b, type: 3}
+  - cue: fall2
+    clip: {fileID: 8300000, guid: 60dc9ff3569d4d142ab51192f60c0e98, type: 3}
+  - cue: fall3
+    clip: {fileID: 8300000, guid: 7ff7a3011389ce741aaff83ff193e880, type: 3}
+  - cue: fallDown
+    clip: {fileID: 8300000, guid: 373d639025de1634abcb0ebe7026a871, type: 3}
+  - cue: fallFest
+    clip: {fileID: 8300000, guid: b8d200d56cd274a40b85d30c337e20b8, type: 3}
+  - cue: fall_day_ambient
+    clip: {fileID: 8300000, guid: 1f803f6662741cb449cf51e1a67588fe, type: 3}
+  - cue: fastReel
+    clip: {fileID: 8300000, guid: de84001a83adee04cbfce19c47ff23bf, type: 3}
+  - cue: fieldofficeTentMusic
+    clip: {fileID: 8300000, guid: 816e8be0ddaec7b45a47f2ce8861cfaa, type: 3}
+  - cue: fireball
+    clip: {fileID: 8300000, guid: febc08919a09d294982858792dcf8a90, type: 3}
+  - cue: firework
+    clip: {fileID: 8300000, guid: 65b078e70af5ac749a110089e97c1b20, type: 3}
+  - cue: fishBite
+    clip: {fileID: 8300000, guid: 84b648b05cffd3346b5e06694babc697, type: 3}
+  - cue: fishBite_alternate_0
+    clip: {fileID: 8300000, guid: 90869e21d8a05234eb314cb695e49c84, type: 3}
+  - cue: fishBite_alternate_1
+    clip: {fileID: 8300000, guid: 787da8b558aaa0a4ca88dd71d9a04c9e, type: 3}
+  - cue: fishBite_alternate_2
+    clip: {fileID: 8300000, guid: e897b168177f19f499a2eee6b406609a, type: 3}
+  - cue: fishEscape
+    clip: {fileID: 8300000, guid: 72d8406cd52050f478d463d9a0c82919, type: 3}
+  - cue: fishSlap
+    clip: {fileID: 8300000, guid: a3c49e344e72df24d92c186a4840b963, type: 3}
+  - cue: fishingRodBend
+    clip: {fileID: 8300000, guid: 989f5440733fdd748bf209b679fecde5, type: 3}
+  - cue: flameSpell
+    clip: {fileID: 8300000, guid: e7597efa337e9b64bb325645507dbe95, type: 3}
+  - cue: flameSpellHit
+    clip: {fileID: 8300000, guid: 02dbf41916051dd44b3ea904c8d08924, type: 3}
+  - cue: flute
+    clip: {fileID: 8300000, guid: 95c94776ef5296b4f97b2ef718aa234f, type: 3}
+  - cue: flybuzzing
+    clip: {fileID: 8300000, guid: 1eae3bf957e6ee04eaf6b44781e6d722, type: 3}
+  - cue: frog_slap
+    clip: {fileID: 8300000, guid: ffb83fa490ef8e344b94e9f7a083ba17, type: 3}
+  - cue: frozen
+    clip: {fileID: 8300000, guid: 0266d3d0212254446b4f78d4e7d5ee93, type: 3}
+  - cue: furnace
+    clip: {fileID: 8300000, guid: 33148d494d27e1546a9065cb39845f61, type: 3}
+  - cue: fuse
+    clip: {fileID: 8300000, guid: 515fe0b9dcbd69e4490d053d54d45eb4, type: 3}
+  - cue: getNewSpecialItem
+    clip: {fileID: 8300000, guid: a400c17e5f692f54cb8bd9dd3351ab83, type: 3}
+  - cue: ghost
+    clip: {fileID: 8300000, guid: 0cf68f3ab3a39e4469e413205b247e88, type: 3}
+  - cue: give_gift
+    clip: {fileID: 8300000, guid: 1626dbd4176bcd541abf100d8e789209, type: 3}
+  - cue: glug
+    clip: {fileID: 8300000, guid: 0d4e6bbaa1100e34f8f8502b2b4d4fa1, type: 3}
+  - cue: goat
+    clip: {fileID: 8300000, guid: 8531d3cac0c1a5047a326754a0056960, type: 3}
+  - cue: goldenWalnut
+    clip: {fileID: 8300000, guid: 5fb09cab9e9ec4b47803bdc3a541f93f, type: 3}
+  - cue: gorilla_intro
+    clip: {fileID: 8300000, guid: 651c0cdf555ef6944844d807a93c9e4e, type: 3}
+  - cue: grandpas_theme
+    clip: {fileID: 8300000, guid: c69717d51f6b7b842a5df7f9a44be1e2, type: 3}
+  - cue: grassyStep
+    clip: {fileID: 8300000, guid: 6486fb84d57df764a9830665b9f2da07, type: 3}
+  - cue: grunt
+    clip: {fileID: 8300000, guid: 2b28ff5f1a165c3459ff08b7aa08282e, type: 3}
+  - cue: gulp
+    clip: {fileID: 8300000, guid: fafcd76c56b404248a3cc9faefa96081, type: 3}
+  - cue: gusviolin
+    clip: {fileID: 8300000, guid: 5c49f99bef8731f4591962bdd5c3edf1, type: 3}
+  - cue: hammer
+    clip: {fileID: 8300000, guid: 2a9ac496dd5a327428401f324e3b1eac, type: 3}
+  - cue: harvest
+    clip: {fileID: 8300000, guid: 8742682725a1c454a8d26441b9f49867, type: 3}
+  - cue: harveys_theme_jazz
+    clip: {fileID: 8300000, guid: 92d0196a70a647045a6aff2a02bf9640, type: 3}
+  - cue: healSound
+    clip: {fileID: 8300000, guid: 17f2f9a0444c23f4d9e03fd1fe27bb6a, type: 3}
+  - cue: heavy
+    clip: {fileID: 8300000, guid: ad6a728b706a2484986f3e68080e99e2, type: 3}
+  - cue: heavyEngine
+    clip: {fileID: 8300000, guid: 1913a79d340ad5245a9eb248fe2bfe96, type: 3}
+  - cue: hitEnemy
+    clip: {fileID: 8300000, guid: ed76907764b0515489c1886b7a7b7352, type: 3}
+  - cue: hoeHit
+    clip: {fileID: 8300000, guid: 1d876a1fc83fb23419396c109a5b486a, type: 3}
+  - cue: honkytonky
+    clip: {fileID: 8300000, guid: 8cd5cad1af4b5d9489622d33f058413c, type: 3}
+  - cue: horse_flute
+    clip: {fileID: 8300000, guid: 95186d57a4ae69040b941a001c9a2900, type: 3}
+  - cue: jaunty
+    clip: {fileID: 8300000, guid: e232e6df64162c342aca2ed3fa8b1b6d, type: 3}
+  - cue: jingle1
+    clip: {fileID: 8300000, guid: 387c82689cab7cd4a8828db5f0c879bb, type: 3}
+  - cue: jingleBell
+    clip: {fileID: 8300000, guid: 2666a1ee00402d44f9a3d817f836394d, type: 3}
+  - cue: jojaOfficeSoundscape
+    clip: {fileID: 8300000, guid: 35e6137c97937e142bb7bdbe9a29add3, type: 3}
+  - cue: jungle_ambience
+    clip: {fileID: 8300000, guid: 0280d8125d4b664499cab195fdd28eb6, type: 3}
+  - cue: junimoKart
+    clip: {fileID: 8300000, guid: 164fa359ff9c3064d94668362015320b, type: 3}
+  - cue: junimoKart_coin
+    clip: {fileID: 8300000, guid: 68280db36dd97934e8f857dbd113af9f, type: 3}
+  - cue: junimoKart_ghostMusic
+    clip: {fileID: 8300000, guid: 7d63a974bbb9fb64c9d6d90552315c1a, type: 3}
+  - cue: junimoKart_mushroomMusic
+    clip: {fileID: 8300000, guid: a1dcc78f254b5ec40b93d5698173b53d, type: 3}
+  - cue: junimoKart_slimeMusic
+    clip: {fileID: 8300000, guid: f28ccd8663be2b547a269e513c5033ab, type: 3}
+  - cue: junimoKart_whaleMusic
+    clip: {fileID: 8300000, guid: e891dc930476ec74e9371eae094d6627, type: 3}
+  - cue: junimoMeep1
+    clip: {fileID: 8300000, guid: d320507cb899b4d4a8e166f862c499b0, type: 3}
+  - cue: junimoStarSong
+    clip: {fileID: 8300000, guid: 8cdb61b2b3b572c4583956c8d07b6f9d, type: 3}
+  - cue: keyboardTyping
+    clip: {fileID: 8300000, guid: 48a76d559098ce141a35dac9a4265184, type: 3}
+  - cue: killAnimal
+    clip: {fileID: 8300000, guid: 45c67458bcb291c418b8f07cc5e115ce, type: 3}
+  - cue: kindadumbautumn
+    clip: {fileID: 8300000, guid: abfeec66bec979140b02423a78883660, type: 3}
+  - cue: leafrustle
+    clip: {fileID: 8300000, guid: 616f785b019a06242804cd81d375c9ad, type: 3}
+  - cue: libraryTheme
+    clip: {fileID: 8300000, guid: 3a38fbb4799e0014d8cb67dac892e453, type: 3}
+  - cue: machine_bell
+    clip: {fileID: 8300000, guid: 02adb22b411aaca4dadc73f944536507, type: 3}
+  - cue: magic_arrow
+    clip: {fileID: 8300000, guid: 4e1796171afc55d4da286d7a35cddb84, type: 3}
+  - cue: magic_arrow_hit
+    clip: {fileID: 8300000, guid: d0104be6a0362e5419619d7dad02bcbb, type: 3}
+  - cue: magma_sprite_die
+    clip: {fileID: 8300000, guid: b1f6fecfaf840e94eb01dad96693cd6b, type: 3}
+  - cue: magma_sprite_hit
+    clip: {fileID: 8300000, guid: cbc3b117b94216a46bbf257b7909d7b8, type: 3}
+  - cue: magma_sprite_spot
+    clip: {fileID: 8300000, guid: 6e1c9c04601dd1c4096dc98534654c7f, type: 3}
+  - cue: marnieShop
+    clip: {fileID: 8300000, guid: a073c4a927974284ab1136217fcc78da, type: 3}
+  - cue: mermaidSong
+    clip: {fileID: 8300000, guid: bc87b2878b96b2c4da489ee231955ac9, type: 3}
+  - cue: metal_tap
+    clip: {fileID: 8300000, guid: cfdeaebf780b3c948aab81bd2f44685d, type: 3}
+  - cue: minecartLoop
+    clip: {fileID: 8300000, guid: 4444a9368c455a94e9661d2752b625f9, type: 3}
+  - cue: miniharp_note
+    clip: {fileID: 8300000, guid: 7e226346bab280e4aa5aa80201347eb1, type: 3}
+  - cue: money
+    clip: {fileID: 8300000, guid: d3b55ef2f0d0b1a4a9256db60387add8, type: 3}
+  - cue: moneyDial
+    clip: {fileID: 8300000, guid: 399ee3401b5de2c41b899d4a1c28a9de, type: 3}
+  - cue: monkey1
+    clip: {fileID: 8300000, guid: e0719879f4c37e740bdc996dae6c1b10, type: 3}
+  - cue: monsterdead
+    clip: {fileID: 8300000, guid: 8417c9e4b98f7564ebe8084b28cc4f8c, type: 3}
+  - cue: moonlightJellies
+    clip: {fileID: 8300000, guid: 61a8edde048d12041a10e713f06deed3, type: 3}
+  - cue: moss_cut
+    clip: {fileID: 8300000, guid: ef4220942aa9b2042916f6729b9dfe91, type: 3}
+  - cue: mouseClick
+    clip: {fileID: 8300000, guid: 4faceec5a369ecb4da22e510c88923df, type: 3}
+  - cue: movieScreenAmbience
+    clip: {fileID: 8300000, guid: 082c18c2527ae82448319cf08e9b9542, type: 3}
+  - cue: movieTheater
+    clip: {fileID: 8300000, guid: 241ac3f938fc44c4685713d9b66b8f39, type: 3}
+  - cue: movieTheaterAfter
+    clip: {fileID: 8300000, guid: a31312aef35d28a41a6d79303fdc974b, type: 3}
+  - cue: movie_classic
+    clip: {fileID: 8300000, guid: 18cf1ff55b0620b449a494a6d9da54dd, type: 3}
+  - cue: movie_nature
+    clip: {fileID: 8300000, guid: b93e90a2123553f408ab9d3a07bca934, type: 3}
+  - cue: movie_wumbus
+    clip: {fileID: 8300000, guid: fc53f616ee2653b4bacaafb3a870806e, type: 3}
+  - cue: musicboxsong
+    clip: {fileID: 8300000, guid: aac4258bd8acf1848b369205c2e310c5, type: 3}
+  - cue: newArtifact
+    clip: {fileID: 8300000, guid: c0877dbe2e5919f409fc6ae32c9f3d1a, type: 3}
+  - cue: newRecipe
+    clip: {fileID: 8300000, guid: 2d854b3550df8514390fb39340d7a056, type: 3}
+  - cue: newRecord
+    clip: {fileID: 8300000, guid: bc9983dc2410384408fee2957f9d54df, type: 3}
+  - cue: nightTime
+    clip: {fileID: 8300000, guid: a93dd7b62290fd441825ab2cc3ba32c3, type: 3}
+  - cue: night_market
+    clip: {fileID: 8300000, guid: 3849f2f5beac71c45b1d621a20081bfe, type: 3}
+  - cue: objectiveComplete
+    clip: {fileID: 8300000, guid: e00bcfbc3ced34544b52f80c59f48c16, type: 3}
+  - cue: ocean
+    clip: {fileID: 8300000, guid: f50522da02e70ca4494d9cf916ac3f2a, type: 3}
+  - cue: openBox
+    clip: {fileID: 8300000, guid: ff4ef4dd17d32654db39ee6e39096a12, type: 3}
+  - cue: openChest
+    clip: {fileID: 8300000, guid: efd55c91ecd7a5a4a84de7b1863a10af, type: 3}
+  - cue: ow
+    clip: {fileID: 8300000, guid: 71747c211d1554d4392f9555d9bfc0ba, type: 3}
+  - cue: owl
+    clip: {fileID: 8300000, guid: 21475d90a859ac544b0aaed922a09c1f, type: 3}
+  - cue: parachute
+    clip: {fileID: 8300000, guid: 5cddb15e23d8f7c47bf822695150e221, type: 3}
+  - cue: parrot
+    clip: {fileID: 8300000, guid: ea89978a8935e844f87ce014226111da, type: 3}
+  - cue: parrot_flap
+    clip: {fileID: 8300000, guid: 7c64674d2e5588146854821e9eb8c365, type: 3}
+  - cue: parrot_squawk
+    clip: {fileID: 8300000, guid: 50ffc61a338bc5348add5d4efc0b6027, type: 3}
+  - cue: parry
+    clip: {fileID: 8300000, guid: 3f153433b770c0e499a12fb9bd0c5400, type: 3}
+  - cue: phone
+    clip: {fileID: 8300000, guid: c0c2dacad6bb0b148b417fe26d001e69, type: 3}
+  - cue: pickUpItem
+    clip: {fileID: 8300000, guid: cd9534ee73a72ec46b8496cb0c586a72, type: 3}
+  - cue: pig
+    clip: {fileID: 8300000, guid: e0e742e7948ede94cb99b10b25166671, type: 3}
+  - cue: planeflyby
+    clip: {fileID: 8300000, guid: c678d0a8c34dc0e44861856f84a685ad, type: 3}
+  - cue: playful
+    clip: {fileID: 8300000, guid: 56f6626df184180469958360241764c1, type: 3}
+  - cue: pool_ambient
+    clip: {fileID: 8300000, guid: 32405fd9b22d2c94785b71fdf7b3ecda, type: 3}
+  - cue: poppy
+    clip: {fileID: 8300000, guid: 43509c578d622614bbfbe6098666052d, type: 3}
+  - cue: potterySmash
+    clip: {fileID: 8300000, guid: 043fac2aef359ca4889e6d84f41a7192, type: 3}
+  - cue: powerup
+    clip: {fileID: 8300000, guid: d692ace390fce024487cd0031da9902c, type: 3}
+  - cue: pullItemFromWater
+    clip: {fileID: 8300000, guid: fc9a8e070a1b4c4418cc004aba13f6df, type: 3}
+  - cue: purchase
+    clip: {fileID: 8300000, guid: 128f34112e7f93f45bee3113b7b6787f, type: 3}
+  - cue: purchaseClick
+    clip: {fileID: 8300000, guid: 33daf0a5a9827a04baa9b7292680ed1c, type: 3}
+  - cue: purchaseRepeat
+    clip: {fileID: 8300000, guid: c23f861a0006b8e46b1da7bdb9985e33, type: 3}
+  - cue: qi_shop
+    clip: {fileID: 8300000, guid: 9f80ab685425cf141b179e8f04a20fe1, type: 3}
+  - cue: qi_shop_purchase
+    clip: {fileID: 8300000, guid: 2ef9178d427c4d241b9f4b64aa292df2, type: 3}
+  - cue: questcomplete
+    clip: {fileID: 8300000, guid: c57f7516ccdfc0d48b5a13d422102f03, type: 3}
+  - cue: quickSlosh
+    clip: {fileID: 8300000, guid: daed00320d461c447977170481e14245, type: 3}
+  - cue: rabbit
+    clip: {fileID: 8300000, guid: 6ca20e24e90c3ca4eab7fef20669b3a5, type: 3}
+  - cue: raccoonSong
+    clip: {fileID: 8300000, guid: f0d9d2e99072e2240acd85bec003a205, type: 3}
+  - cue: ragtime
+    clip: {fileID: 8300000, guid: c16ab8ca3550df546bb13f08d0bb19ed, type: 3}
+  - cue: rain
+    clip: {fileID: 8300000, guid: 2c1eff5881dc45b49ad9ad6ecf29ad31, type: 3}
+  - cue: rainsound
+    clip: {fileID: 8300000, guid: 6398d1dc9d59e3f40ab98ed923419318, type: 3}
+  - cue: reward
+    clip: {fileID: 8300000, guid: 12867fd8e1af99a41aa7240d1d3833f3, type: 3}
+  - cue: roadnoise
+    clip: {fileID: 8300000, guid: ff631debb6a696141b3b84f210d46b07, type: 3}
+  - cue: robotBLASTOFF
+    clip: {fileID: 8300000, guid: d7e6a4366c0d38a42866b45e7ad0fb52, type: 3}
+  - cue: robotSoundEffects
+    clip: {fileID: 8300000, guid: 6922b5e5379f0cc4a87fc5cf72d2dadc, type: 3}
+  - cue: rockGolemDie
+    clip: {fileID: 8300000, guid: d4080ec68a793a54aa0978ccfdd9e7ed, type: 3}
+  - cue: rockGolemHit
+    clip: {fileID: 8300000, guid: 38d134c7d9d8ee64ab5d0048c2d5ab89, type: 3}
+  - cue: rockGolemSpawn
+    clip: {fileID: 8300000, guid: 66be2e3f147461048b93b2f02b4ab211, type: 3}
+  - cue: rooster
+    clip: {fileID: 8300000, guid: aadc0f43c121b03419b3e6da14eec795, type: 3}
+  - cue: sad_kid
+    clip: {fileID: 8300000, guid: 42a813374ba3fa644bb13d4d10373831, type: 3}
+  - cue: sadpiano
+    clip: {fileID: 8300000, guid: 1e1a7ddd6dd3a394898dc87feac3f070, type: 3}
+  - cue: sam_acoustic1
+    clip: {fileID: 8300000, guid: aa5fc969101892a41ae1f90a6eba23a0, type: 3}
+  - cue: sam_acoustic2
+    clip: {fileID: 8300000, guid: 0fd243e0951b2ec4fa773ac41b2709d9, type: 3}
+  - cue: sampractice
+    clip: {fileID: 8300000, guid: f5468fa9760afc44ab83cdfb26e843ee, type: 3}
+  - cue: sandyStep
+    clip: {fileID: 8300000, guid: bd85942ddc71a344583eb0051e94a738, type: 3}
+  - cue: sappypiano
+    clip: {fileID: 8300000, guid: 4d1831abbf0ab0340804c2ded6e96a9a, type: 3}
+  - cue: scissors
+    clip: {fileID: 8300000, guid: 26cdbd3fb64dd0640954a07d86ac51b7, type: 3}
+  - cue: seagulls
+    clip: {fileID: 8300000, guid: 1047f7e9d4c0ad344bea46dee06284ad, type: 3}
+  - cue: secret1
+    clip: {fileID: 8300000, guid: cdbb49334e3d0e045acabe4c6b1172db, type: 3}
+  - cue: seeds
+    clip: {fileID: 8300000, guid: bbcfb96886037dc439e8c3491443d755, type: 3}
+  - cue: select
+    clip: {fileID: 8300000, guid: 3bada21a49e035d46a835e231b3104de, type: 3}
+  - cue: sell
+    clip: {fileID: 8300000, guid: ca02551584160fc4aacb533eaf3be5d7, type: 3}
+  - cue: serpentDie
+    clip: {fileID: 8300000, guid: e70acfe3c3c7cf54db6a64ddad8b68da, type: 3}
+  - cue: serpentHit
+    clip: {fileID: 8300000, guid: 2dbfd7ee1a74e0c4faf47415255dd902, type: 3}
+  - cue: sewing_loop
+    clip: {fileID: 8300000, guid: 3ea7060b444ba7042b9fd908fddfa968, type: 3}
+  - cue: shadowDie
+    clip: {fileID: 8300000, guid: f1fb6eed8512e0742a8f13829f8614a5, type: 3}
+  - cue: shadowHit
+    clip: {fileID: 8300000, guid: 5f75271a35194be468f0328eea8a1edc, type: 3}
+  - cue: shadowpeep
+    clip: {fileID: 8300000, guid: 240d52d6514e7014ca2052b0827efc3a, type: 3}
+  - cue: shaneTheme
+    clip: {fileID: 8300000, guid: 0642d1ae5b24e2447b611674481ce374, type: 3}
+  - cue: sheep
+    clip: {fileID: 8300000, guid: 3f29c3380fcdf4c4190210ce0dc8e9d9, type: 3}
+  - cue: shimmeringbastion
+    clip: {fileID: 8300000, guid: b9c9be537eafd4b4d99938e65d6b1a0c, type: 3}
+  - cue: shiny4
+    clip: {fileID: 8300000, guid: 21807a3d95853594ba72addf6b7e8b7a, type: 3}
+  - cue: shwip
+    clip: {fileID: 8300000, guid: f657283299c8f1f4b9cda7c71216c931, type: 3}
+  - cue: sipTea
+    clip: {fileID: 8300000, guid: 0831165f7e3a7f6438853cac35c50816, type: 3}
+  - cue: skeletonDie
+    clip: {fileID: 8300000, guid: f817cfe9d7a179d4294aaf1d08068997, type: 3}
+  - cue: skeletonHit
+    clip: {fileID: 8300000, guid: dcd73de90dd249c4aa07be19b1c44a0d, type: 3}
+  - cue: skeletonStep
+    clip: {fileID: 8300000, guid: f40ae8b8bea1d884f89517fb2ccc94ab, type: 3}
+  - cue: slime
+    clip: {fileID: 8300000, guid: 3ba00ef8e117f52479e861b374970094, type: 3}
+  - cue: slimeHit
+    clip: {fileID: 8300000, guid: 62c894e4a3f890248a457a57e1b2b1b1, type: 3}
+  - cue: slimedead
+    clip: {fileID: 8300000, guid: b06481568d6ce7c429210772ff24cf3f, type: 3}
+  - cue: slingshot
+    clip: {fileID: 8300000, guid: 82a7dc6f765660b45b65d09534e4711c, type: 3}
+  - cue: slosh
+    clip: {fileID: 8300000, guid: a094edcf0016158449f66940fc20bff8, type: 3}
+  - cue: slowReel
+    clip: {fileID: 8300000, guid: 2336d5bdf75508848bdef9c67415971e, type: 3}
+  - cue: smallSelect
+    clip: {fileID: 8300000, guid: 9cce9794f69abb141980453a74224483, type: 3}
+  - cue: snowyStep
+    clip: {fileID: 8300000, guid: 06ba35670cdbd4742908df65502a79b0, type: 3}
+  - cue: spaceMusic
+    clip: {fileID: 8300000, guid: a93ac6cb3133a5644a4edd387c628845, type: 3}
+  - cue: spirits_eve
+    clip: {fileID: 8300000, guid: 860f2c17859e1f34384c5e3eb8c820d9, type: 3}
+  - cue: spring1
+    clip: {fileID: 8300000, guid: ba6adb130332d4e41a5bef407e3ed4ae, type: 3}
+  - cue: spring2
+    clip: {fileID: 8300000, guid: 13e2a2257519af9498114e3d7ad1cc7c, type: 3}
+  - cue: spring3
+    clip: {fileID: 8300000, guid: c20eac18045a2b1408385b3558af405f, type: 3}
+  - cue: spring_day_ambient
+    clip: {fileID: 8300000, guid: f7eaf20aef6a4574f84e9a3e38fc1dec, type: 3}
+  - cue: spring_night_ambient
+    clip: {fileID: 8300000, guid: 29e6798fe1f7c1648a7f6391ae505019, type: 3}
+  - cue: springsongs
+    clip: {fileID: 8300000, guid: e18819be95f910342929e62cdf7933bf, type: 3}
+  - cue: springtown
+    clip: {fileID: 8300000, guid: 6d38b7433f24a97408f2081994023213, type: 3}
+  - cue: squid_bubble
+    clip: {fileID: 8300000, guid: 9425b75c1552f1e4da5f9e62108be221, type: 3}
+  - cue: squid_hit
+    clip: {fileID: 8300000, guid: 3ea738dff26e5834a88581a74d5fd5ae, type: 3}
+  - cue: squid_move
+    clip: {fileID: 8300000, guid: 18105dba37055c44cb792e8545c02fec, type: 3}
+  - cue: stairsdown
+    clip: {fileID: 8300000, guid: 69ca22f924ac7b2448ef93c69f5468e4, type: 3}
+  - cue: stardrop
+    clip: {fileID: 8300000, guid: 1955578d7bb5a3d4c8163959d1a9ded5, type: 3}
+  - cue: starshoot
+    clip: {fileID: 8300000, guid: 032e6b9a1c7475241be7a1bbca594758, type: 3}
+  - cue: statue_of_blessings
+    clip: {fileID: 8300000, guid: 83652515a89e55047a6c751fde4fab4e, type: 3}
+  - cue: steam
+    clip: {fileID: 8300000, guid: 0319151ae96eaa8448d910d79918a47e, type: 3}
+  - cue: stoneCrack
+    clip: {fileID: 8300000, guid: 21e9629f74a22094ea054da7d57d70e1, type: 3}
+  - cue: stoneStep
+    clip: {fileID: 8300000, guid: 6db05dfc3a2b2a54dbf9e3de5599cf84, type: 3}
+  - cue: stone_button
+    clip: {fileID: 8300000, guid: 765ea83c56d69aa4f87474e22f6cac57, type: 3}
+  - cue: stumpCrack
+    clip: {fileID: 8300000, guid: a7b64fd2900e5b24d91d3675fb3485a3, type: 3}
+  - cue: submarine_landing
+    clip: {fileID: 8300000, guid: 82426ede853872e45a98d3774b20555d, type: 3}
+  - cue: submarine_song
+    clip: {fileID: 8300000, guid: d308cbb3715cbbe49b55684c4561465d, type: 3}
+  - cue: summer1
+    clip: {fileID: 8300000, guid: 9ed1841f364b66a43a58db630d91bd96, type: 3}
+  - cue: summer2
+    clip: {fileID: 8300000, guid: d927c453faa495448a809c704572ac38, type: 3}
+  - cue: summer3
+    clip: {fileID: 8300000, guid: eb32a339817c4614db6231ec0f84f50e, type: 3}
+  - cue: summer_day_ambient
+    clip: {fileID: 8300000, guid: f02507a5996ee7a4a9e24a96b384f6d8, type: 3}
+  - cue: sweet
+    clip: {fileID: 8300000, guid: 08df2a4b2552af142978726ddd86ad14, type: 3}
+  - cue: swordswipe
+    clip: {fileID: 8300000, guid: d496bf01aaf2d9843bd60ec81f93c4a2, type: 3}
+  - cue: telephone_buttonPush
+    clip: {fileID: 8300000, guid: 29d71478a3ac1a140b36a6721dda754e, type: 3}
+  - cue: telephone_dialtone
+    clip: {fileID: 8300000, guid: b2a236f120c43c64dbcce53de2cf554a, type: 3}
+  - cue: telephone_ringingInEar
+    clip: {fileID: 8300000, guid: c882483768aa3e44ab0692fb99802702, type: 3}
+  - cue: terraria_boneSerpent
+    clip: {fileID: 8300000, guid: a609f51ae3d8f9642812938e09af3aa7, type: 3}
+  - cue: terraria_meowmere
+    clip: {fileID: 8300000, guid: 3acece229d93522458d6fbe8a03dbd87, type: 3}
+  - cue: terraria_warp
+    clip: {fileID: 8300000, guid: 4f9ced9c6b8b1184b8a1cf7d32cdc3eb, type: 3}
+  - cue: throw
+    clip: {fileID: 8300000, guid: 327334cf283b0744b941daa5653f6a81, type: 3}
+  - cue: throwDownITem
+    clip: {fileID: 8300000, guid: a113d1a86bf441c4bbd760f71efb48a4, type: 3}
+  - cue: thudStep
+    clip: {fileID: 8300000, guid: 4ea1c5150603ff94d851425fcfe19911, type: 3}
+  - cue: thunder
+    clip: {fileID: 8300000, guid: 8993e1fbcc0c14e41b38e8a197bc14b2, type: 3}
+  - cue: thunder_small
+    clip: {fileID: 8300000, guid: de5f6a7424bfffe4e9f15280678b1462, type: 3}
+  - cue: tickTock
+    clip: {fileID: 8300000, guid: af9f2f35180a2fe48ba5eb53829e6eb8, type: 3}
+  - cue: ticket_machine_whir
+    clip: {fileID: 8300000, guid: c01ac28ff5cebe243b66e3659c4e6427, type: 3}
+  - cue: tinyWhip
+    clip: {fileID: 8300000, guid: 0742b7cd761cd6b4cb94ff1421028e1f, type: 3}
+  - cue: tinymusicbox
+    clip: {fileID: 8300000, guid: 554a3dfc2d84825428bfe3ba2a545fb4, type: 3}
+  - cue: title_night
+    clip: {fileID: 8300000, guid: 5db7130d980d3fd40afea5943070a147, type: 3}
+  - cue: toolCharge
+    clip: {fileID: 8300000, guid: 51acf2ba9dce4764fb313b6511528f53, type: 3}
+  - cue: toolSwap
+    clip: {fileID: 8300000, guid: 9f1b711191cc5df41963d254cde8ff02, type: 3}
+  - cue: toyPiano
+    clip: {fileID: 8300000, guid: b7dc4a91f877c2848b4e5ba6d07eee9d, type: 3}
+  - cue: trainLoop
+    clip: {fileID: 8300000, guid: 298edf124f40b5546af0aa787a48625c, type: 3}
+  - cue: trainWhistle
+    clip: {fileID: 8300000, guid: e1d86736067e9ed459d4ef63ad432d83, type: 3}
+  - cue: trashbear
+    clip: {fileID: 8300000, guid: 935a3b209c787244dbae7d971539b7be, type: 3}
+  - cue: trashbear_flute
+    clip: {fileID: 8300000, guid: 4a9573d4cd9f37d478f42eb146b659a3, type: 3}
+  - cue: trashcan
+    clip: {fileID: 8300000, guid: 7d0ad6df655b85446b93a6ca3293bcc8, type: 3}
+  - cue: trashcanlid
+    clip: {fileID: 8300000, guid: 7df3b5b75b2aae64b8b0212da68e3fb8, type: 3}
+  - cue: treasure_totem
+    clip: {fileID: 8300000, guid: da482a224c6780541a0ba2e84b929b30, type: 3}
+  - cue: treecrack
+    clip: {fileID: 8300000, guid: a17fbf92bae671d439ab7045f5b2e17b, type: 3}
+  - cue: treethud
+    clip: {fileID: 8300000, guid: 86729394f91944e468f8f6b6f35b67e2, type: 3}
+  - cue: tribal
+    clip: {fileID: 8300000, guid: 99f3bed0f4482664495bcb9a18e0ad31, type: 3}
+  - cue: tropical_island_day_ambient
+    clip: {fileID: 8300000, guid: ca92c75e70694bc438fa56990aedfad3, type: 3}
+  - cue: turtle_pet
+    clip: {fileID: 8300000, guid: c6780b797806cd9449ff2c3536592076, type: 3}
+  - cue: wand
+    clip: {fileID: 8300000, guid: fa40dc7ee50e78b438ad9ace2f8c926b, type: 3}
+  - cue: warrior
+    clip: {fileID: 8300000, guid: ca3f84e33c66e8440891caec52308298, type: 3}
+  - cue: waterSlosh
+    clip: {fileID: 8300000, guid: bd6de7a9c2ad7274585521f3bb3b06a1, type: 3}
+  - cue: waterfall
+    clip: {fileID: 8300000, guid: 26eeefdbd2d796546837380307ae4df8, type: 3}
+  - cue: waterfall_big
+    clip: {fileID: 8300000, guid: 7d2d3288b4db8a249a181792605320ee, type: 3}
+  - cue: wateringCan
+    clip: {fileID: 8300000, guid: f5b7fb5ee5e792b41a466a9c677e434c, type: 3}
+  - cue: wavy
+    clip: {fileID: 8300000, guid: 5128cfa966d583e42931c6092b8320fb, type: 3}
+  - cue: wedding
+    clip: {fileID: 8300000, guid: a6ec6ab1e618b2d4d9ef26fd5c921130, type: 3}
+  - cue: weed_cut
+    clip: {fileID: 8300000, guid: 75f635023e31e2d439b402c2bee6382f, type: 3}
+  - cue: whistle
+    clip: {fileID: 8300000, guid: 96438c7c19013ed49b6e5ded06ac587a, type: 3}
+  - cue: wind
+    clip: {fileID: 8300000, guid: f77b810fbe411a943855aead2674e901, type: 3}
+  - cue: windstorm
+    clip: {fileID: 8300000, guid: 12cd3403dc925154b821386c263a271a, type: 3}
+  - cue: winter1
+    clip: {fileID: 8300000, guid: f7046177f42052844aa179ce9be7f481, type: 3}
+  - cue: winter2
+    clip: {fileID: 8300000, guid: 21185e3f9380b7145bd4b3adb90bf36e, type: 3}
+  - cue: winter3
+    clip: {fileID: 8300000, guid: 7fec4c4a5c3e4a640b8870ef4ef0846a, type: 3}
+  - cue: winter_day_ambient
+    clip: {fileID: 8300000, guid: 65b206a7b6ab8a74b8970538f79b714b, type: 3}
+  - cue: woodWhack
+    clip: {fileID: 8300000, guid: eb3e7022328f7114f8a1dfadcb8c0953, type: 3}
+  - cue: woodchipper
+    clip: {fileID: 8300000, guid: 8d265e55d92566c47ac7351892b1f4ea, type: 3}
+  - cue: woodchipper_occasional
+    clip: {fileID: 8300000, guid: b34dbc1d9678f3e459fff525c7bce321, type: 3}
+  - cue: woodsTheme
+    clip: {fileID: 8300000, guid: 50dbf98dd21587d48b904e20ccffcf79, type: 3}
+  - cue: woodyHit
+    clip: {fileID: 8300000, guid: 9a3e6c9b0077cc9439c7fb39be8b9471, type: 3}
+  - cue: woodyStep
+    clip: {fileID: 8300000, guid: 8499ef497e4f87f4fa8c0bde9173c726, type: 3}
+  - cue: yoba
+    clip: {fileID: 8300000, guid: f6f830e9460ec29459f0a2addf618561, type: 3}

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-/// <summary>Reads the original top-left tile index from a sliced Stardew sheet.</summary>
+/// <summary>Reads the original top-left tile index from a sliced sprite sheet.</summary>
 public static class TileSpriteIndex
 {
     public static int Get(Sprite sprite, int tileSize = 16)

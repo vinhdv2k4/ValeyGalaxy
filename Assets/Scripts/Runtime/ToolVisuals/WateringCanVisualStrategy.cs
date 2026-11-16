@@ -1,13 +1,13 @@
 using UnityEngine;
 
-/// <summary>WateringCan branch of Game1.drawTool, using Tool.Update atlas rows.</summary>
+/// <summary>WateringCan branch using atlas rows.</summary>
 public sealed class WateringCanVisualStrategy : IToolVisualStrategy
 {
     public ToolPose CalculatePose(int direction, float progress, InventorySlot slot)
     {
         int frame = ToolAnimationTimeline.WateringFrame(progress);
         Tool tool = ToolCatalog.Resolve(slot);
-        // Game1.drawTool switches to the second tool sprite only on frame 3.
+        // Switches to the second tool sprite on frame 3.
         int motionFrame = frame == 3 ? 5 : 0;
         int atlasOffset = tool == null ? 0
             : tool.GetAtlasIndex(direction, motionFrame) - tool.InitialAtlasIndex;
@@ -20,27 +20,27 @@ public sealed class WateringCanVisualStrategy : IToolVisualStrategy
         bool flipX = direction == 3;
         switch (direction)
         {
-            case 1: // Stardew facing right
+            case 1: // Source facing right
                 x = frame < 2 ? 44f : frame == 2 ? 56f : 40f;
                 y = frame < 2 ? -40f : frame == 2 ? -56f : -72f;
                 if (frame == 2) angle = 15f;
                 break;
-            case 3: // Stardew facing left
+            case 3: // Source facing left
                 x = frame < 2 ? -52f : -48f;
                 y = frame < 2 ? -40f : frame == 2 ? -48f : -72f;
                 if (frame == 2) angle = -15f;
                 break;
-            case 2: // Stardew facing up (source direction 0)
+            case 2: // Source facing up (direction 0)
                 x = 0f;
                 y = frame < 2 ? -32f : frame == 2 ? -80f : -112f;
                 break;
-            default: // Stardew facing down (source direction 2)
+            default: // Source facing down (direction 2)
                 x = frame == 3 ? -4f : 0f;
                 y = frame < 2 ? -32f : frame == 2 ? -44f : -24f;
                 break;
         }
 
-        // XNA draws at 4x with origin (0,16) in a 16x32 source tile.
+        // Draws at 4x with origin (0,16) in a 16x32 source tile.
         // Adjust for the Unity sprite's serialized pivot before converting
         // from source screen pixels to local Unity units.
         Vector2 sourcePivot = sprite == null ? new Vector2(8f, 24f)

@@ -44,6 +44,10 @@
 ExportedObj/
 .consulo/
 *.csproj
+!Backend/**/*.csproj
+!/tools/DailyEvents.Cli/DailyEvents.Cli.csproj
+/tools/DailyEvents.Cli/bin/
+/tools/DailyEvents.Cli/obj/
 *.unityproj
 *.sln
 *.slnx
@@ -106,4 +110,18 @@ InitTestScene*.unity*
 /[Aa]ssets/[Ss]ceneDependencyCache*
 
 TempInspection/
-Assets/_Recovery/0 (2).unity*
+Backend/**/bin/
+Backend/**/obj/
+Backend/GameBackend/data/
+
+# Unity scene auto-recovery after a crash (local only)
+/[Aa]ssets/_Recovery/
+/[Aa]ssets/_Recovery.meta
+
+# Python caches from the docs/tools scripts
+__pycache__/
+*.py[cod]
+
+# Loose test crops at the project root
+/crop_clock.png
+/crop_hand.png

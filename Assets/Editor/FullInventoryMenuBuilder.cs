@@ -82,7 +82,7 @@ public static class FullInventoryMenuBuilder
         menuRect.sizeDelta = new Vector2(864, 664);
         menuRect.anchoredPosition = Vector2.zero;
 
-        // 4a. Menu Window Background Frame (Pre-rendered composite from MenuTiles.png)
+        // 4a. Menu Window Background Frame
         GameObject frameGO = new GameObject("MenuFrame", typeof(RectTransform), typeof(Image));
         frameGO.transform.SetParent(menuRoot.transform, false);
         RectTransform frameRect = frameGO.GetComponent<RectTransform>();
@@ -122,8 +122,8 @@ public static class FullInventoryMenuBuilder
             tRect.anchorMin = new Vector2(0.5f, 0.5f);
             tRect.anchorMax = new Vector2(0.5f, 0.5f);
             tRect.pivot = new Vector2(0.5f, 0.5f);
-            // Inactive tabs at Y = 352, active Tab 0 elevated +8px to Y = 360
-            float yPos = (i == 0) ? 360f : 352f;
+            // Store the base position; MenuTabStripUI raises the active tab.
+            float yPos = 352f;
             tRect.anchoredPosition = new Vector2(tabXPositions[i], yPos);
             tRect.sizeDelta = new Vector2(64, 64);
 
@@ -137,20 +137,6 @@ public static class FullInventoryMenuBuilder
             entry.FindPropertyRelative("tabTransform").objectReferenceValue = tRect;
             entry.FindPropertyRelative("tabButton").objectReferenceValue = tabGO.GetComponent<Button>();
         }
-
-        // Extra Hammer Tab
-        GameObject hammerTabGO = new GameObject("Tab_Extra_Hammer", typeof(RectTransform), typeof(Image), typeof(Button));
-        hammerTabGO.transform.SetParent(tabStripGO.transform, false);
-        RectTransform hRect = hammerTabGO.GetComponent<RectTransform>();
-        hRect.anchorMin = new Vector2(0.5f, 0.5f);
-        hRect.anchorMax = new Vector2(0.5f, 0.5f);
-        hRect.pivot = new Vector2(0.5f, 0.5f);
-        hRect.anchoredPosition = new Vector2(192, 352);
-        hRect.sizeDelta = new Vector2(64, 64);
-        Image hImg = hammerTabGO.GetComponent<Image>();
-        hImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>($"{UIDir}/Tab_Extra_Hammer.png");
-        hImg.preserveAspect = true;
-        soTabs.FindProperty("extraHammerButton").objectReferenceValue = hammerTabGO.GetComponent<Button>();
 
         // Close Red 'X' Button
         GameObject closeGO = new GameObject("Button_Close", typeof(RectTransform), typeof(Image), typeof(Button));
@@ -523,6 +509,8 @@ public static class FullInventoryMenuBuilder
         soCS.FindProperty("bootsSlotImage").objectReferenceValue = equipSlotImages[3];
         soCS.FindProperty("portraitBackgroundImage").objectReferenceValue = pbImg;
         soCS.FindProperty("characterPreviewImage").objectReferenceValue = pbImg;
+        soCS.FindProperty("portraitDay").objectReferenceValue = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Content/LooseSprites/daybg.png");
+        soCS.FindProperty("portraitNight").objectReferenceValue = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Content/LooseSprites/nightbg.png");
         soCS.FindProperty("playerNameText").objectReferenceValue = nameTMP;
         soCS.FindProperty("farmNameText").objectReferenceValue = fnTMP;
         soCS.FindProperty("currentFundsText").objectReferenceValue = fundsTMP;
@@ -545,6 +533,13 @@ public static class FullInventoryMenuBuilder
         soFull.FindProperty("tabStrip").objectReferenceValue = tabStripUI;
         soFull.FindProperty("backpackGrid").objectReferenceValue = backpackGridUI;
         soFull.FindProperty("characterSheet").objectReferenceValue = charSheetUI;
+        soFull.FindProperty("worldMap").objectReferenceValue = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Content/LooseSprites/map.png");
+        soFull.FindProperty("secondaryCursors").objectReferenceValue = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Content/LooseSprites/Cursors2.png");
+        soFull.FindProperty("fishDefinitions").objectReferenceValue = AssetDatabase.LoadAssetAtPath<TextAsset>("Assets/Content/Data/Fish.json");
+        soFull.FindProperty("cookingRecipes").objectReferenceValue = AssetDatabase.LoadAssetAtPath<TextAsset>("Assets/Content/Data/CookingRecipes.json");
+        soFull.FindProperty("craftablesAtlas").objectReferenceValue = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Content/TileSheets/Craftables.png");
+        soFull.FindProperty("objectsAtlas").objectReferenceValue = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Content/Maps/springobjects.png");
+        soFull.FindProperty("craftingRecipes").objectReferenceValue = AssetDatabase.LoadAssetAtPath<TextAsset>("Assets/Content/Data/CraftingRecipes.json");
         soFull.FindProperty("normalSlotSprite").objectReferenceValue = normalSlot;
         soFull.FindProperty("selectedSlotSprite").objectReferenceValue = selectedSlot;
         soFull.FindProperty("lockedSlotSprite").objectReferenceValue = lockedSlot;

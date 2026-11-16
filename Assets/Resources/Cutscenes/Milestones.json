@@ -1,0 +1,1792 @@
+{
+  "events": [
+    {
+      "id": "willy_rod",
+      "title": "Cần câu đầu tiên",
+      "endPosition": {
+        "x": 42,
+        "y": 36
+      },
+      "skipPosition": {
+        "x": 43,
+        "y": 36
+      },
+      "actors": [
+        {
+          "id": "Player",
+          "x": 39,
+          "y": 34
+        },
+        {
+          "id": "Willy",
+          "x": 43,
+          "y": 35
+        }
+      ],
+      "conditions": [
+        {
+          "type": "location",
+          "value": "Beach"
+        },
+        {
+          "type": "time",
+          "min": 600,
+          "max": 1710
+        },
+        {
+          "type": "progress",
+          "value": "day",
+          "min": 2
+        },
+        {
+          "type": "mail",
+          "value": "spring_2_1"
+        }
+      ],
+      "commands": [
+        {
+          "type": "fade",
+          "value": "in",
+          "seconds": 0.35
+        },
+        {
+          "type": "move",
+          "actor": "Player",
+          "x": 39,
+          "y": 35,
+          "speed": 2.5
+        },
+        {
+          "type": "move",
+          "actor": "Player",
+          "x": 42,
+          "y": 35,
+          "speed": 2.5
+        },
+        {
+          "type": "face",
+          "actor": "Willy",
+          "value": "Left"
+        },
+        {
+          "type": "speak",
+          "actor": "Willy",
+          "text": "Chào cháu! Nghe nói có người mới chuyển đến nông trại. Bác vừa trở về sau một chuyến đi biển dài.",
+          "portrait": 0
+        },
+        {
+          "type": "speak",
+          "actor": "Willy",
+          "text": "Bác để dành được ít tiền mua cần mới. Cháu cầm lấy chiếc cần tre cũ này nhé. Ngoài biển còn nhiều cá lắm.",
+          "portrait": 0
+        },
+        {
+          "type": "speak",
+          "actor": "Willy",
+          "text": "Cửa hàng của bác ở ngay đây. Khi cần đồ câu hoặc muốn bán cá, cứ ghé qua.",
+          "portrait": 0
+        },
+        {
+          "type": "face",
+          "actor": "Willy",
+          "value": "Down"
+        },
+        {
+          "type": "fade",
+          "value": "out",
+          "seconds": 0.35
+        }
+      ]
+    },
+    {
+      "id": "mine_landslide_clear",
+      "title": "Joja dọn lối vào mỏ",
+      "conditions": [
+        {
+          "type": "location",
+          "value": "Mountain"
+        },
+        {
+          "type": "time",
+          "min": 600,
+          "max": 2600
+        },
+        {
+          "type": "progress",
+          "value": "day",
+          "min": 5
+        }
+      ],
+      "commands": [
+        {
+          "type": "clearMineRubble"
+        }
+      ]
+    },
+    {
+      "id": "marlon_sword",
+      "title": "Thanh kiếm của Marlon",
+      "actors": [
+        {
+          "id": "Player",
+          "x": 18,
+          "y": 13
+        },
+        {
+          "id": "Marlon",
+          "x": 23,
+          "y": 10
+        }
+      ],
+      "conditions": [
+        {
+          "type": "location",
+          "value": "Mine"
+        },
+        {
+          "type": "time",
+          "min": 600,
+          "max": 2600
+        },
+        {
+          "type": "progress",
+          "value": "day",
+          "min": 5
+        }
+      ],
+      "commands": [
+        {
+          "type": "fade",
+          "value": "in",
+          "seconds": 0.35
+        },
+        {
+          "type": "move",
+          "actor": "Player",
+          "x": 18,
+          "y": 10,
+          "speed": 2.5
+        },
+        {
+          "type": "move",
+          "actor": "Player",
+          "x": 21,
+          "y": 10,
+          "speed": 2.5
+        },
+        {
+          "type": "face",
+          "actor": "Marlon",
+          "value": "Left"
+        },
+        {
+          "type": "face",
+          "actor": "Player",
+          "value": "Right"
+        },
+        {
+          "type": "speak",
+          "actor": "Marlon",
+          "text": "Ta là Marlon. Cái thang này dẫn sâu xuống mỏ. Dưới đó có quặng quý, nhưng cũng có sinh vật nguy hiểm.",
+          "portrait": 0
+        },
+        {
+          "type": "speak",
+          "actor": "Marlon",
+          "text": "Mang theo thanh kiếm cũ của ta. Khi đã quen chiến đấu, hãy ghé Hội Mạo Hiểm gần đây.",
+          "portrait": 0
+        },
+        {
+          "type": "fade",
+          "value": "out",
+          "seconds": 0.35
+        }
+      ]
+    },
+    {
+      "id": "pet_adoption",
+      "title": "Nhận nuôi thú cưng",
+      "defaultName": "Milo",
+      "actors": [
+        {
+          "id": "Player",
+          "x": 64,
+          "y": 18
+        },
+        {
+          "id": "Marnie",
+          "x": 66,
+          "y": 18
+        },
+        {
+          "id": "Pet",
+          "x": 66,
+          "y": 19
+        }
+      ],
+      "conditions": [
+        {
+          "type": "location",
+          "value": "Farm"
+        },
+        {
+          "type": "time",
+          "min": 600,
+          "max": 1100
+        },
+        {
+          "type": "weather",
+          "value": "Clear"
+        },
+        {
+          "type": "progress",
+          "value": "earnings",
+          "min": 1000
+        }
+      ],
+      "commands": [
+        {
+          "type": "fade",
+          "value": "in",
+          "seconds": 0.35
+        },
+        {
+          "type": "parallel",
+          "children": [
+            {
+              "type": "move",
+              "actor": "Marnie",
+              "x": 65,
+              "y": 18,
+              "speed": 2
+            },
+            {
+              "type": "move",
+              "actor": "Pet",
+              "x": 65,
+              "y": 19,
+              "speed": 2
+            }
+          ]
+        },
+        {
+          "type": "face",
+          "actor": "Marnie",
+          "value": "Left"
+        },
+        {
+          "type": "speak",
+          "actor": "Marnie",
+          "text": "Chào buổi sáng! Ta tìm thấy một bé thú cưng đang quanh quẩn ở trang trại. Cháu có muốn nhận nuôi không?",
+          "portrait": 0
+        },
+        {
+          "type": "question",
+          "text": "Nhận nuôi thú cưng nào?",
+          "options": [
+            {
+              "label": "Nhận nuôi chó",
+              "value": "dog",
+              "commands": [
+                {
+                  "type": "speak",
+                  "actor": "Marnie",
+                  "text": "Vậy từ nay trang trại có thêm một chú chó rồi!",
+                  "portrait": 0
+                }
+              ],
+              "friendshipDelta": 50
+            },
+            {
+              "label": "Nhận nuôi mèo",
+              "value": "cat",
+              "commands": [
+                {
+                  "type": "speak",
+                  "actor": "Marnie",
+                  "text": "Vậy từ nay trang trại có thêm một chú mèo rồi!",
+                  "portrait": 0
+                }
+              ],
+              "friendshipDelta": 50
+            },
+            {
+              "label": "Từ chối",
+              "value": "decline",
+              "commands": [
+                {
+                  "type": "speak",
+                  "actor": "Marnie",
+                  "text": "Ta hiểu rồi. Ta sẽ tìm cho bé một mái nhà khác.",
+                  "portrait": 0
+                }
+              ],
+              "friendshipDelta": 0
+            }
+          ],
+          "friendshipNpc": "Marnie"
+        },
+        {
+          "type": "fade",
+          "value": "out",
+          "seconds": 0.35
+        }
+      ]
+    },
+    {
+      "id": "farm_cave",
+      "title": "Cải tạo hang trang trại",
+      "actors": [
+        {
+          "id": "Player",
+          "x": 64,
+          "y": 18
+        },
+        {
+          "id": "Demetrius",
+          "x": 66,
+          "y": 18
+        }
+      ],
+      "conditions": [
+        {
+          "type": "location",
+          "value": "Farm"
+        },
+        {
+          "type": "time",
+          "min": 600,
+          "max": 1100
+        },
+        {
+          "type": "progress",
+          "value": "earnings",
+          "min": 25000
+        }
+      ],
+      "commands": [
+        {
+          "type": "fade",
+          "value": "in",
+          "seconds": 0.35
+        },
+        {
+          "type": "move",
+          "actor": "Demetrius",
+          "x": 65,
+          "y": 18,
+          "speed": 2
+        },
+        {
+          "type": "face",
+          "actor": "Demetrius",
+          "value": "Left"
+        },
+        {
+          "type": "speak",
+          "actor": "Demetrius",
+          "text": "Tôi muốn dùng hang trên trang trại để nghiên cứu. Bạn muốn nuôi dơi ăn quả hay trồng nấm?",
+          "portrait": 0
+        },
+        {
+          "type": "question",
+          "text": "Cải tạo hang theo cách nào?",
+          "options": [
+            {
+              "label": "Dơi ăn quả",
+              "value": "bats",
+              "commands": [
+                {
+                  "type": "speak",
+                  "actor": "Demetrius",
+                  "text": "Tôi sẽ chuẩn bị hang cho đàn dơi. Thỉnh thoảng chúng sẽ mang trái cây về.",
+                  "portrait": 0
+                }
+              ],
+              "friendshipDelta": 0
+            },
+            {
+              "label": "Trồng nấm",
+              "value": "mushrooms",
+              "commands": [
+                {
+                  "type": "speak",
+                  "actor": "Demetrius",
+                  "text": "Tôi sẽ bố trí khay trồng nấm trong hang.",
+                  "portrait": 0
+                }
+              ],
+              "friendshipDelta": 0
+            }
+          ],
+          "friendshipNpc": ""
+        },
+        {
+          "type": "fade",
+          "value": "out",
+          "seconds": 0.35
+        }
+      ]
+    },
+    {
+      "id": "furnace_blueprint",
+      "title": "Bản vẽ lò nung",
+      "actors": [
+        {
+          "id": "Player",
+          "x": 64,
+          "y": 18
+        },
+        {
+          "id": "Clint",
+          "x": 66,
+          "y": 18
+        }
+      ],
+      "conditions": [
+        {
+          "type": "location",
+          "value": "Farm"
+        },
+        {
+          "type": "time",
+          "min": 600,
+          "max": 1100
+        },
+        {
+          "type": "progress",
+          "value": "copperMorning",
+          "min": 1
+        }
+      ],
+      "commands": [
+        {
+          "type": "fade",
+          "value": "in",
+          "seconds": 0.35
+        },
+        {
+          "type": "move",
+          "actor": "Clint",
+          "x": 65,
+          "y": 18,
+          "speed": 2
+        },
+        {
+          "type": "face",
+          "actor": "Clint",
+          "value": "Left"
+        },
+        {
+          "type": "sound",
+          "value": "hammer"
+        },
+        {
+          "type": "speak",
+          "actor": "Clint",
+          "text": "Tôi nghe nói bạn vừa khai thác quặng đồng. Đây là bản vẽ lò nung. Cần 20 quặng đồng và 25 đá để chế tạo.",
+          "portrait": 0
+        },
+        {
+          "type": "speak",
+          "actor": "Clint",
+          "text": "Dùng 5 quặng cùng loại và 1 than để luyện một thỏi kim loại.",
+          "portrait": 0
+        },
+        {
+          "type": "fade",
+          "value": "out",
+          "seconds": 0.35
+        }
+      ]
+    },
+    {
+      "id": "community_center",
+      "title": "Lewis dẫn đến Nhà văn hóa",
+      "endPosition": {
+        "x": 52,
+        "y": 23
+      },
+      "actors": [
+        {
+          "id": "Player",
+          "x": 52,
+          "y": 29
+        },
+        {
+          "id": "Lewis",
+          "x": 52,
+          "y": 23
+        }
+      ],
+      "conditions": [
+        {
+          "type": "location",
+          "value": "Town"
+        },
+        {
+          "type": "time",
+          "min": 800,
+          "max": 1300
+        },
+        {
+          "type": "weather",
+          "value": "Clear"
+        },
+        {
+          "type": "progress",
+          "value": "day",
+          "min": 5
+        }
+      ],
+      "commands": [
+        {
+          "type": "face",
+          "actor": "Player",
+          "value": "Up"
+        },
+        {
+          "type": "fade",
+          "value": "in",
+          "seconds": 0.5
+        },
+        {
+          "type": "move",
+          "actor": "Lewis",
+          "x": 52,
+          "y": 27,
+          "speed": 2.5
+        },
+        {
+          "type": "face",
+          "actor": "Lewis",
+          "value": "Down"
+        },
+        {
+          "type": "speak",
+          "actor": "Lewis",
+          "text": "À, cháu đây rồi! Ta đang định đi tìm cháu. Mấy hôm nay ở nông trại thế nào?",
+          "portrait": 0
+        },
+        {
+          "type": "speak",
+          "actor": "Lewis",
+          "text": "Ta muốn chỉ cho cháu một nơi quan trọng của thị trấn: Nhà văn hóa cũ. Đi theo ta nào!",
+          "portrait": 0
+        },
+        {
+          "type": "face",
+          "actor": "Lewis",
+          "value": "Up"
+        },
+        {
+          "type": "guide",
+          "actor": "Lewis",
+          "value": "Player",
+          "speed": 3,
+          "children": [
+            {
+              "x": 52,
+              "y": 21
+            }
+          ]
+        },
+        {
+          "type": "sound",
+          "value": "doorClose"
+        },
+        {
+          "type": "fade",
+          "value": "out",
+          "seconds": 0.4
+        }
+      ]
+    },
+    {
+      "id": "community_center_junimos",
+      "title": "Junimo trong Nhà văn hóa",
+      "endPosition": {
+        "x": 32,
+        "y": 18
+      },
+      "actors": [
+        {
+          "id": "Player",
+          "x": 32,
+          "y": 23
+        },
+        {
+          "id": "Lewis",
+          "x": 32,
+          "y": 21
+        },
+        {
+          "id": "Junimo1",
+          "x": 27,
+          "y": 15,
+          "hidden": true
+        },
+        {
+          "id": "Junimo2",
+          "x": 30,
+          "y": 12,
+          "hidden": true
+        },
+        {
+          "id": "Junimo3",
+          "x": 36,
+          "y": 12,
+          "hidden": true
+        },
+        {
+          "id": "Junimo4",
+          "x": 38,
+          "y": 15,
+          "hidden": true
+        },
+        {
+          "id": "Junimo5",
+          "x": 36,
+          "y": 17,
+          "hidden": true
+        },
+        {
+          "id": "Junimo6",
+          "x": 25,
+          "y": 18,
+          "hidden": true
+        }
+      ],
+      "conditions": [
+        {
+          "type": "location",
+          "value": "CommunityCenter"
+        },
+        {
+          "type": "time",
+          "min": 800,
+          "max": 2600
+        },
+        {
+          "type": "progress",
+          "value": "day",
+          "min": 5
+        },
+        {
+          "type": "seen",
+          "value": "community_center"
+        }
+      ],
+      "commands": [
+        {
+          "type": "face",
+          "actor": "Player",
+          "value": "Up"
+        },
+        {
+          "type": "face",
+          "actor": "Lewis",
+          "value": "Up"
+        },
+        {
+          "type": "fade",
+          "value": "in",
+          "seconds": 0.5
+        },
+        {
+          "type": "parallel",
+          "children": [
+            {
+              "type": "move",
+              "actor": "Lewis",
+              "x": 33,
+              "y": 16,
+              "speed": 2.5
+            },
+            {
+              "type": "move",
+              "actor": "Player",
+              "x": 32,
+              "y": 18,
+              "speed": 2.5
+            }
+          ]
+        },
+        {
+          "type": "face",
+          "actor": "Lewis",
+          "value": "Down"
+        },
+        {
+          "type": "face",
+          "actor": "Player",
+          "value": "Up"
+        },
+        {
+          "type": "speak",
+          "actor": "Lewis",
+          "text": "Đây là Nhà văn hóa của thị trấn. Ngày xưa, nơi này lúc nào cũng rộn ràng tiếng cười.",
+          "portrait": 0
+        },
+        {
+          "type": "speak",
+          "actor": "Lewis",
+          "text": "Giờ thì bỏ hoang lâu rồi... Joja còn muốn mua lại để làm nhà kho. Ta thật không nỡ chút nào.",
+          "portrait": 0
+        },
+        {
+          "type": "face",
+          "actor": "Lewis",
+          "value": "Up"
+        },
+        {
+          "type": "speak",
+          "actor": "Lewis",
+          "text": "Hửm? Cháu có nghe thấy tiếng gì không?",
+          "portrait": 0
+        },
+        {
+          "type": "parallel",
+          "children": [
+            {
+              "type": "sound",
+              "value": "junimoMeep1"
+            },
+            {
+              "type": "appear",
+              "actor": "Junimo1",
+              "seconds": 0.3
+            },
+            {
+              "type": "appear",
+              "actor": "Junimo2",
+              "seconds": 0.3
+            },
+            {
+              "type": "appear",
+              "actor": "Junimo3",
+              "seconds": 0.3
+            },
+            {
+              "type": "appear",
+              "actor": "Junimo4",
+              "seconds": 0.3
+            },
+            {
+              "type": "appear",
+              "actor": "Junimo5",
+              "seconds": 0.3
+            },
+            {
+              "type": "appear",
+              "actor": "Junimo6",
+              "seconds": 0.3
+            },
+            {
+              "type": "face",
+              "actor": "Player",
+              "value": "Up"
+            }
+          ]
+        },
+        {
+          "type": "emote",
+          "actor": "Player",
+          "value": "Exclamation",
+          "seconds": 0.7
+        },
+        {
+          "type": "music",
+          "value": "junimoStarSong"
+        },
+        {
+          "type": "parallel",
+          "children": [
+            {
+              "type": "dance",
+              "actor": "Junimo1",
+              "seconds": 4
+            },
+            {
+              "type": "dance",
+              "actor": "Junimo2",
+              "seconds": 4
+            },
+            {
+              "type": "dance",
+              "actor": "Junimo3",
+              "seconds": 4
+            },
+            {
+              "type": "dance",
+              "actor": "Junimo4",
+              "seconds": 4
+            },
+            {
+              "type": "dance",
+              "actor": "Junimo5",
+              "seconds": 4
+            },
+            {
+              "type": "dance",
+              "actor": "Junimo6",
+              "seconds": 4
+            },
+            {
+              "type": "sound",
+              "value": "dustMeep"
+            }
+          ]
+        },
+        {
+          "type": "parallel",
+          "children": [
+            {
+              "type": "sound",
+              "value": "tinyWhip"
+            },
+            {
+              "type": "vanish",
+              "actor": "Junimo1",
+              "seconds": 0.3
+            },
+            {
+              "type": "vanish",
+              "actor": "Junimo2",
+              "seconds": 0.3
+            },
+            {
+              "type": "vanish",
+              "actor": "Junimo3",
+              "seconds": 0.3
+            },
+            {
+              "type": "vanish",
+              "actor": "Junimo4",
+              "seconds": 0.3
+            },
+            {
+              "type": "vanish",
+              "actor": "Junimo5",
+              "seconds": 0.3
+            },
+            {
+              "type": "vanish",
+              "actor": "Junimo6",
+              "seconds": 0.3
+            }
+          ]
+        },
+        {
+          "type": "face",
+          "actor": "Lewis",
+          "value": "Down"
+        },
+        {
+          "type": "speak",
+          "actor": "Lewis",
+          "text": "Chắc là chuột thôi. Chỗ này lâu lắm rồi chẳng ai dọn dẹp.",
+          "portrait": 0
+        },
+        {
+          "type": "speak",
+          "actor": "Lewis",
+          "text": "Cháu cứ thoải mái xem quanh nhé. Nếu thấy điều gì lạ thì báo ta. Ta về tòa thị chính đây.",
+          "portrait": 0
+        },
+        {
+          "type": "move",
+          "actor": "Lewis",
+          "x": 33,
+          "y": 23,
+          "speed": 3
+        },
+        {
+          "type": "vanish",
+          "actor": "Lewis",
+          "seconds": 0.25
+        },
+        {
+          "type": "fade",
+          "value": "out",
+          "seconds": 0.4
+        }
+      ]
+    },
+    {
+      "id": "community_opening",
+      "title": "Khánh thành Trung tâm Cộng đồng",
+      "endPosition": {
+        "x": 32,
+        "y": 14
+      },
+      "actors": [
+        {
+          "id": "Player",
+          "x": 32,
+          "y": 19
+        },
+        {
+          "id": "Lewis",
+          "x": 32,
+          "y": 10
+        },
+        {
+          "id": "Pierre",
+          "x": 35,
+          "y": 11
+        },
+        {
+          "id": "Morris",
+          "x": 29,
+          "y": 11
+        },
+        {
+          "id": "Robin",
+          "x": 26,
+          "y": 12
+        },
+        {
+          "id": "Gus",
+          "x": 27,
+          "y": 13
+        },
+        {
+          "id": "Jodi",
+          "x": 28,
+          "y": 14
+        },
+        {
+          "id": "Marnie",
+          "x": 25,
+          "y": 14
+        },
+        {
+          "id": "Emily",
+          "x": 37,
+          "y": 12
+        },
+        {
+          "id": "Abigail",
+          "x": 38,
+          "y": 13
+        },
+        {
+          "id": "Caroline",
+          "x": 36,
+          "y": 14
+        },
+        {
+          "id": "Clint",
+          "x": 39,
+          "y": 14
+        },
+        {
+          "id": "Junimo1",
+          "x": 28,
+          "y": 9,
+          "hidden": true
+        },
+        {
+          "id": "Junimo2",
+          "x": 30,
+          "y": 9,
+          "hidden": true
+        },
+        {
+          "id": "Junimo3",
+          "x": 34,
+          "y": 9,
+          "hidden": true
+        },
+        {
+          "id": "Junimo4",
+          "x": 36,
+          "y": 9,
+          "hidden": true
+        },
+        {
+          "id": "Junimo5",
+          "x": 24,
+          "y": 11,
+          "hidden": true
+        },
+        {
+          "id": "Junimo6",
+          "x": 40,
+          "y": 11,
+          "hidden": true
+        }
+      ],
+      "conditions": [
+        {
+          "type": "location",
+          "value": "CommunityCenter"
+        },
+        {
+          "type": "time",
+          "min": 800,
+          "max": 2200
+        },
+        {
+          "type": "progress",
+          "value": "rooms",
+          "min": 6
+        }
+      ],
+      "commands": [
+        {
+          "type": "face",
+          "actor": "Player",
+          "value": "Up"
+        },
+        {
+          "type": "face",
+          "actor": "Lewis",
+          "value": "Down"
+        },
+        {
+          "type": "face",
+          "actor": "Morris",
+          "value": "Right"
+        },
+        {
+          "type": "face",
+          "actor": "Pierre",
+          "value": "Left"
+        },
+        {
+          "type": "music",
+          "value": "communityCenter"
+        },
+        {
+          "type": "fade",
+          "value": "in",
+          "seconds": 0.6
+        },
+        {
+          "type": "parallel",
+          "children": [
+            {
+              "type": "move",
+              "actor": "Player",
+              "x": 32,
+              "y": 14,
+              "speed": 2.5
+            },
+            {
+              "type": "emote",
+              "actor": "Robin",
+              "value": "Exclamation",
+              "seconds": 0.6
+            },
+            {
+              "type": "emote",
+              "actor": "Emily",
+              "value": "Exclamation",
+              "seconds": 0.6
+            },
+            {
+              "type": "emote",
+              "actor": "Gus",
+              "value": "Exclamation",
+              "seconds": 0.6
+            }
+          ]
+        },
+        {
+          "type": "speak",
+          "actor": "Lewis",
+          "text": "A, nhân vật chính của chúng ta đây rồi! Cả thị trấn đang chờ cháu đấy.",
+          "portrait": 0
+        },
+        {
+          "type": "speak",
+          "actor": "Lewis",
+          "text": "Mọi người ơi! Cả sáu phòng của Trung tâm Cộng đồng đã được phục hồi. Nơi này lại sống dậy như ngày xưa!",
+          "portrait": 0
+        },
+        {
+          "type": "parallel",
+          "children": [
+            {
+              "type": "emote",
+              "actor": "Robin",
+              "value": "Happy",
+              "seconds": 1.0
+            },
+            {
+              "type": "emote",
+              "actor": "Gus",
+              "value": "Happy",
+              "seconds": 1.0
+            },
+            {
+              "type": "emote",
+              "actor": "Emily",
+              "value": "Happy",
+              "seconds": 1.0
+            },
+            {
+              "type": "emote",
+              "actor": "Abigail",
+              "value": "Happy",
+              "seconds": 1.0
+            },
+            {
+              "type": "emote",
+              "actor": "Jodi",
+              "value": "Happy",
+              "seconds": 1.0
+            },
+            {
+              "type": "emote",
+              "actor": "Caroline",
+              "value": "Happy",
+              "seconds": 1.0
+            },
+            {
+              "type": "emote",
+              "actor": "Marnie",
+              "value": "Happy",
+              "seconds": 1.0
+            },
+            {
+              "type": "emote",
+              "actor": "Clint",
+              "value": "Happy",
+              "seconds": 1.0
+            }
+          ]
+        },
+        {
+          "type": "speak",
+          "actor": "Lewis",
+          "text": "Tất cả là nhờ công sức của người nông dân trẻ này. Cảm ơn cháu thật nhiều!",
+          "portrait": 0
+        },
+        {
+          "type": "parallel",
+          "children": [
+            {
+              "type": "sound",
+              "value": "achievement"
+            },
+            {
+              "type": "dance",
+              "actor": "Robin",
+              "seconds": 2.4
+            },
+            {
+              "type": "dance",
+              "actor": "Gus",
+              "seconds": 2.4
+            },
+            {
+              "type": "dance",
+              "actor": "Emily",
+              "seconds": 2.4
+            },
+            {
+              "type": "dance",
+              "actor": "Abigail",
+              "seconds": 2.4
+            },
+            {
+              "type": "dance",
+              "actor": "Jodi",
+              "seconds": 2.4
+            },
+            {
+              "type": "dance",
+              "actor": "Caroline",
+              "seconds": 2.4
+            },
+            {
+              "type": "dance",
+              "actor": "Marnie",
+              "seconds": 2.4
+            },
+            {
+              "type": "dance",
+              "actor": "Clint",
+              "seconds": 2.4
+            },
+            {
+              "type": "emote",
+              "actor": "Lewis",
+              "value": "Heart",
+              "seconds": 1.0
+            }
+          ]
+        },
+        {
+          "type": "face",
+          "actor": "Lewis",
+          "value": "Left"
+        },
+        {
+          "type": "emote",
+          "actor": "Morris",
+          "value": "Sweat",
+          "seconds": 0.9
+        },
+        {
+          "type": "speak",
+          "actor": "Morris",
+          "text": "Thật vô lý... Joja đã định biến nơi này thành nhà kho hiện đại nhất thung lũng!",
+          "portrait": 0
+        },
+        {
+          "type": "speak",
+          "actor": "Pierre",
+          "text": "Thung lũng này không cần nhà kho của Joja, Morris. Dân làng đã tự tay xây dựng lại nơi này.",
+          "portrait": 0
+        },
+        {
+          "type": "speak",
+          "actor": "Morris",
+          "text": "Hừ! Các người sẽ hối hận. Joja sẽ không quên chuyện này đâu!",
+          "portrait": 0
+        },
+        {
+          "type": "parallel",
+          "children": [
+            {
+              "type": "move",
+              "actor": "Morris",
+              "x": 32,
+              "y": 22,
+              "speed": 6
+            },
+            {
+              "type": "sound",
+              "value": "doorClose"
+            },
+            {
+              "type": "emote",
+              "actor": "Lewis",
+              "value": "Exclamation",
+              "seconds": 0.6
+            }
+          ]
+        },
+        {
+          "type": "vanish",
+          "actor": "Morris",
+          "seconds": 0.2
+        },
+        {
+          "type": "face",
+          "actor": "Lewis",
+          "value": "Down"
+        },
+        {
+          "type": "speak",
+          "actor": "Lewis",
+          "text": "Từ hôm nay JojaMart sẽ đóng cửa. Trung tâm Cộng đồng lại thuộc về cả thị trấn!",
+          "portrait": 0
+        },
+        {
+          "type": "parallel",
+          "children": [
+            {
+              "type": "sound",
+              "value": "reward"
+            },
+            {
+              "type": "dance",
+              "actor": "Robin",
+              "seconds": 3.0
+            },
+            {
+              "type": "dance",
+              "actor": "Gus",
+              "seconds": 3.0
+            },
+            {
+              "type": "dance",
+              "actor": "Emily",
+              "seconds": 3.0
+            },
+            {
+              "type": "dance",
+              "actor": "Abigail",
+              "seconds": 3.0
+            },
+            {
+              "type": "dance",
+              "actor": "Jodi",
+              "seconds": 3.0
+            },
+            {
+              "type": "dance",
+              "actor": "Caroline",
+              "seconds": 3.0
+            },
+            {
+              "type": "dance",
+              "actor": "Marnie",
+              "seconds": 3.0
+            },
+            {
+              "type": "dance",
+              "actor": "Clint",
+              "seconds": 3.0
+            },
+            {
+              "type": "dance",
+              "actor": "Pierre",
+              "seconds": 3.0
+            },
+            {
+              "type": "emote",
+              "actor": "Player",
+              "value": "Happy",
+              "seconds": 1.0
+            }
+          ]
+        },
+        {
+          "type": "speak",
+          "actor": "Lewis",
+          "text": "Nào, mọi người cứ tự nhiên tham quan nhé. Ta sẽ treo tấm bảng kỷ niệm ở ngay đây.",
+          "portrait": 0
+        },
+        {
+          "type": "face",
+          "actor": "Player",
+          "value": "Up"
+        },
+        {
+          "type": "music",
+          "value": "junimoStarSong"
+        },
+        {
+          "type": "parallel",
+          "children": [
+            {
+              "type": "sound",
+              "value": "junimoMeep1"
+            },
+            {
+              "type": "appear",
+              "actor": "Junimo1",
+              "seconds": 0.4
+            },
+            {
+              "type": "appear",
+              "actor": "Junimo2",
+              "seconds": 0.4
+            },
+            {
+              "type": "appear",
+              "actor": "Junimo3",
+              "seconds": 0.4
+            },
+            {
+              "type": "appear",
+              "actor": "Junimo4",
+              "seconds": 0.4
+            },
+            {
+              "type": "appear",
+              "actor": "Junimo5",
+              "seconds": 0.4
+            },
+            {
+              "type": "appear",
+              "actor": "Junimo6",
+              "seconds": 0.4
+            }
+          ]
+        },
+        {
+          "type": "emote",
+          "actor": "Player",
+          "value": "Exclamation",
+          "seconds": 0.8
+        },
+        {
+          "type": "parallel",
+          "children": [
+            {
+              "type": "sound",
+              "value": "dustMeep"
+            },
+            {
+              "type": "dance",
+              "actor": "Junimo1",
+              "seconds": 4.0
+            },
+            {
+              "type": "dance",
+              "actor": "Junimo2",
+              "seconds": 4.0
+            },
+            {
+              "type": "dance",
+              "actor": "Junimo3",
+              "seconds": 4.0
+            },
+            {
+              "type": "dance",
+              "actor": "Junimo4",
+              "seconds": 4.0
+            },
+            {
+              "type": "dance",
+              "actor": "Junimo5",
+              "seconds": 4.0
+            },
+            {
+              "type": "dance",
+              "actor": "Junimo6",
+              "seconds": 4.0
+            }
+          ]
+        },
+        {
+          "type": "parallel",
+          "children": [
+            {
+              "type": "emote",
+              "actor": "Player",
+              "value": "Heart",
+              "seconds": 1.0
+            },
+            {
+              "type": "emote",
+              "actor": "Junimo1",
+              "value": "Heart",
+              "seconds": 1.0
+            },
+            {
+              "type": "emote",
+              "actor": "Junimo2",
+              "value": "Heart",
+              "seconds": 1.0
+            },
+            {
+              "type": "emote",
+              "actor": "Junimo3",
+              "value": "Heart",
+              "seconds": 1.0
+            },
+            {
+              "type": "emote",
+              "actor": "Junimo4",
+              "value": "Heart",
+              "seconds": 1.0
+            },
+            {
+              "type": "emote",
+              "actor": "Junimo5",
+              "value": "Heart",
+              "seconds": 1.0
+            },
+            {
+              "type": "emote",
+              "actor": "Junimo6",
+              "value": "Heart",
+              "seconds": 1.0
+            }
+          ]
+        },
+        {
+          "type": "parallel",
+          "children": [
+            {
+              "type": "sound",
+              "value": "tinyWhip"
+            },
+            {
+              "type": "vanish",
+              "actor": "Junimo1",
+              "seconds": 0.5
+            },
+            {
+              "type": "vanish",
+              "actor": "Junimo2",
+              "seconds": 0.5
+            },
+            {
+              "type": "vanish",
+              "actor": "Junimo3",
+              "seconds": 0.5
+            },
+            {
+              "type": "vanish",
+              "actor": "Junimo4",
+              "seconds": 0.5
+            },
+            {
+              "type": "vanish",
+              "actor": "Junimo5",
+              "seconds": 0.5
+            },
+            {
+              "type": "vanish",
+              "actor": "Junimo6",
+              "seconds": 0.5
+            }
+          ]
+        },
+        {
+          "type": "fade",
+          "value": "out",
+          "seconds": 0.6
+        }
+      ]
+    },
+    {
+      "id": "grandpa_evaluation",
+      "title": "Đánh giá của Ông nội",
+      "actors": [
+        {
+          "id": "Player",
+          "x": 9,
+          "y": 9
+        },
+        {
+          "id": "Grandpa",
+          "x": 8,
+          "y": 7
+        }
+      ],
+      "conditions": [
+        {
+          "type": "location",
+          "value": "Farm"
+        },
+        {
+          "type": "time",
+          "min": 2000,
+          "max": 2600
+        },
+        {
+          "type": "progress",
+          "value": "day",
+          "min": 225
+        }
+      ],
+      "commands": [
+        {
+          "type": "fade",
+          "value": "in",
+          "seconds": 0.35
+        },
+        {
+          "type": "music",
+          "value": "grandpas_theme"
+        },
+        {
+          "type": "emote",
+          "actor": "Grandpa",
+          "value": "Happy",
+          "seconds": 0.65
+        },
+        {
+          "type": "speak",
+          "actor": "Grandpa",
+          "text": "Cháu đã đi được một chặng đường dài kể từ ngày ông trao lại nông trại này.",
+          "portrait": 0
+        },
+        {
+          "type": "speak",
+          "actor": "Grandpa",
+          "text": "Những ngọn nến trên bàn thờ sẽ ghi lại thành quả của cháu.",
+          "portrait": 0
+        },
+        {
+          "type": "fade",
+          "value": "out",
+          "seconds": 0.35
+        }
+      ]
+    },
+    {
+      "id": "joja_opening",
+      "title": "Khánh thành Nhà kho Joja",
+      "endPosition": {
+        "x": 52,
+        "y": 26
+      },
+      "actors": [
+        {
+          "id": "Player",
+          "x": 52,
+          "y": 26
+        },
+        {
+          "id": "Morris",
+          "x": 52,
+          "y": 22
+        },
+        {
+          "id": "Lewis",
+          "x": 49,
+          "y": 24
+        },
+        {
+          "id": "Pierre",
+          "x": 55,
+          "y": 24
+        }
+      ],
+      "conditions": [
+        {
+          "type": "location",
+          "value": "Town"
+        },
+        {
+          "type": "time",
+          "min": 800,
+          "max": 2000
+        },
+        {
+          "type": "seen",
+          "value": "JojaMember"
+        },
+        {
+          "type": "seen",
+          "value": "joja_vault"
+        },
+        {
+          "type": "seen",
+          "value": "joja_boiler"
+        },
+        {
+          "type": "seen",
+          "value": "joja_crafts"
+        },
+        {
+          "type": "seen",
+          "value": "joja_pantry"
+        },
+        {
+          "type": "seen",
+          "value": "joja_fish"
+        }
+      ],
+      "commands": [
+        {
+          "type": "face",
+          "actor": "Player",
+          "value": "Up"
+        },
+        {
+          "type": "face",
+          "actor": "Morris",
+          "value": "Down"
+        },
+        {
+          "type": "face",
+          "actor": "Lewis",
+          "value": "Right"
+        },
+        {
+          "type": "face",
+          "actor": "Pierre",
+          "value": "Left"
+        },
+        {
+          "type": "music",
+          "value": "event1"
+        },
+        {
+          "type": "fade",
+          "value": "in",
+          "seconds": 0.6
+        },
+        {
+          "type": "speak",
+          "actor": "Morris",
+          "text": "Kính chào quý vị! Nhờ sự ủng hộ nhiệt tình của hội viên thân thiết, Joja đã hoàn tất mọi dự án phát triển cộng đồng.",
+          "portrait": 0
+        },
+        {
+          "type": "speak",
+          "actor": "Morris",
+          "text": "Và hôm nay, tòa nhà cũ kỹ này chính thức trở thành Nhà kho Joja hiện đại nhất thung lũng!",
+          "portrait": 0
+        },
+        {
+          "type": "parallel",
+          "children": [
+            {
+              "type": "sound",
+              "value": "hammer"
+            },
+            {
+              "type": "emote",
+              "actor": "Lewis",
+              "value": "Sweat",
+              "seconds": 1.0
+            },
+            {
+              "type": "emote",
+              "actor": "Pierre",
+              "value": "Exclamation",
+              "seconds": 0.8
+            }
+          ]
+        },
+        {
+          "type": "face",
+          "actor": "Lewis",
+          "value": "Up"
+        },
+        {
+          "type": "speak",
+          "actor": "Lewis",
+          "text": "Vậy là... Trung tâm Cộng đồng của thị trấn đã không còn nữa.",
+          "portrait": 0
+        },
+        {
+          "type": "speak",
+          "actor": "Pierre",
+          "text": "Hừ. Rồi tiệm của tôi cũng sẽ lao đao vì Joja mất thôi.",
+          "portrait": 0
+        },
+        {
+          "type": "face",
+          "actor": "Morris",
+          "value": "Down"
+        },
+        {
+          "type": "parallel",
+          "children": [
+            {
+              "type": "emote",
+              "actor": "Morris",
+              "value": "Happy",
+              "seconds": 1.0
+            },
+            {
+              "type": "sound",
+              "value": "reward"
+            }
+          ]
+        },
+        {
+          "type": "speak",
+          "actor": "Morris",
+          "text": "Xin cảm ơn hội viên thân thiết của chúng tôi! Joja luôn đồng hành cùng quý khách.",
+          "portrait": 0
+        },
+        {
+          "type": "emote",
+          "actor": "Player",
+          "value": "Sweat",
+          "seconds": 0.8
+        },
+        {
+          "type": "fade",
+          "value": "out",
+          "seconds": 0.6
+        }
+      ]
+    }
+  ]
+}

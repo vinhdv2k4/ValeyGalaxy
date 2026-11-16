@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 /// <summary>
 /// SRP & DIP: Handles the on-screen 12-slot HUD toolbar.
-/// Implements Stardew Valley mechanics:
+/// Implements HUD toolbar mechanics:
 /// - 12 horizontal slots with key bindings 1..9, 0, -, =
 /// - Mouse wheel cycle selection
 /// - Screen repositioning / flip if player walks to the bottom of the screen.
@@ -22,7 +22,7 @@ public class ToolbarUI : MonoBehaviour
     [SerializeField] private Sprite selectedSlotSprite;
     [SerializeField] private Sprite lockedSlotSprite;
 
-    [Header("Smart Screen Flip Settings (Stardew Toolbar.cs:126-158)")]
+    [Header("Smart Screen Flip Settings")]
     [SerializeField] private Transform playerTransform;
     [SerializeField] private Camera targetCamera;
     [SerializeField] private float bottomFlipThreshold = 0.22f; // Viewport Y threshold

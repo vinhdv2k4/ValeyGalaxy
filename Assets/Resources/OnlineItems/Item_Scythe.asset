@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 140b88db30e2dd8439ad2f0660357425, type: 3}
+  m_Name: Item_Scythe
+  m_EditorClassIdentifier: Assembly-CSharp::MeleeWeaponData
+  itemId: scythe
+  displayName: "L\u01B0\u1EE1i li\u1EC1m"
+  description: "D\xF9ng \u0111\u1EC3 c\u1EAFt c\u1ECF d\u1EA1i v\xE0 thu ho\u1EA1ch
+    l\xFAa."
+  icon: {fileID: 21300000, guid: 289311240fb33214298783977836f5bd, type: 3}
+  maxStackSize: 1
+  kind: 5
+  hasUseAnimation: 1
+  useAnimation: 8
+  heldSprite: {fileID: 21300000, guid: 34b2e7a3ccd177246bfb84f95a783e44, type: 3}
+  heldSpriteDown: {fileID: 21300000, guid: 34b2e7a3ccd177246bfb84f95a783e44, type: 3}
+  heldSpriteRight: {fileID: 21300000, guid: 34b2e7a3ccd177246bfb84f95a783e44, type: 3}
+  heldSpriteUp: {fileID: 21300000, guid: 34b2e7a3ccd177246bfb84f95a783e44, type: 3}
+  heldAnimationSprites: []
+  upgradeLevel: 0
+  initialParentTileIndex: 47
+  currentParentTileIndex: 47
+  staminaCost: 0
+  animationSpeedModifier: 1
+  weaponType: 3
+  minDamage: 2
+  maxDamage: 5
+  knockback: 1
+  speed: 0
+  critChance: 0.02
+  critMultiplier: 3
+  addedDefense: 0

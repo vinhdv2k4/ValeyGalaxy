@@ -1,27 +1,69 @@
 using UnityEngine;
 
-/// <summary>Uses the cast frames selected by Game1.drawTool for FishingRod.</summary>
+/// <summary>
+/// Port of the FishingRod branches of Game1.drawTool. Cast sprites are 48x48 (192 px at 4x)
+/// with a top-left pivot; offsets below are that corner relative to playerPosition in
+/// source pixels, converted with the body centre at playerPosition + (32, -32).
+/// </summary>
 public sealed class FishingRodVisualStrategy : IToolVisualStrategy
 {
+    private const float SpriteUnits = 192f / 64f;
+    /// <summary>FishingController holds the last cast frame at 0.98 while the line is out.</summary>
+    private const float WaitingProgress = 0.975f;
+    /// <summary>While fishing the rod shows column 5 ("rectangle.X += (5 - index) * 48").</summary>
+    private const int LineOutFrame = 5;
+
+    // Cast frames facing sideways (FarmerSprite 295-298: 100, 40, 40, 80, 200 ms).
+    private static readonly Vector2[] SideCast =
+    {
+        new(-64f, -160f), new(-64f, -152f), new(-64f, -152f), new(-72f, -160f), new(-64f, -156f)
+    };
+
     public ToolPose CalculatePose(int direction, float progress, InventorySlot slot)
     {
-        int frame = ToolAnimationTimeline.FishingFrame(progress);
+        bool waiting = progress >= WaitingProgress;
+        int frame = waiting ? 4 : ToolAnimationTimeline.FishingFrame(progress);
         var rod = slot?.itemData as FishingRodData;
-        Sprite sprite = rod != null ? rod.GetCastSprite(direction, frame)
+        Sprite sprite = rod != null ? rod.GetCastSprite(direction, waiting ? LineOutFrame : frame)
             : slot?.GetHeldSprite(direction);
+        // Older rod assets without the line-out column fall back to the last cast frame.
+        if (rod != null && waiting && sprite == rod.GetHeldSprite(direction))
+            sprite = rod.GetCastSprite(direction, 4);
 
-        // Cast sprites are 48x48 with a top-left pivot. Source draw positions
-        // are about 64 px left and 160 px above playerPosition at 4x scale.
         bool side = direction == 1 || direction == 3;
-        float x = -1.5f;
-        float y = side ? 2f : 124f / 64f - 0.5f;
-        if (side && frame == 1) y -= 8f / 64f;
-        if (side && frame == 3) { x -= 8f / 64f; y += 8f / 64f; }
-
-        if (direction == 3)
+        bool flipY = false;
+        bool hide = false;
+        Vector2 corner;
+        if (side)
         {
-            x = -x;
+            // isFishing && !isReeling: "playerPosition.Y += 8" on top of case 4 (-64, -160).
+            corner = waiting ? new Vector2(-64f, -152f) : SideCast[frame];
         }
+        else if (direction == 2)
+        {
+            // Facing up the rod shifts 16 px right; frames 3+ are hidden while casting, and
+            // while fishing case 4 draws it flipped vertically at (X - 80, Y - 96).
+            if (waiting)
+            {
+                corner = new Vector2(-64f, -96f);
+                flipY = true;
+            }
+            else
+            {
+                corner = new Vector2(-48f, -124f);
+                hide = frame >= 3;
+            }
+        }
+        else
+        {
+            corner = new Vector2(-64f, -124f);
+        }
+
+        float x = (corner.x - 32f) / 64f;
+        float y = -(corner.y + 32f) / 64f;
+        // Unity flips around the top-left pivot; XNA keeps the same screen rectangle.
+        if (direction == 3) x += SpriteUnits;
+        if (flipY) y -= SpriteUnits;
 
         return new ToolPose
         {
@@ -29,7 +71,8 @@ public sealed class FishingRodVisualStrategy : IToolVisualStrategy
             LocalRotation = Quaternion.identity,
             SortingOrder = direction == 2 ? 20 : 27,
             FlipX = direction == 3,
-            Hide = direction == 2 && frame >= 3,
+            FlipY = flipY,
+            Hide = hide,
             OverrideSprite = sprite
         };
     }

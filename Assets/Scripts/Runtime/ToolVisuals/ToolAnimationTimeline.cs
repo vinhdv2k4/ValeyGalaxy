@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary>
-/// Converts clip progress to the discrete FarmerSprite frame used by the
+/// Converts clip progress to the discrete frame used by the
 /// generated clips. Keep these start times aligned with FarmerAnimationGenerator.
 /// </summary>
 public static class ToolAnimationTimeline
