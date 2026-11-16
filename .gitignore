@@ -126,6 +126,11 @@ __pycache__/
 /docs/**/*.py
 /tools/**/*.py
 
+# Generated report pages, PDF exports and test results from those scripts
+/docs/report_next_qa/
+/docs/sprint_render/
+*.trx
+
 # Loose test crops at the project root
 /crop_clock.png
 /crop_hand.png
